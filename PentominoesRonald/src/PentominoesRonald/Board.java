@@ -61,7 +61,7 @@ public class Board
      * @param y The y-coordinate of the location to be tryied.
      * @return Returns true if the Pentominoe is placed, returns false if the pentominoe wasn't placed.
      */
-    public void placePentominoe(Pentominoes placePentominoe, int x, int y)
+    public boolean placePentominoe(Pentominoes placePentominoe, int x, int y)
     {
         if(Try(placePentominoe, x, y) == true)
         {
@@ -70,7 +70,10 @@ public class Board
             {
                 board[placePentominoe.returnPentominoe()[R][C] + x][placePentominoe.returnPentominoe()[R][C + 1] + y] = placePentominoe;
             }
+            return true;
         }
+        return false;
+
     }
 
     /** This method returns the current board as an Pentominoe[][].
@@ -100,6 +103,40 @@ public class Board
          return full;
      }
 
+     /** This method returns whether or not a certain row is full
+      *
+      * @param y The number of the line that is to be checked.
+      * @return Returns true if the row is full, returns false if the line is not full.
+      */
+     public boolean rowFull(int y)
+     {
+         boolean full = true;
+         while(!full)
+         for(int x = 0; x <= width; x++)
+         {
+             if(board[x][y] == null) full = false;
+         }
+         return full;
+     }
+
+    /** Returns the current width of the board
+     *
+     * @return Returns the current width of the board in x.
+     */
+    public int width()
+    {
+        return width;
+    }
+
+    /** Returns the current height of the board
+     *
+     * @return Returns the current height of the board in y values.
+     */
+    public int height()
+    {
+        return height;
+    }
+    
     private int width;
     private int height;
     private Pentominoes[][] board;
