@@ -26,11 +26,31 @@ public class Solver
     {
         int width = board.width();
         int height = board.height();
-        for(int x = 0; x <= width; x++)
+
+        for(int P = 0; P <= pentominoes.length; P++)
         {
-            for(int y = 0; y <= height; y++)
+            int maxRotations = pentominoes[P].returnRotations();
+            boolean rotate = false;
+            boolean placed = false;
+            while(!placed)
             {
-                
+                for(int x = 0; x <= width; x++)
+                {
+                    for(int y = 0; y <= height; y++)
+                    {
+                        if(!exceptions.checkException(pentominoes[P], x, y))
+                        {
+                            for(int rotations = 0; rotations < maxRotations; rotations++)
+                            {
+                                if(rotations != 0)
+                                {
+                                    pentominoes[P].takeRotatedPentominoe();
+                                }
+                                if(board.placePentominoe(pentominoes[P], x, y)) placed = true;
+                            }
+                        } 
+                    }
+                }
             }
         }
 
