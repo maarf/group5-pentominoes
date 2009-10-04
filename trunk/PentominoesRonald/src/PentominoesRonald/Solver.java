@@ -11,28 +11,47 @@ package PentominoesRonald;
  */
 public class Solver
 {
-    public Solver(Board board)
+    /** This constructor sets the input board and the input exceptions.
+     * 
+     * @param board The Board on which the solver algorithm should work.
+     * @param exceptions The Exceptions object with which the solver should reconcile it's solutions.
+     */
+    public Solver(Board board, Exceptions exceptions)
     {
         this.board = board;
-        Exceptions exceptions = new Exceptions();
+        this.exceptions = exceptions;
     }
 
-    public boolean solve()
+    public int solve(Pentominoes[] pentominoes)
     {
-        boolean solution = false;
+        int width = board.width();
+        int height = board.height();
+        for(int x = 0; x <= width; x++)
+        {
+            for(int y = 0; y <= height; y++)
+            {
+                
+            }
+        }
 
-        // set P
-        // check for exceptions P
-        //set S
-        //check for exceptions S.
-        // try
 
-        if(board.boardFull() == true) solution = true;
-        return solution;
+       
+        
+        return solutions;
     }
 
-    
-    private static int solutions = 0;
-    private int P;
+
+
+
+    /** Returns the current number of solutions
+     *
+     * @return Returns the current number of solutions.
+     */
+    public int returnsSolution()
+    {
+        return solutions;
+    }
+    private static int solutions;
     private Board board;
+    private Exceptions exceptions;
 }
