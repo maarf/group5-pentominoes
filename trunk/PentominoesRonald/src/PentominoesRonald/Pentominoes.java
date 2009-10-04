@@ -46,6 +46,25 @@ public class Pentominoes
             }
         return true;
     }
+
+    /** This method returns the number of rotations of a certain Pentominoe are available.
+     *
+     * @return Returns an int which represents the number of rotations available.
+     */
+    public int returnRotations()
+    {
+        int rotations = 0;
+        boolean moreRotations = true;
+        while(!moreRotations)
+        {
+            if(Pentominoes[P][rotations + 1][1][0] == 0 && Pentominoes[P][rotations + 1][1][1] == 0)
+            {
+                moreRotations = false;
+            }
+            else rotations++;
+        }
+        return rotations;
+    }
     /** This method returns the Pentominoe-array that holds all the coordinates for the rectangles of the Pentominoe.
      * 
      * @return Returns an 2 dimensional array that contains all the coordinates of the Pentominoe, without supplying mirrorimages of rotations.
@@ -94,6 +113,8 @@ public class Pentominoes
         }
         else return 0;
     }
+
+
 
 
     private static int P;
