@@ -5,8 +5,17 @@ import java.util.ArrayList;
 */
 public class Pentomino
 {
+	
 	/**
-		Constructs the pentomino object with some stuff.
+	 * Constructs pentomino with from predefined two-dimensional boolean array
+	 * @param aState two-dimensional boolean array which represents the filled and blank fields
+	 */
+	public Pentomino(boolean[][] aState){
+		state = aState;
+	}
+	
+	/**
+		Constructs the pentomino object from a string.
 		@param aTextualRepresentation a textual representation of pentomino (e.g. ".#.\n###\n.#.")
 	*/
 	public Pentomino(String aTextualRepresentation)
@@ -14,45 +23,104 @@ public class Pentomino
 		// First, lets split the input in lines so we get a nice array of strings.
 		String[] lines = aTextualRepresentation.split("\n"); // the \n is the "new line" character
 		
-		// Now lets initialize the grid array with the propper size.
+		// Now lets initialize the grid array with the proper size.
 		// lines.length is the number of lines we've got.
 		// line[0].length() is the length of the first line. Right?
-		grid = new boolean[lines.length][lines[0].length()];
+		state = new boolean[lines.length][lines[0].length()];
 		
-		// So lets iterate through the lines. The "for each" loops is a nice thing to for that.
-		// You can read more about for each loops here: http://java.sun.com/j2se/1.5.0/docs/guide/language/foreach.html
+		// So lets iterate through the lines.
 		int i = 0;
 		int k = 0;
 		// Lets take line by line
 		for (String aLine : lines)
 		{
-			// Lets dive into the line itself. We devide it into characters! So we take char by char.
+			// Lets dive into the line itself. We divide it into characters! So we take char by char.
 			for (char aChar : aLine.toCharArray())
 			{
 				// And this is the part where we fill the "grid", yeah.
 				if (aChar == '#')
-					grid[i][k] = true; // if the according char is "#", than the field is filled
+					state[i][k] = true; // if the according char is "#", than the field is filled
 				else
-					grid[i][k] = false; // or else it's is blank
+					state[i][k] = false; // or else it's is blank
 				
 				k++;
 			}
 			k = 0; // don't forget to keep the right count!
 			i++;
 		}
+		generateMutations();
 	}
 	
-	/**
-	 * Constructs pentomino with all the mutations
-	 * @param aTextualRepresentation
-	 * @param rotations
-	 */
-	public Pentomino(String aTextualRepresentation, String[] someMutations){
-		this(aTextualRepresentation);
+	private void generateMutations() {
 		mutations = new ArrayList<Pentomino>();
-		for(String pent : someMutations) {
-			mutations.add(new Pentomino(pent));
+
+		// Lets get all the possible mutations, there could be some duplicates.
+		boolean[][][] mutationStates = new boolean[5][][]; // 3-dimensional arrays is crazy stuff, ummm...
+		mutationStates[0] = rotateMatrix(state);
+		mutationStates[1] = rotateMatrix(mutationStates[0]); 
+		mutationStates[2] = rotateMatrix(mutationStates[1]);
+		mutationStates[3] = flipMatrixVertically(state);
+		mutationStates[4] = flipMatrixVertically(mutationStates[1]);
+		
+		boolean[][][] uniqueMutationStates = new boolean[6][][];
+		
+		// Lets add the "basic" state as one of the mutations, too.
+		uniqueMutationStates[0] = state;
+		int uniqueStatesCount = 1;
+		mutations.add(new Pentomino(state));
+		
+		for (boolean[][] aState : mutationStates) {
+			// Lets assume the mutation state is unique
+			boolean unique = true;
+			// Check against all known unique states
+			for (int i = 0; i < uniqueStatesCount; i++) {
+				if (compareStates(aState, uniqueMutationStates[i])) {
+					// If the states are copies, then the new state is a duplicate
+					unique = false;
+					break;
+				}
+			}
+			// If the state is unique, add a mutation pentomino
+			if (unique) {
+				uniqueMutationStates[uniqueStatesCount] = aState;
+				uniqueStatesCount++;
+				mutations.add(new Pentomino(aState));				
+			}
 		}
+	}
+	
+	private static boolean compareStates(boolean[][] leftState, boolean[][] rightState) {
+		if (leftState.length != rightState.length || leftState[0].length != rightState[0].length)
+			return false;
+		
+		for (int i = 0; i < leftState.length; i++) {
+			for (int j = 0; j < leftState[0].length; j++) {
+				if (leftState[i][j] != rightState[i][j])
+					return false;
+			}
+		}
+		return true;
+	}
+	
+	private static boolean[][] rotateMatrix(boolean[][] original)
+	{
+		int height = original[0].length;
+		int width = original.length;
+		boolean[][] rotated = new boolean[height][width];
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				rotated[i][j] = original[width - j - 1][i];
+			}
+		}
+		return rotated;
+	}
+	
+	private static boolean[][] flipMatrixVertically(boolean[][] original) {
+		boolean[][] flipped = new boolean[original.length][original[0].length];
+		for (int i = 0; i < original.length; i++) {
+			flipped[i] = original[original.length - 1 - i];
+		}
+		return flipped;
 	}
 	
 	/**
@@ -63,7 +131,7 @@ public class Pentomino
 	*/
 	public boolean isFilled(int x, int y)
 	{
-		if (grid[y][x])
+		if (state[y][x])
 			return true;
 		return false;
 	}
@@ -72,18 +140,26 @@ public class Pentomino
 		Returns the count of fields in a column
 		@return the count of fields in a column
 	*/
-	public int verticalSize()
+	public int height()
 	{
-		return grid.length;
+		return state.length;
 	}
 	
 	/**
 		Returns the count of fields in a row
 		@return the count of fields in a row
 	*/
-	public int horizontalSize()
+	public int width()
 	{
-		return grid[0].length;
+		return state[0].length;
+	}
+	
+	/**
+	 * Returns all the mutations as an array of pentominoes
+	 * @return array of pentominoes
+	 */
+	public Object[] getMutations() {
+		return mutations.toArray();
 	}
 	
 	/**
@@ -94,9 +170,9 @@ public class Pentomino
 	{
 		// This is easy, just iterate through the array. Massssssive!
 		// But I belive there should be an easier way how to do this.
-		char[] text = new char[grid.length * (grid[0].length + 1)]; // that is the length of the value we will return. The "+ 1" is for the new line chars.
+		char[] text = new char[state.length * (state[0].length + 1)]; // that is the length of the value we will return. The "+ 1" is for the new line chars.
 		int i = 0;
-		for (boolean[] gridLine : grid)
+		for (boolean[] gridLine : state)
 		{
 			for (boolean field : gridLine)
 			{
@@ -115,5 +191,5 @@ public class Pentomino
 	}
 	
 	private ArrayList<Pentomino> mutations;
-	private boolean[][] grid;
+	private boolean[][] state;
 }
