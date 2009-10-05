@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
 	Describes pentomino and allows to do some manipulations on it.
 */
@@ -37,6 +39,19 @@ public class Pentomino
 			}
 			k = 0; // don't forget to keep the right count!
 			i++;
+		}
+	}
+	
+	/**
+	 * Constructs pentomino with all the mutations
+	 * @param aTextualRepresentation
+	 * @param rotations
+	 */
+	public Pentomino(String aTextualRepresentation, String[] someMutations){
+		this(aTextualRepresentation);
+		mutations = new ArrayList<Pentomino>();
+		for(String pent : someMutations) {
+			mutations.add(new Pentomino(pent));
 		}
 	}
 	
@@ -99,5 +114,6 @@ public class Pentomino
 		return new String(text);
 	}
 	
+	private ArrayList<Pentomino> mutations;
 	private boolean[][] grid;
 }
