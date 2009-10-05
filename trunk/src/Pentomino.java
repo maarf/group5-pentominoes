@@ -96,12 +96,10 @@ public class Pentomino
 	 */
 	private static boolean[][] rotateMatrix(boolean[][] original)
 	{
-		int height = original[0].length;
-		int width = original.length;
-		boolean[][] rotated = new boolean[height][width];
-		for (int i = 0; i < height; i++) {
-			for (int j = 0; j < width; j++) {
-				rotated[i][j] = original[width - j - 1][i];
+		boolean[][] rotated = new boolean[original[0].length][original.length];
+		for (int i = 0; i < original[0].length; i++) {
+			for (int j = 0; j < original.length; j++) {
+				rotated[i][j] = original[original.length - j - 1][i];
 			}
 		}
 		return rotated;
