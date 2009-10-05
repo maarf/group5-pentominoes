@@ -24,8 +24,8 @@ public class Board
 	*/
 	public boolean addPentomino(Pentomino aPentomino, int x, int y)
 	{
-		int verticalSizeOfPentomino = aPentomino.verticalSize();
-		int horizontalSizeOfPentomino = aPentomino.horizontalSize();
+		int verticalSizeOfPentomino = aPentomino.height();
+		int horizontalSizeOfPentomino = aPentomino.width();
 		
 		// Lets check if it's in the board's bounds
 		if (horizontalSizeOfPentomino + x > grid[0].length || verticalSizeOfPentomino + y > grid.length)
