@@ -4,7 +4,7 @@
 public class Main
 {
 	/**
-		The main method, hold on!!
+		The main method, hold on!
 	*/
 	public static void main(String[] args)
 	{
