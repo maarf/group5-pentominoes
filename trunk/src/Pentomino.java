@@ -74,7 +74,7 @@ public class Pentomino
 			boolean unique = true;
 			// Check against all known unique states
 			for (int i = 0; i < uniqueStatesCount; i++) {
-				if (compareStates(aState, uniqueMutationStates[i])) {
+				if (compareMatrixes(aState, uniqueMutationStates[i])) {
 					// If the states are copies, then the new state is a duplicate
 					unique = false;
 					break;
@@ -89,19 +89,11 @@ public class Pentomino
 		}
 	}
 	
-	private static boolean compareStates(boolean[][] leftState, boolean[][] rightState) {
-		if (leftState.length != rightState.length || leftState[0].length != rightState[0].length)
-			return false;
-		
-		for (int i = 0; i < leftState.length; i++) {
-			for (int j = 0; j < leftState[0].length; j++) {
-				if (leftState[i][j] != rightState[i][j])
-					return false;
-			}
-		}
-		return true;
-	}
-	
+	/**
+	 * Rotates the two-dimensional array by 90 degrees clockwise
+	 * @param original the two-dimensional array
+	 * @return two-dimensional array rotated by 90 degrees
+	 */
 	private static boolean[][] rotateMatrix(boolean[][] original)
 	{
 		int height = original[0].length;
@@ -115,12 +107,36 @@ public class Pentomino
 		return rotated;
 	}
 	
+	/**
+	 * Flips two-dimensional array vertically
+	 * @param original the two-dimensional array
+	 * @return two-dimensional array flipped vertically
+	 */
 	private static boolean[][] flipMatrixVertically(boolean[][] original) {
 		boolean[][] flipped = new boolean[original.length][original[0].length];
 		for (int i = 0; i < original.length; i++) {
 			flipped[i] = original[original.length - 1 - i];
 		}
 		return flipped;
+	}
+	
+	/**
+	 * Compares two two-dimensional arrays
+	 * @param leftMatrix first array
+	 * @param rightMatrix second array
+	 * @return true if the arrays are the same, false if not
+	 */
+	private static boolean compareMatrixes(boolean[][] leftMatrix, boolean[][] rightMatrix) {
+		if (leftMatrix.length != rightMatrix.length || leftMatrix[0].length != rightMatrix[0].length)
+			return false;
+		
+		for (int i = 0; i < leftMatrix.length; i++) {
+			for (int j = 0; j < leftMatrix[0].length; j++) {
+				if (leftMatrix[i][j] != rightMatrix[i][j])
+					return false;
+			}
+		}
+		return true;
 	}
 	
 	/**
