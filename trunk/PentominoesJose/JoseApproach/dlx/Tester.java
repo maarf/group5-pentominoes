@@ -12,7 +12,7 @@ public class Tester
 		//System.out.print(boardy.get(0, 3));
 		System.out.println(boardy);
 		//System.out.println(boardy.get(0, 4));
-		
+
 	}
 
 }
