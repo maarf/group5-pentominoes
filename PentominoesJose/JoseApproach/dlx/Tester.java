@@ -11,8 +11,6 @@ public class Tester
 		//boardy.set1(0, 0, 0, "L");
 		//System.out.print(boardy.get(0, 3));
 		System.out.println(boardy);
-		//System.out.println(boardy.get(0, 4));
-
 	}
 
 }
