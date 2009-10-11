@@ -48,11 +48,11 @@ public class Pentomino
 			k = 0; // don't forget to keep the right count!
 			i++;
 		}
-		generateMutations();
+		mutations = generateMutations();
 	}
 	
-	private void generateMutations() {
-		mutations = new ArrayList<Pentomino>();
+	private Object[] generateMutations() {
+		ArrayList<Pentomino> mutationsList = new ArrayList<Pentomino>();
 
 		// Lets get all the possible mutations, there could be some duplicates.
 		boolean[][][] mutationStates = new boolean[5][][]; // 3-dimensional arrays is crazy stuff, ummm...
@@ -67,7 +67,7 @@ public class Pentomino
 		// Lets add the "basic" state as one of the mutations, too.
 		uniqueMutationStates[0] = state;
 		int uniqueStatesCount = 1;
-		mutations.add(new Pentomino(state));
+		mutationsList.add(new Pentomino(state));
 		
 		for (boolean[][] aState : mutationStates) {
 			// Lets assume the mutation state is unique
@@ -84,9 +84,10 @@ public class Pentomino
 			if (unique) {
 				uniqueMutationStates[uniqueStatesCount] = aState;
 				uniqueStatesCount++;
-				mutations.add(new Pentomino(aState));				
+				mutationsList.add(new Pentomino(aState));				
 			}
 		}
+		return mutationsList.toArray();
 	}
 	
 	/**
@@ -173,7 +174,7 @@ public class Pentomino
 	 * @return array of pentominoes
 	 */
 	public Object[] getMutations() {
-		return mutations.toArray();
+		return mutations;
 	}
 	
 	/**
@@ -204,6 +205,6 @@ public class Pentomino
 		return new String(text);
 	}
 	
-	private ArrayList<Pentomino> mutations;
+	private Object[] mutations;
 	private boolean[][] state;
 }

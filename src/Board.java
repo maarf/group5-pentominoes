@@ -12,7 +12,7 @@ public class Board
 	*/
 	public Board(int horizontalSize, int verticalSize)
 	{
-		grid = new boolean[verticalSize][horizontalSize];
+		grid = new int[verticalSize][horizontalSize];
 	}
 	
 	/**
@@ -22,13 +22,29 @@ public class Board
 		@param y the y coordinate where to place the pentomino on the board
 		@return returns true if pentomino is added successfully, otherwise false
 	*/
-	public boolean addPentomino(Pentomino aPentomino, int x, int y)
+	public boolean addPentomino(Pentomino aPentomino, int id, int x, int y)
 	{
 		int verticalSizeOfPentomino = aPentomino.height();
 		int horizontalSizeOfPentomino = aPentomino.width();
 		
+		int calculatedX = x;
+		int calculatedY = y;
+		// Lets look for the first filled field in the pentomino and shift the coordinates if necessary
+		blankSearch:
+		for (int i = 0; i < aPentomino.height(); i++) {
+			for (int j = 0; j < aPentomino.width(); j++) {
+				if (aPentomino.isFilled(j, i)) {
+					calculatedX = x - j;
+					calculatedY = y - i;
+					break blankSearch;
+				}
+			}
+		}
+		
 		// Lets check if it's in the board's bounds
-		if (horizontalSizeOfPentomino + x > grid[0].length || verticalSizeOfPentomino + y > grid.length)
+		if (horizontalSizeOfPentomino + calculatedX > grid[0].length ||
+				verticalSizeOfPentomino + calculatedY > grid.length ||
+				calculatedX < 0 || calculatedY < 0)
 			return false;
 		
 		// Lets check if it fits on the board
@@ -36,10 +52,15 @@ public class Board
 		{
 			for (int k = 0; k < horizontalSizeOfPentomino; k++)
 			{
-				if (aPentomino.isFilled(k, i) && isFilled(k + x, i + y))
+				if (aPentomino.isFilled(k, i) && isFilled(k + calculatedX, i + calculatedY))
 					return false; // If the field on board is already filled
 			}
 		}
+		
+		// Lets add the pentomino to the list and get its index
+		pentominoes.add(aPentomino);
+
+		int pentominoIndex = pentominoes.indexOf(aPentomino); 
 		
 		// If everything is ok, then we place the pentomino		
 		for (int i = 0; i < verticalSizeOfPentomino; i++)
@@ -47,12 +68,46 @@ public class Board
 			for (int k = 0; k < horizontalSizeOfPentomino; k++)
 			{
 				if (aPentomino.isFilled(k, i))
-					fill(k + x, i + y);
+					fill(id, k + calculatedX, i + calculatedY);
+//					fill(pentominoIndex, k + calculatedX, i + calculatedY);
 			}
 		}
 		
-		pentominoes.add(aPentomino); // TODO: it actually don't know where the pentominoes are located at, so there is no big use of this
 		
+		// Lets search for the next blank spot
+		searchNextBlankField();
+		
+		return true;
+	}
+	
+	private void searchNextBlankField() {
+		for (int i = nextBlankY; i < grid.length; i++) {
+			for (int j = nextBlankX; j < grid[0].length; j++) {
+				if (!isFilled(j, i)) {
+					nextBlankY = i;
+					nextBlankX = j;
+					return;
+				}
+			}
+			nextBlankX = 0;
+		}
+	}
+	
+	public int getNextBlankX() {
+		return nextBlankX;
+	}
+
+	public int getNextBlankY() {
+		return nextBlankY;
+	}
+	
+	public boolean isSolved() {
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[0].length; j++) {
+				if(grid[i][j] == 0)
+					return false;
+			}
+		}
 		return true;
 	}
 	
@@ -61,10 +116,10 @@ public class Board
 		@param x the x coordinate
 		@param y the y coordinate
 	*/
-	private void fill(int x, int y)
+	private void fill(int p, int x, int y)
 	{
-		if (!grid[y][x]) { // If not filled, then fill
-			grid[y][x] = true;
+		if (grid[y][x] == 0) { // If not filled, then fill
+			grid[y][x] = p;
 			return;
 		}
 		throw new IllegalStateException(); // There is already something in the place!
@@ -78,10 +133,10 @@ public class Board
 	*/
 	public boolean isFilled(int x, int y)
 	{
-		if (grid[y][x]) {
-			return true;
+		if (grid[y][x] == 0) {
+			return false;
 		}
-		return false;
+		return true;
 	}
 	
 	/**
@@ -93,12 +148,12 @@ public class Board
 		// I just copied the code from Pentomio's toString()
 		char[] text = new char[grid.length * (grid[0].length + 1)]; // that is the length of the value we will return. The "+ 1" is for the new line chars.
 		int i = 0;
-		for (boolean[] gridLine : grid)
+		for (int[] gridLine : grid)
 		{
-			for (boolean field : gridLine)
+			for (int field : gridLine)
 			{
-				if (field) {
-					text[i] = '#';
+				if (field != 0) {
+					text[i] = (char) (field + '0');
 				} else {
 					text[i] = '.';
 				}
@@ -111,6 +166,19 @@ public class Board
 		return new String(text);
 	}
 	
-	private boolean[][] grid; // The state of the board
+	public void clear() {
+		nextBlankX = 0;
+		nextBlankY = 0;
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[0].length; j++) {
+				grid[i][j] = 0;
+			}
+		}
+		pentominoes.clear();
+	}
+	
+	private int nextBlankX = 0;
+	private int nextBlankY = 0;
+	private int[][] grid; // The state of the board
 	private ArrayList<Pentomino> pentominoes = new ArrayList<Pentomino>(); // All pentominoes on the board
 }
