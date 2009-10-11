@@ -1,18 +1,26 @@
-public class PentominoTester
-{
-	public static void main(String[] args)
-	{
-		Pentomino pentominoX = new Pentomino(".#.\n###\n.#.");
-		
-		System.out.println("Here we go:\n" + pentominoX.toString());
-//		System.out.println("The size of pentomino: [" + pentominoX.height() + "][" + pentominoX.width() + "]");
-//		System.out.println("Is 0,0 filled? " + pentominoX.isFilled(0, 0));
-//		System.out.println("Is 0,1 filled? " + pentominoX.isFilled(0, 1));
-//		System.out.println("Is 1,0 filled? " + pentominoX.isFilled(1, 0));
-//		System.out.println("Is 1,1 filled? " + pentominoX.isFilled(1, 1));
-		System.out.println("The mutations:");
-		for (Object mut : pentominoX.getMutations()) {
-			System.out.println(mut.toString() + "\n");
-		}
-	}
+public class PentominoTester {
+
+    public static void main(String[] args)
+    {
+        Pentomino I = new Pentomino("#####\n");
+        Pentomino L = new Pentomino("####\n...#\n");
+        Pentomino P = new Pentomino("##.\n##.\n#.\n");
+        Pentomino fout = new Pentomino("##\n###\n");
+
+        Pentomino[] array = new Pentomino[11];
+        array[0] = I;
+        array[1] = L;
+        array[2] = P;
+        array[3] = fout;
+
+        for (Pentomino pentominoes : array)
+        {
+            System.out.println("Pentominoe: \n" + pentominoes.toString());
+
+	        for (Object mutations : pentominoes.getMutations())
+	        {
+	            System.out.println(mutations.toString());
+	        }
+        }
+    }
 }

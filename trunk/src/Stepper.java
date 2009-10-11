@@ -1,52 +1,30 @@
 //import java.util.Scanner;
 
 public class Stepper {
-	
-	public static void main(String[] args) {
-		Stepper stepper = new Stepper();
-//		Scanner in = new Scanner(System.in);
-//		boolean stop = false;
-		int i = 1;
-		while(!stepper.walked) {
-			stepper.step();
-			i++;
-//			System.out.println(i++ + "	" + stepper.toString());
-//			try {
-//				Thread.sleep(500);
-//			} catch (Exception e) {
-//				break;
-//			}
-		}
-		System.out.println(i);
-	}
-	
-	public Stepper() {
-		this(6, 12);
-	}
-	
+
 	public Stepper(int numberOfLevels, int numberOfChoices) {
 		choices = numberOfChoices;
 		levels = numberOfLevels;
 		map = new int[levels];
 	}
 	
-	public void step() {
+	public boolean step() {
 		if(walked) // If already done
-			return;
+			return false;
 		
 		// If the tree is empty, fill it with fresh fruits!!!1
 		if (map[0] == 0) {
 			for (int i = 0; i < levels; i++) {
 				map[i] = i + 1;
 			}
-			return;
+			return true;
 		}
 		
 		// Lets find the next available value for the last level
 		for (int i = 0; i < choices - map[levels - 1]; i++) {
 			if (isAvailable(levels, map[levels - 1] + 1 + i)) {
 				map[levels - 1] = map[levels - 1] + 1 + i;
-				return;
+				return true;
 			}
 		}
 
@@ -68,7 +46,7 @@ public class Stepper {
 		// In case we try to take another round
 		if(map[0] == 0) {
 			walked = true;
-			return;
+			return false;
 		}
 		
 		// Lets fill the blank spots
@@ -82,6 +60,7 @@ public class Stepper {
 				}
 			}
 		}
+		return true;
 	}
 	
 	public boolean isAvailable(int level, int choice) {
@@ -93,13 +72,18 @@ public class Stepper {
 		return true;
 	}
 	
-	public String toString() {
-		// this is the WRONG way :)
-		return new String(map[0] + "	" + map[1] + "	" + map[2] + "	" + map[3] + "	" + map[4] + "	" + map[5]);
+	public int[] getMap() {
+		return map;
 	}
+	
+//	public String toString() {
+//		// this is the WRONG way :)
+//		return new String(map[0] + "	" + map[1] + "	" + map[2] + "	" + map[3] + "	" + map[4] + "	" + map[5]);
+//	}
 	
 	private boolean walked = false;
 	private int choices;
 	private int levels;
 	private int[] map;
+
 }

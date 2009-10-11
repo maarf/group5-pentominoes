@@ -8,10 +8,63 @@ public class Main
 	*/
 	public static void main(String[] args)
 	{
-		// Here we initialize our pentominoes
+		Solver solver = new Solver(listPentominoes(), 6, 5);
+		System.out.println(solver.solve());
+	}
+	
+	/**
+	 * Defines all the twelve pentomiones
+	 * @return array of pentominoes
+	 */
+	public static Pentomino[] listPentominoes() {
+		Pentomino[] pentominoes = {
+			new Pentomino("##\n" + 
+			              "##\n" +
+			              "#."), // P
+			
+			new Pentomino(".##\n" + 
+			              "##.\n" +
+			              ".#."), // F
+			
+			new Pentomino("#..\n" + 
+			              "#..\n" +
+			              "###"), // L
+			
+			new Pentomino("#..\n" + 
+			              "##.\n" +
+			              ".##"), // W
+			
+			new Pentomino(".#\n" + 
+			              "##\n" +
+			              ".#\n" +
+			              ".#"), // Y
+			
+			new Pentomino("#####"), // I
+			
+			new Pentomino("###\n" + 
+			              ".#.\n" +
+			              ".#."), // T
+			
+			new Pentomino("##.\n" + 
+			              ".#.\n" +
+			              ".##"), // Z
+			
+			new Pentomino(".#.\n" + 
+			              "###\n" +
+			              ".#."), // X
+			
+			new Pentomino("#.#\n" + 
+			              "###"), // U
+			
+			new Pentomino("##..\n" + 
+			              ".###"), // N
+			
+			new Pentomino("#...\n" + 
+			              "####") // X
+		};
 		
-		// Here we run our solver
+		// List all the pentominoes here
 		
-		// Here we print the result. Yay!!
+		return pentominoes;
 	}
 }
