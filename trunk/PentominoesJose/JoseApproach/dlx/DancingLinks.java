@@ -48,7 +48,7 @@ public class DancingLinks<E>
 	
 	protected static interface E
 	{
-		public E element();
+		//public E element();
 	}
 	public DancingLinks()
 	{
