@@ -22,7 +22,7 @@ public class Board
 		@param y the y coordinate where to place the pentomino on the board
 		@return returns true if pentomino is added successfully, otherwise false
 	*/
-	public boolean addPentomino(Pentomino aPentomino, int id, int x, int y)
+	public boolean addPentomino(Pentomino aPentomino, int x, int y)
 	{
 		int verticalSizeOfPentomino = aPentomino.height();
 		int horizontalSizeOfPentomino = aPentomino.width();
@@ -59,8 +59,6 @@ public class Board
 		
 		// Lets add the pentomino to the list and get its index
 		pentominoes.add(aPentomino);
-
-		int pentominoIndex = pentominoes.indexOf(aPentomino); 
 		
 		// If everything is ok, then we place the pentomino		
 		for (int i = 0; i < verticalSizeOfPentomino; i++)
@@ -68,8 +66,7 @@ public class Board
 			for (int k = 0; k < horizontalSizeOfPentomino; k++)
 			{
 				if (aPentomino.isFilled(k, i))
-					fill(id, k + calculatedX, i + calculatedY);
-//					fill(pentominoIndex, k + calculatedX, i + calculatedY);
+					fill(aPentomino.getId(), k + calculatedX, i + calculatedY);
 			}
 		}
 		
@@ -123,6 +120,17 @@ public class Board
 			return;
 		}
 		throw new IllegalStateException(); // There is already something in the place!
+	}
+	
+	public void removePentomino(Pentomino aPentomino)
+	{
+		int pentominoId = aPentomino.getId();
+		for (int[] line : grid) {
+			for (int i : line) {
+				if (i == pentominoId)
+					i = 0; // TODO: We can optimize a lot here!
+			}
+		}
 	}
 	
 	/**
