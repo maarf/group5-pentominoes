@@ -22,7 +22,6 @@ public class Solver
 	{
 		int solvedBoards = 0;
 		int step = 0;
-		stepLoop:
 		while(stepper.step()) {
 			if (step % 1000 == 0)
 				System.out.println(step + " " + solvedBoards);
@@ -45,13 +44,12 @@ public class Solver
 				mutationsMap[i] = 1;
 			}
 			
-			mutationLoop:
 			for(int foo = 0; foo < totalMutationsCount; foo++) {
 				
 				// Iterating trough the selected pentominoes
 				for (int i = 0; i < currentMap.length; i++) {
 					Pentomino pent = (Pentomino) pentominoes[currentMap[i] - 1].getMutations()[mutationsMap[i] - 1];
-					boolean added = board.addPentomino(pent, i + 1, board.getNextBlankX(), board.getNextBlankY());
+					boolean added = board.addPentomino(pent, board.getNextBlankX(), board.getNextBlankY());
 					if (!added) {
 						break;
 					}

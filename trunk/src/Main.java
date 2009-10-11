@@ -9,6 +9,7 @@ public class Main
 	public static void main(String[] args)
 	{
 		Solver solver = new Solver(listPentominoes(), 6, 5);
+//		SuperBruteSolver solver = new SuperBruteSolver(listPentominoes(), 6, 5);
 		System.out.println(solver.solve());
 	}
 	
@@ -20,47 +21,47 @@ public class Main
 		Pentomino[] pentominoes = {
 			new Pentomino("##\n" + 
 			              "##\n" +
-			              "#."), // P
+			              "#.", 1), // P
 			
 			new Pentomino(".##\n" + 
 			              "##.\n" +
-			              ".#."), // F
+			              ".#.", 2), // F
 			
 			new Pentomino("#..\n" + 
 			              "#..\n" +
-			              "###"), // L
+			              "###", 3), // L
 			
 			new Pentomino("#..\n" + 
 			              "##.\n" +
-			              ".##"), // W
+			              ".##", 4), // W
 			
 			new Pentomino(".#\n" + 
 			              "##\n" +
 			              ".#\n" +
-			              ".#"), // Y
+			              ".#", 5), // Y
 			
-			new Pentomino("#####"), // I
+			new Pentomino("#####", 6), // I
 			
 			new Pentomino("###\n" + 
 			              ".#.\n" +
-			              ".#."), // T
+			              ".#.", 7), // T
 			
 			new Pentomino("##.\n" + 
 			              ".#.\n" +
-			              ".##"), // Z
+			              ".##", 8), // Z
 			
 			new Pentomino(".#.\n" + 
 			              "###\n" +
-			              ".#."), // X
+			              ".#.", 9), // X
 			
 			new Pentomino("#.#\n" + 
-			              "###"), // U
+			              "###", 10), // U
 			
 			new Pentomino("##..\n" + 
-			              ".###"), // N
+			              ".###", 11), // N
 			
 			new Pentomino("#...\n" + 
-			              "####") // X
+			              "####", 12) // X
 		};
 		
 		// List all the pentominoes here

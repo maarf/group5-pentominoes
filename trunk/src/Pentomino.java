@@ -5,21 +5,27 @@ import java.util.ArrayList;
 */
 public class Pentomino
 {
+
+	private Object[] mutations;
+	private boolean[][] state;
+	private int id;
 	
 	/**
 	 * Constructs pentomino with from predefined two-dimensional boolean array
 	 * @param aState two-dimensional boolean array which represents the filled and blank fields
 	 */
-	public Pentomino(boolean[][] aState){
+	public Pentomino(boolean[][] aState, int anId){
 		state = aState;
+		id = anId;
 	}
 	
 	/**
 		Constructs the pentomino object from a string.
 		@param aTextualRepresentation a textual representation of pentomino (e.g. ".#.\n###\n.#.")
 	*/
-	public Pentomino(String aTextualRepresentation)
+	public Pentomino(String aTextualRepresentation, int anId)
 	{
+		id = anId;
 		// First, lets split the input in lines so we get a nice array of strings.
 		String[] lines = aTextualRepresentation.split("\n"); // the \n is the "new line" character
 		
@@ -55,19 +61,21 @@ public class Pentomino
 		ArrayList<Pentomino> mutationsList = new ArrayList<Pentomino>();
 
 		// Lets get all the possible mutations, there could be some duplicates.
-		boolean[][][] mutationStates = new boolean[5][][]; // 3-dimensional arrays is crazy stuff, ummm...
+		boolean[][][] mutationStates = new boolean[7][][]; // 3-dimensional arrays is crazy stuff, ummm...
 		mutationStates[0] = rotateMatrix(state);
 		mutationStates[1] = rotateMatrix(mutationStates[0]); 
 		mutationStates[2] = rotateMatrix(mutationStates[1]);
 		mutationStates[3] = flipMatrixVertically(state);
 		mutationStates[4] = flipMatrixVertically(mutationStates[1]);
+		mutationStates[5] = flipMatrixVertically(mutationStates[0]);
+		mutationStates[6] = flipMatrixVertically(mutationStates[2]);
 		
-		boolean[][][] uniqueMutationStates = new boolean[6][][];
+		boolean[][][] uniqueMutationStates = new boolean[8][][];
 		
 		// Lets add the "basic" state as one of the mutations, too.
 		uniqueMutationStates[0] = state;
 		int uniqueStatesCount = 1;
-		mutationsList.add(new Pentomino(state));
+		mutationsList.add(new Pentomino(state, id));
 		
 		for (boolean[][] aState : mutationStates) {
 			// Lets assume the mutation state is unique
@@ -84,7 +92,7 @@ public class Pentomino
 			if (unique) {
 				uniqueMutationStates[uniqueStatesCount] = aState;
 				uniqueStatesCount++;
-				mutationsList.add(new Pentomino(aState));				
+				mutationsList.add(new Pentomino(aState, id));				
 			}
 		}
 		return mutationsList.toArray();
@@ -177,6 +185,11 @@ public class Pentomino
 		return mutations;
 	}
 	
+	public int getId()
+	{
+		return id;
+	}
+	
 	/**
 		Returns a string representation of the object.
 		@return a string
@@ -205,6 +218,4 @@ public class Pentomino
 		return new String(text);
 	}
 	
-	private Object[] mutations;
-	private boolean[][] state;
 }
