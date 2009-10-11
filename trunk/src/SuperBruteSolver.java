@@ -44,29 +44,21 @@ public class SuperBruteSolver {
 		
 		// The first level
 		for (Pentomino pent1 : pentominoes) {
-			System.out.println(pent1 + "\n");
 			if (!board.addPentomino(pent1, board.getNextBlankX(), board.getNextBlankY())) {
 				continue;
 			}
-//			System.out.println("pent1:\n" + pent1.toString());
-//			System.out.println("board1:\n" + board.toString());
 			
 			for (Pentomino pent2 : pentominoes) {
 				if (pent2.getId() == pent1.getId() ||
 						!board.addPentomino(pent2, board.getNextBlankX(), board.getNextBlankY())) {
-//					System.out.println("FAIL!");
 					continue;
 				}
-//				System.out.println("pent2:\n" + pent2.toString());
-//				System.out.println("board2:\n" + board.toString());
 				
 				for (Pentomino pent3 : pentominoes) {
 					if (pent3.getId() == pent1.getId() || pent3.getId() == pent2.getId() ||
 							!board.addPentomino(pent3, board.getNextBlankX(), board.getNextBlankY())) {
 						continue;
 					}
-//					System.out.println("pent2:\n" + pent2.toString());
-//					System.out.println("board2:\n" + board.toString());
 					
 					for (Pentomino pent4 : pentominoes) {
 						if (pent4.getId() == pent1.getId() || pent4.getId() == pent2.getId() || pent4.getId() == pent3.getId() ||
@@ -85,7 +77,7 @@ public class SuperBruteSolver {
 										!board.addPentomino(pent6, board.getNextBlankX(), board.getNextBlankY())) {
 									continue;
 								}
-								
+																
 								if (board.isSolved()) {
 									solutionsCount++;
 									System.out.println(solutionsCount);

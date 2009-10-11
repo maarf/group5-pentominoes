@@ -26,6 +26,8 @@ public class BoardTester
 				someBoard.addPentomino(pentomino5, someBoard.getNextBlankX(), someBoard.getNextBlankY()));
 		System.out.println("Sixth pentomino? " +
 				someBoard.addPentomino(pentomino6, someBoard.getNextBlankX(), someBoard.getNextBlankY()));
-		System.out.println("State after the first pentomin:\n" + someBoard.toString());
+		System.out.println("State one:\n" + someBoard.toString());
+		someBoard.removePentomino(pentomino5);
+		System.out.println("State two:\n" + someBoard.toString());
 	}
 }

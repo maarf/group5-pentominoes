@@ -78,8 +78,8 @@ public class Board
 	}
 	
 	private void searchNextBlankField() {
-		for (int i = nextBlankY; i < grid.length; i++) {
-			for (int j = nextBlankX; j < grid[0].length; j++) {
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[0].length; j++) {
 				if (!isFilled(j, i)) {
 					nextBlankY = i;
 					nextBlankX = j;
@@ -125,12 +125,14 @@ public class Board
 	public void removePentomino(Pentomino aPentomino)
 	{
 		int pentominoId = aPentomino.getId();
-		for (int[] line : grid) {
-			for (int i : line) {
-				if (i == pentominoId)
-					i = 0; // TODO: We can optimize a lot here!
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[0].length; j++) {
+				if (grid[i][j] == pentominoId) {
+					grid[i][j] = 0;
+				}
 			}
 		}
+		searchNextBlankField();
 	}
 	
 	/**
