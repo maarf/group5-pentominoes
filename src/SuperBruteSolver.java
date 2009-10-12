@@ -4,9 +4,7 @@ public class SuperBruteSolver {
 		
 	private Pentomino[] pentominoes;
 	private Board board;
-	private int width, height, choices, levels, solutionsCount;
-	private int[] pentominoesMap, rotationsMap;
-	private boolean walked = false;
+	private int solutionsCount;
 	
 	public SuperBruteSolver(Pentomino[] pentominoesList, int aWidth, int aHeight)
 	{
@@ -28,13 +26,8 @@ public class SuperBruteSolver {
 			i++;
 		}
 		
-//		pentominoes = pentominoesList;
-		height = aHeight;
-		width = aWidth;
-		board = new Board(width, height);
+		board = new Board(aWidth, aHeight);
 		
-		choices = pentominoes.length;
-		levels = width * height / 5;
 		solutionsCount = 0;
 		
 	}
@@ -98,7 +91,7 @@ public class SuperBruteSolver {
 								
 								if (board.isSolved()) {
 									solutionsCount++;
-									System.out.println(solutionsCount);
+//									System.out.println(solutionsCount);
 								}
 								
 								board.removePentomino(pent6);
