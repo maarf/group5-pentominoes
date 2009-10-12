@@ -8,7 +8,6 @@ public class Main
 	*/
 	public static void main(String[] args)
 	{
-//		Solver solver = new Solver(listPentominoes(), 6, 5);
 		SuperBruteSolver solver = new SuperBruteSolver(listPentominoes(), 6, 5);
 		System.out.println(solver.solve());
 	}
