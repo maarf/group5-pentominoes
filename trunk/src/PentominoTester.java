@@ -1,11 +1,13 @@
+
+
 public class PentominoTester {
 
     public static void main(String[] args)
     {
-        Pentomino I = new Pentomino("#####\n");
-        Pentomino L = new Pentomino("####\n...#\n");
-        Pentomino P = new Pentomino("##.\n##.\n#.\n");
-        Pentomino fout = new Pentomino("##\n###\n");
+        Pentomino I = new Pentomino("#####\n", 1);
+        Pentomino L = new Pentomino("####\n...#\n", 2);
+        Pentomino P = new Pentomino("##.\n##.\n#.\n", 3);
+        Pentomino fout = new Pentomino("##\n###\n", 4);
 
         Pentomino[] array = new Pentomino[11];
         array[0] = I;
