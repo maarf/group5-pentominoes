@@ -92,7 +92,7 @@ public class SuperBruteSolver {
 								 * this is the first implementation that
 								 * a) calculates the CORRECT result,
 								 * b) does that all in a split second.
-								 * So I hope that you'll forget me. Of course I will think how to do this
+								 * So I hope that you'll forgive me. Of course I will think how to do this
 								 * some other way. Recursion anyone?
 								 */
 								
