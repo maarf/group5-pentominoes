@@ -6,7 +6,10 @@ import dlx.DancingLinks.E;
 
 public class Pentomino
 {
-		protected static class Piece implements E
+	/**
+	 * Maintain information about a pentomino piece.
+	 */
+	protected static class Piece implements E
 	{
 		private String name;
 		private boolean [][] shape;
@@ -101,8 +104,12 @@ public class Pentomino
 			}
 			return result;
 		}
-	} // from static class piece
-	
+	} 
+	  /** 
+	   * A point in the puzzle board. This represents a placement of a piece into 
+	   * a given point on the board. 
+	   */ 
+
 		static class Point implements E
 		{
 			int x;
@@ -112,8 +119,16 @@ public class Pentomino
 				this.x = x;
 				this.y = y;
 			}
-		}// point class
-		
+		}
+		 /** 
+		  * Convert a solution to the puzzle returned by the model into a string 
+		  * that represents the placement of the pieces onto the board. 
+		  * @param width the width of the puzzle board 
+		  * @param height the height of the puzzle board 
+		  * @param solution the list of column names that were selected in the model 
+		  * @return a string representation of completed puzzle board 
+		  */ 
+
 		public static String stringifySolution(int width, int height, List<List<E>> solution)
 		{
 			String[][] picture = new String[height][width];
@@ -149,7 +164,7 @@ public class Pentomino
 			return result.toString();
 		}
 		
-		public enum SolutionCategory {UPPER_LEFT, MID_X, MID_Y, CENTER} //??????????????		
+		public enum SolutionCategory {UPPER_LEFT, MID_X, MID_Y, CENTER}		
 	
 		public SolutionCategory getCategory(List<List<E>> names)
 		{
@@ -214,7 +229,7 @@ public class Pentomino
 			return SolutionCategory.UPPER_LEFT;
 		}
 		
-		private static class SolutionPrinter implements DancingLinks.SolutionAcceptor<E> //dunno if maybe out of piece class
+		private static class SolutionPrinter implements DancingLinks.SolutionAcceptor<E> 
 		{
 			int width;
 			int height;
@@ -229,7 +244,7 @@ public class Pentomino
 			{
 				System.out.println(stringifySolution(width, height, names));
 			}
-		}// class solution printer
+		}
 		
 		protected int width;
 		protected int height;
@@ -338,15 +353,15 @@ public class Pentomino
 		  private DancingLinks.SolutionAcceptor<E> printer;
 		  
 		  {
-			  initializePieces();//dunno if good
+			  initializePieces();
 		  }	
 		  
-			public Pentomino(int width, int height) // constructor
+			public Pentomino(int width, int height) 
 			{
 				initialize(width, height);
 			}
 			
-			public Pentomino()//constructor
+			public Pentomino()
 			{			}
 			
 			void initialize(int width, int height)
@@ -423,8 +438,8 @@ public class Pentomino
 			  
 			  public static void main(String[] args)
 			  {
-				  int width = 6;
-				  int height = 10;
+				  int width = 5;
+				  int height = 6;
 				  Pentomino model = new Pentomino(width, height);
 				  List splits = model.getSplits(2);
 				  for(Iterator splitItr=splits.iterator(); splitItr.hasNext(); )
