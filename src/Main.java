@@ -9,8 +9,9 @@ public class Main
 	public static void main(String[] args)
 	{
 		SuperBruteSolver solver = new SuperBruteSolver(listPentominoes(), 6, 5);
-		System.out.println("Solution with mirror images: " + solver.solve());
-                System.out.println("Solution without mirror images: " + (solver.solve())/4);
+                int solutions = solver.solve();
+		System.out.println("Solution with mirror images: " + solutions);
+                System.out.println("Solution without mirror images: " + (solutions)/4);
 	}
 	
 	/**
