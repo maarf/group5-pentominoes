@@ -1,24 +1,35 @@
+
 /**
-	This is the Main class of the project. Here we initialize all the pentominoes and add the to an array. We will run our solver and some other stuff here.
-*/
+ * The Main class of the project.
+ * Here we initialize all the pentominoes and add them to an array.
+ * We will run our solver here.
+ * 
+ * 15/09/2009
+ * 
+ * @author Martins Spilners, Roland Gerits, Leoni Haagmans
+ * @version 0.1
+ */
+
 public class Main
 {
 	/**
-		The main method, hold on!
-	*/
+	 * The main method, hold on yer horses!
+	 */
 	public static void main(String[] args)
 	{
 		SuperBruteSolver solver = new SuperBruteSolver(listPentominoes(), 6, 5);
-                int solutions = solver.solve();
+		int solutions = solver.solve();
 		System.out.println("Solution with mirror images: " + solutions);
-                System.out.println("Solution without mirror images: " + (solutions)/4);
+		System.out.println("Solution without mirror images: " + (solutions)/4);
 	}
 	
 	/**
-	 * Defines all the twelve pentomiones
+	 * Defines all the twelve pentomiones.
 	 * @return array of pentominoes
 	 */
 	public static Pentomino[] listPentominoes() {
+
+		// List all the pentominoes here
 		Pentomino[] pentominoes = {
 			new Pentomino("##\n" + 
 			              "##\n" +
@@ -64,8 +75,6 @@ public class Main
 			new Pentomino("#...\n" + 
 			              "####", 12) // X
 		};
-		
-		// List all the pentominoes here
 		
 		return pentominoes;
 	}
