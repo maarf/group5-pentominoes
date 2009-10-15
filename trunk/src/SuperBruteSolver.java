@@ -62,6 +62,8 @@ public class SuperBruteSolver {
 	 */
 	public int solve()
 	{
+		long startTime = System.currentTimeMillis();		
+
 		int moves = 0;
 		// The first pentomino.
 		for (Pentomino pent1 : pentominoes) {
@@ -147,6 +149,7 @@ public class SuperBruteSolver {
 			board.removePentomino(pent1);
 		}
 
+		System.out.println("Time it took: " + (System.currentTimeMillis() - startTime));
 		System.out.println("Total nodes touched: " + moves);
 		
 		return solutionsCount;
