@@ -34,7 +34,7 @@ public class Main
 			new Pentomino("##\n" + 
 			              "##\n" +
 			              "#.", 1), // P
-			
+
 			new Pentomino(".##\n" + 
 			              "##.\n" +
 			              ".#.", 2), // F

@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * 
  * 15/09/2009
  * 
- * @author Martins Spilners, Roland Gerits, Leoni Haagmans
+ * @author Martins Spilners, Ronald Gerits, Leoni Haagmans
  * @version 0.1
  */
 

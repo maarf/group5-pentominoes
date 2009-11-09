@@ -1,11 +1,13 @@
+
+
 import java.util.ArrayList;
 
 /**
  * Describes pentomino and allows to do some manipulations on it.
- * Once the pentomino is initialized, it generates all the rotations and flips. 
- * 
+ * Once the pentomino is initialized, it generates all the rotations and flips.
+ *
  * 15/09/2009
- * 
+ *
  * @author Martins Spilners, Roland Gerits, Leoni Haagmans
  * @version 0.1
  */
@@ -14,9 +16,13 @@ public class Pentomino
 {
 
 	/**
-	 * This two-dimensional array of booleans represents the state of the pentomino.  
+	 * This two-dimensional array of booleans represents the state of the pentomino.
 	 */
 	private boolean[][] state;
+
+    public boolean[][] getState() {
+        return state;
+    }
 
 	/**
 	 * This represents the kind of the pentomino.
@@ -24,7 +30,7 @@ public class Pentomino
 	 * too, so we can easily check whether they are basically the same pentominoes.
 	 */
 	private int id;
-	
+
 	/**
 	 * Holds all the mutations of pentomino.
 	 * Note: for mutations themselves this may be blank because otherwise we can run into
@@ -32,8 +38,8 @@ public class Pentomino
 	 * so on.
 	 */
 	private Object[] mutations;
-	
-	
+
+
 	/**
 	 * Constructs pentomino from predefined two-dimensional boolean array
 	 * Note: this constructor _does not_ generate mutations.
@@ -44,8 +50,8 @@ public class Pentomino
 		state = aState;
 		id = anId;
 	}
-	
-	
+
+
 	/**
 	 * Constructs a pentomino object from a string.
 	 * This constructor also generates all the mutations of the pentomino.
@@ -54,15 +60,15 @@ public class Pentomino
 	public Pentomino(String aTextualRepresentation, int anId)
 	{
 		id = anId;
-		
+
 		// First, lets split the input in lines so we get a nice array of strings.
 		String[] lines = aTextualRepresentation.split("\n"); // the \n is the "new line" character
-		
+
 		// Now lets initialize the grid array with the proper size.
 		// lines.length is the number of lines we've got.
 		// line[0].length() is the length of the first line. Right?
 		state = new boolean[lines.length][lines[0].length()];
-		
+
 		// So lets iterate through the lines.
 		int i = 0;
 		int k = 0;
@@ -75,22 +81,22 @@ public class Pentomino
 				// And this is the part where we fill the "grid", yeah.
 				if (aChar == '#')
 					// If the according char is "#", than the field is filled.
-					state[i][k] = true; 
+					state[i][k] = true;
 				else
 					// Or else it's is blank.
-					state[i][k] = false; 
-				
+					state[i][k] = false;
+
 				k++;
 			}
 			k = 0; // Don't forget to keep the right count!
 			i++;
 		}
-		
+
 		// Lets generate mutations.
 		mutations = generateMutations();
 	}
-	
-	
+
+
 	/**
 	 * Generates all the rotations and flips of the pentomino.
 	 * @return array of pentominoes
@@ -102,20 +108,20 @@ public class Pentomino
 		boolean[][][] mutationStates = new boolean[7][][];
 		// 3-dimensional arrays is not the nicest thing. Anyway...
 		mutationStates[0] = rotateMatrix(state);
-		mutationStates[1] = rotateMatrix(mutationStates[0]); 
+		mutationStates[1] = rotateMatrix(mutationStates[0]);
 		mutationStates[2] = rotateMatrix(mutationStates[1]);
 		mutationStates[3] = flipMatrixVertically(state);
 		mutationStates[4] = flipMatrixVertically(mutationStates[1]);
 		mutationStates[5] = flipMatrixVertically(mutationStates[0]);
 		mutationStates[6] = flipMatrixVertically(mutationStates[2]);
-		
+
 		boolean[][][] uniqueMutationStates = new boolean[8][][];
-		
+
 		// Lets add the "basic" state as one of the mutations, too.
 		uniqueMutationStates[0] = state;
 		int uniqueStatesCount = 1;
 		mutationsList.add(new Pentomino(state, id));
-		
+
 		for (boolean[][] aState : mutationStates) {
 			// Lets assume the mutation state is unique.
 			boolean unique = true;
@@ -131,14 +137,14 @@ public class Pentomino
 			if (unique) {
 				uniqueMutationStates[uniqueStatesCount] = aState;
 				uniqueStatesCount++;
-				mutationsList.add(new Pentomino(aState, id));				
+				mutationsList.add(new Pentomino(aState, id));
 			}
 		}
-		
+
 		return mutationsList.toArray();
 	}
-	
-	
+
+
 	/**
 	 * Rotates the two-dimensional array by 90 degrees clockwise
 	 * @param original the two-dimensional array
@@ -154,8 +160,8 @@ public class Pentomino
 		}
 		return rotated;
 	}
-	
-	
+
+
 	/**
 	 * Flips two-dimensional array vertically
 	 * @param original the two-dimensional array
@@ -169,8 +175,8 @@ public class Pentomino
 		}
 		return flipped;
 	}
-	
-	
+
+
 	/**
 	 * Compares two two-dimensional arrays
 	 * @param leftMatrix first array
@@ -179,10 +185,10 @@ public class Pentomino
 	 */
 	private static boolean compareMatrixes(boolean[][] leftMatrix, boolean[][] rightMatrix)
 	{
-		// If the sizes of matrixes is not equal then the matrixes can not be equal. 
+		// If the sizes of matrixes is not equal then the matrixes can not be equal.
 		if (leftMatrix.length != rightMatrix.length || leftMatrix[0].length != rightMatrix[0].length)
 			return false;
-		
+
 		for (int i = 0; i < leftMatrix.length; i++) {
 			for (int j = 0; j < leftMatrix[0].length; j++) {
 				if (leftMatrix[i][j] != rightMatrix[i][j])
@@ -191,8 +197,8 @@ public class Pentomino
 		}
 		return true;
 	}
-	
-	
+
+
 	/**
 	 * Returns the state of field at x,y.
 	 * @param x the x coordinate
@@ -205,8 +211,8 @@ public class Pentomino
 			return true;
 		return false;
 	}
-	
-	
+
+
 	/**
 	 * Returns the number of rows.
 	 * @return the number of rows
@@ -215,8 +221,8 @@ public class Pentomino
 	{
 		return state.length;
 	}
-	
-	
+
+
 	/**
 	 * Returns the number of columns.
 	 * @return the number of columns
@@ -225,8 +231,8 @@ public class Pentomino
 	{
 		return state[0].length;
 	}
-	
-	
+
+
 	/**
 	 * Returns all the mutations as an array of pentominoes.
 	 * @return array of pentominoes
@@ -234,8 +240,8 @@ public class Pentomino
 	public Object[] getMutations() {
 		return mutations;
 	}
-	
-	
+
+
 	/**
 	 * Returns the id of the pentomino.
 	 * @return the id of pentomino
@@ -244,7 +250,7 @@ public class Pentomino
 	{
 		return id;
 	}
-	
+
 	/**
 	 * Returns textual representation of the pentomino.
 	 * @return a textual representation
@@ -256,7 +262,7 @@ public class Pentomino
 		char[] text = new char[state.length * (state[0].length + 1)]; // that is the length of the value we will return. The "+ 1" is for the new line chars.
 		// That is the length of the value we will return. The "+ 1" is for the new
 		// line chars.
-		
+
 		int i = 0;
 		for (boolean[] gridLine : state)
 		{
@@ -272,10 +278,10 @@ public class Pentomino
 			text[i] = '\n';
 			i++;
 		}
-		
+
 		text[i - 1] = 0; // We don't need the last new line char.
-		
+
 		return new String(text);
 	}
-	
+
 }
