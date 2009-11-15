@@ -1,61 +1,250 @@
 package tetris_jose_rob;
 
+import java.util.Random;
+
 public class Figure implements Ifig
 {
-	public static final int P_Figure = 1;
+	public static final int P_FIGURE = 1;
 	
-	public static final int X_Figure = 2;
+	public static final int X_FIGURE = 2;
+	
+	public static final int F_FIGURE = 3;
+	
+	public static final int V_FIGURE = 4;
+	
+	public static final int W_FIGURE = 5;
+	
+	public static final int Y_FIGURE = 6;
+	
+	public static final int I_FIGURE = 7;
+	
+	public static final int T_FIGURE = 8;
+	
+	public static final int Z_FIGURE = 9;
+	
+	public static final int U_FIGURE = 10;
+	
+	public static final int N_FIGURE = 11;
+	
+	public static final int L_FIGURE = 12;
 	
 	private int [] shapeX = new int[5];
 	
 	private int [] shapeY = new int[5];
 	
-	private int orientation = 0;
+	private int orientation;
 	
-	private int maxOrientation = 4;
+	private int maxOrientation;
 	
-	public int x1;
+	private int x1;
 	
-	public int y1;
+	private int y1;
 	
+	private int x2diff;
+	
+	private int y2diff;
+	
+	private int x3diff;
+	
+	private int x4diff;
+	
+	private int x5diff;
+	
+	private int y3diff;
+	
+	private int y4diff;
+	
+	private int y5diff;
+	
+		
 	public Figure (int type)
 	{
 		initialize(type);
 	}
 	
+	public Figure()
+	{
+		
+	}
+	
 	public void initialize(int type)
 	{
-		orientation = 0;
+		orientation = 1;
+		x1 = 0;
+		y1 = 0;
 		
 		switch(type)
 		{
-		case P_Figure:
+		case P_FIGURE:
 			maxOrientation = 4;
 			
-        	shapeX[0] = -1;
-        	shapeY[0] = 0;
+        	shapeX[0] = 0;
+        	shapeY[0] = 1;
         	shapeX[1] = -1;
         	shapeY[1] = 1;
         	shapeX[2] = -1;
         	shapeY[2] = 2;
-        	shapeX[3] = 0;
-        	shapeY[3] = 1;
+        	shapeX[3] = -1;
+        	shapeY[3] = 0;
         	shapeX[4] = 0;
         	shapeY[4] = 2;
         	break;
-		case X_Figure:
+		case X_FIGURE:
 			maxOrientation = 1;
+			
         	shapeX[0] = 0;
-        	shapeY[0] = 0;
+        	shapeY[0] = 1;
         	shapeX[1] = 0;
-        	shapeY[1] = 1;
+        	shapeY[1] = 0;
         	shapeX[2] = 0;
         	shapeY[2] = 2;
         	shapeX[3] = 1;
         	shapeY[3] = 1;
         	shapeX[4] = -1;
         	shapeY[4] = 1;
+			break;
 			
+		case F_FIGURE:
+			maxOrientation = 4;
+			
+        	shapeX[0] = 0;
+        	shapeY[0] = 1;
+        	shapeX[1] = 0;
+        	shapeY[1] = 0;
+        	shapeX[2] = 0;
+        	shapeY[2] = 2;
+        	shapeX[3] = -1;
+        	shapeY[3] = 1;
+        	shapeX[4] = 1;
+        	shapeY[4] = 2;
+        	break;
+        	
+		case V_FIGURE:
+			maxOrientation = 4;
+			
+        	shapeX[0] = 0;
+        	shapeY[0] = 0;
+        	shapeX[1] = 1;
+        	shapeY[1] = 0;
+        	shapeX[2] = -1;
+        	shapeY[2] = 0;
+        	shapeX[3] = -1;
+        	shapeY[3] = 1;
+        	shapeX[4] = -1;
+        	shapeY[4] = 2;
+        	break;
+		case W_FIGURE:
+			maxOrientation = 4;
+			
+        	shapeX[0] = 0;
+        	shapeY[0] = 1;
+        	shapeX[1] = 0;
+        	shapeY[1] = 0;
+        	shapeX[2] = 1;
+        	shapeY[2] = 0;
+        	shapeX[3] = -1;
+        	shapeY[3] = 1;
+        	shapeX[4] = -1;
+        	shapeY[4] = 2;
+        	break;
+		case Y_FIGURE:
+			maxOrientation = 4;
+			
+        	shapeX[0] = 0;
+        	shapeY[0] = 1;
+        	shapeX[1] = 0;
+        	shapeY[1] = 0;
+        	shapeX[2] = 0;
+        	shapeY[2] = 2;
+        	shapeX[3] = 0;
+        	shapeY[3] = 3;
+        	shapeX[4] = -1;
+        	shapeY[4] = 2;
+        	break;
+		case I_FIGURE:
+			maxOrientation = 2;
+			
+        	shapeX[0] = 0;
+        	shapeY[0] = 2;
+        	shapeX[1] = 0;
+        	shapeY[1] = 0;
+        	shapeX[2] = 0;
+        	shapeY[2] = 1;
+        	shapeX[3] = 0;
+        	shapeY[3] = 3;
+        	shapeX[4] = 0;
+        	shapeY[4] = 4;
+        	break;
+		case T_FIGURE:
+			maxOrientation = 4;
+			
+        	shapeX[0] = 0;
+        	shapeY[0] = 1;
+        	shapeX[1] = 0;
+        	shapeY[1] = 0;
+        	shapeX[2] = 0;
+        	shapeY[2] = 2;
+        	shapeX[3] = -1;
+        	shapeY[3] = 2;
+        	shapeX[4] = 1;
+        	shapeY[4] = 2;
+        	break;
+		case U_FIGURE:
+			maxOrientation = 4;
+			
+        	shapeX[0] = 0;
+        	shapeY[0] = 0;
+        	shapeX[1] = 1;
+        	shapeY[1] = 0;
+        	shapeX[2] = 1;
+        	shapeY[2] = 1;
+        	shapeX[3] = -1;
+        	shapeY[3] = 0;
+        	shapeX[4] = -1;
+        	shapeY[4] = 1;
+        	break;
+		case N_FIGURE:
+			maxOrientation = 4;
+			
+        	shapeX[0] = 0;
+        	shapeY[0] = 0;
+        	shapeX[1] = 1;
+        	shapeY[1] = 0;
+        	shapeX[2] = -1;
+        	shapeY[2] = 0;
+        	shapeX[3] = -1;
+        	shapeY[3] = 1;
+        	shapeX[4] = -2;
+        	shapeY[4] = 1;
+        	break;
+		case L_FIGURE:
+			maxOrientation = 4;
+			
+        	shapeX[0] = 0;
+        	shapeY[0] = 0;
+        	shapeX[1] = 1;
+        	shapeY[1] = 0;
+        	shapeX[2] = 1;
+        	shapeY[2] = 1;
+        	shapeX[3] = -1;
+        	shapeY[3] = 0;
+        	shapeX[4] = -2;
+        	shapeY[4] = 0;
+        	break;
+		case Z_FIGURE:
+			maxOrientation = 4;
+			
+        	shapeX[0] = 0;
+        	shapeY[0] = 1;
+        	shapeX[1] = 0;
+        	shapeY[1] = 0;
+        	shapeX[2] = 1;
+        	shapeY[2] = 0;
+        	shapeX[3] = -1;
+        	shapeY[3] = 2;
+        	shapeX[4] = 0;
+        	shapeY[4] = 2;
+        	break;
         default :
             throw new IllegalArgumentException("No figure constant: " + 
                                                type);
@@ -67,34 +256,114 @@ public class Figure implements Ifig
 		return orientation;
 	}
 	
-	public void rotateClockwise(Figure a)
+	public void startRotateClockwise() //still to work in the else to go back to original
 	{
-		for(int i = 0; i<4; i++)
+		if(orientation<maxOrientation)
 		{
-			int x = shapeX[i];
-			int y = shapeY[i];
+			for(int i = 0; i<5; i++)
+			{
+				int x = shapeX[i];
+				int y = shapeY[i];
 			
-			y1 = y;
-			y = x;
-			x = -1 * y1;
+				int f = y;
+				y = -1 * x;
+				x = f;
+				
+				shapeX[i] = x;
+				shapeY[i] = y;				
+			}
+			orientation++;
 		}
 	}
 	
-	public void rotateCounterClockwise(Figure a)
+	public void startRotateCounterClockwise()//still to work on orientation/ rotations, but works
 	{
-		for(int i = 0; i<4; i++)
-		{
-			int x = shapeX[i];
-			int y = shapeY[i];
+			for(int i = 0; i<5; i++)
+			{
+				int x = shapeX[i];
+				int y = shapeY[i];
 			
-			x1 = x;
-			x = y;
-			y = -1 * x1;
-		}
+				int f = y;
+				y = x;
+				x = -1 * f;
+			
+				shapeX[i] = x;
+				shapeY[i] = y;
+				
+				orientation++;
+			}
+				
 	}
 	
-	public void getLowestX()
+	public void saveCurrentCor()
 	{
-		
+		x1 = shapeX[0];
+		y1 = shapeY[0];
+	}
+	
+	public void difference()
+	{
+		x2diff = shapeX[1] - shapeX[0];
+		y2diff = shapeY[1] - shapeY[0];
+		x3diff = shapeX[2] - shapeX[0];
+		y3diff = shapeY[2] - shapeY[0];
+		x4diff = shapeX[3] - shapeX[0];
+		y4diff = shapeY[3] - shapeY[0];
+		x5diff = shapeX[4] - shapeX[0];
+		y5diff = shapeY[4] - shapeY[0];
+	}
+	
+	public void putBack()
+	{
+
+		shapeX[0] = x1;
+		shapeY[0] = y1;
+
+	}
+	public void translate()
+	{
+		shapeX[1] = shapeX[0] + x2diff;
+		shapeY[1] = shapeY[0] + y2diff;
+		shapeX[2] = shapeX[0] + x3diff;
+		shapeY[2] = shapeY[0] + y3diff;
+		shapeX[3] = shapeX[0] + x4diff;
+		shapeY[3] = shapeY[0] + y4diff;
+		shapeX[4] = shapeX[0] + x5diff;
+		shapeY[4] = shapeY[0] + y5diff;
+	}
+	
+	public Figure randomPicker(Figure[] a)
+	{
+		Random ram = new Random();
+		Figure b = a[ram.nextInt(a.length)];
+		return b;
+	}
+	
+	public void rotateClockwise()
+	{
+		saveCurrentCor();
+		startRotateClockwise();
+		difference();
+		putBack();
+		translate();
+	}
+	
+	public void rotateCounterClockwise()
+	{
+		saveCurrentCor();
+		startRotateCounterClockwise();
+		difference();
+		putBack();
+		translate();
+	}
+	
+	public int getX(int b)
+	{
+		return shapeX[b];
+	}
+	
+	public int getY (int b)
+	{
+		return shapeY[b];
 	}
 }
