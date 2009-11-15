@@ -12,21 +12,23 @@ public interface Ifig
 	 */
 	void initialize(int type);
 	/**
-	 * rotates the pentomino clockwise and saves new coordinates
+	 * gets current orientation of pentomino could go from 0 to 3, used to avoid unnecessary
+	 * rotations
+	 * 
 	 */
-	void rotateClockwise(Figure a);
+	int getOrientation();
 	/**
-	 * rotates the pentomino counterclockwise and saves new coordinates
+	 * rotates the pentomino clockwise and gets new coordinates but out of bounds
 	 */
-	void rotateCounterClockwise(Figure a);
+	void startRotateClockwise();
 	/**
-	 * get x1 value of pentomino
+	 * rotates the pentomino counterclockwise and gets new coordinates but out of bounds
 	 */
-	int getXCurrent ();
+	void startRotateCounterClockwise();
 	/**
-	 * get y1 value of pentomino
+	 * saves x1 and y1 value of pentomino(coordinates), main values for putting pentomino back to main position
 	 */
-	int getYCurrent ();
+	void saveCurrentCor ();
 	/**
 	 * Calculates the position of the X and Y in relation to X1 and Y1 so we can use this information
 	 * to put the pentomino back to the original position 
@@ -40,5 +42,19 @@ public interface Ifig
 	 * translate other pieces of pentomino using the difference
 	 */
 	void translate();
+	/**
+	 * calls all methods needed to get pentomino rotated clockwise in good position
+	 */
+	void rotateClockwise();
+	/**
+	 * calls all methods needed to get pentomino rotated counterclockwise in good position
+	 */
+	void rotateCounterClockwise();
+	/**
+	 * returns a random pentomino from the array
+	 * @param a array of pentominoes
+	 * @return a random pentomino
+	 */
+	Figure randomPicker(Figure[] a);
 	
 }
