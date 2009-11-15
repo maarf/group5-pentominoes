@@ -56,6 +56,8 @@ public class Figure implements Ifig
 	
 	private int y5diff;
 	
+	private int name;
+	
 		
 	public Figure (int type)
 	{
@@ -77,6 +79,7 @@ public class Figure implements Ifig
 		{
 		case P_FIGURE:
 			maxOrientation = 4;
+			name = 1;
 			
         	shapeX[0] = 0;
         	shapeY[0] = 1;
@@ -91,6 +94,7 @@ public class Figure implements Ifig
         	break;
 		case X_FIGURE:
 			maxOrientation = 1;
+			name = 2;
 			
         	shapeX[0] = 0;
         	shapeY[0] = 1;
@@ -106,6 +110,7 @@ public class Figure implements Ifig
 			
 		case F_FIGURE:
 			maxOrientation = 4;
+			name = 3;
 			
         	shapeX[0] = 0;
         	shapeY[0] = 1;
@@ -121,6 +126,7 @@ public class Figure implements Ifig
         	
 		case V_FIGURE:
 			maxOrientation = 4;
+			name = 4;
 			
         	shapeX[0] = 0;
         	shapeY[0] = 0;
@@ -135,6 +141,7 @@ public class Figure implements Ifig
         	break;
 		case W_FIGURE:
 			maxOrientation = 4;
+			name = 5;
 			
         	shapeX[0] = 0;
         	shapeY[0] = 1;
@@ -149,6 +156,7 @@ public class Figure implements Ifig
         	break;
 		case Y_FIGURE:
 			maxOrientation = 4;
+			name = 6;
 			
         	shapeX[0] = 0;
         	shapeY[0] = 1;
@@ -163,6 +171,7 @@ public class Figure implements Ifig
         	break;
 		case I_FIGURE:
 			maxOrientation = 2;
+			name = 7;
 			
         	shapeX[0] = 0;
         	shapeY[0] = 2;
@@ -177,6 +186,7 @@ public class Figure implements Ifig
         	break;
 		case T_FIGURE:
 			maxOrientation = 4;
+			name = 8;
 			
         	shapeX[0] = 0;
         	shapeY[0] = 1;
@@ -189,8 +199,24 @@ public class Figure implements Ifig
         	shapeX[4] = 1;
         	shapeY[4] = 2;
         	break;
+		case Z_FIGURE:
+			maxOrientation = 4;
+			name = 9;
+			
+        	shapeX[0] = 0;
+        	shapeY[0] = 1;
+        	shapeX[1] = 0;
+        	shapeY[1] = 0;
+        	shapeX[2] = 1;
+        	shapeY[2] = 0;
+        	shapeX[3] = -1;
+        	shapeY[3] = 2;
+        	shapeX[4] = 0;
+        	shapeY[4] = 2;
+        	break;
 		case U_FIGURE:
 			maxOrientation = 4;
+			name = 10;
 			
         	shapeX[0] = 0;
         	shapeY[0] = 0;
@@ -205,6 +231,7 @@ public class Figure implements Ifig
         	break;
 		case N_FIGURE:
 			maxOrientation = 4;
+			name = 11;
 			
         	shapeX[0] = 0;
         	shapeY[0] = 0;
@@ -219,6 +246,7 @@ public class Figure implements Ifig
         	break;
 		case L_FIGURE:
 			maxOrientation = 4;
+			name = 12;
 			
         	shapeX[0] = 0;
         	shapeY[0] = 0;
@@ -231,20 +259,7 @@ public class Figure implements Ifig
         	shapeX[4] = -2;
         	shapeY[4] = 0;
         	break;
-		case Z_FIGURE:
-			maxOrientation = 4;
-			
-        	shapeX[0] = 0;
-        	shapeY[0] = 1;
-        	shapeX[1] = 0;
-        	shapeY[1] = 0;
-        	shapeX[2] = 1;
-        	shapeY[2] = 0;
-        	shapeX[3] = -1;
-        	shapeY[3] = 2;
-        	shapeX[4] = 0;
-        	shapeY[4] = 2;
-        	break;
+
         default :
             throw new IllegalArgumentException("No figure constant: " + 
                                                type);
@@ -256,7 +271,7 @@ public class Figure implements Ifig
 		return orientation;
 	}
 	
-	public void startRotateClockwise() //still to work in the else to go back to original
+	public void startRotateClockwise()
 	{
 		if(orientation<maxOrientation)
 		{
@@ -274,10 +289,22 @@ public class Figure implements Ifig
 			}
 			orientation++;
 		}
+		else 
+		{
+			for(int i = 0; i<5; i++)
+			{
+				Figure a = new Figure(getName());
+				shapeX[i] = a.shapeX[i] + x1;
+				shapeY[i] = a.shapeY[i] + y1;
+			}
+			orientation = 1;
+		}
 	}
 	
 	public void startRotateCounterClockwise()//still to work on orientation/ rotations, but works
 	{
+		if(orientation < maxOrientation)
+		{
 			for(int i = 0; i<5; i++)
 			{
 				int x = shapeX[i];
@@ -288,11 +315,27 @@ public class Figure implements Ifig
 				x = -1 * f;
 			
 				shapeX[i] = x;
-				shapeY[i] = y;
-				
-				orientation++;
+				shapeY[i] = y;				
 			}
-				
+			if(orientation > 1)
+			{
+				orientation--;
+			}
+			else
+			{
+				orientation = 1;
+			}
+		}
+		else
+		{
+			for(int i = 0; i<5; i++)
+			{
+				Figure a = new Figure(getName());
+				shapeX[i] = a.shapeX[i] + x1;
+				shapeY[i] = a.shapeY[i] + y1;
+			}
+			orientation = 1;
+		}
 	}
 	
 	public void saveCurrentCor()
@@ -365,5 +408,9 @@ public class Figure implements Ifig
 	public int getY (int b)
 	{
 		return shapeY[b];
+	}
+	public int getName()
+	{
+		return name;
 	}
 }

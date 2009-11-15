@@ -22,21 +22,32 @@ public class Tester {
 	            new Figure(Figure.L_FIGURE)
 	        };
 		
-		Figure x = new Figure();
-		Figure y = x.randomPicker(figures);
+		Figure x = new Figure(1);
+		//Figure y = x.randomPicker(figures);
+		System.out.println("name: " + x.getName());
 		//y.rotateCounterClockwise();
-		y.rotateClockwise();
+		//x.rotateCounterClockwise();
+		//x.rotateCounterClockwise();
+		//x.rotateCounterClockwise();
+		//x.rotateCounterClockwise();
+		x.rotateClockwise();
+		//x.rotateCounterClockwise();
+		//x.rotateCounterClockwise();
+		x.rotateClockwise();
+		x.rotateCounterClockwise();
+		x.rotateCounterClockwise();
+		x.rotateCounterClockwise();
+		//x.rotateClockwise();
+		//x.rotateClockwise();
+		System.out.println("orientation: " + x.getOrientation());
 
-
-		//System.out.println("x1: " + x.test1());
-		//System.out.println("y1: " + x.test2());
 		//System.out.println(y.getOrientation());
 		
 		
 	  for (int i = 0; i<5 ; i++)
 	   { 
-	   System.out.println("x: " + y.getX(i));
-	   System.out.println("y: " + y.getY(i));
+	   System.out.println("x: " + x.getX(i));
+	   System.out.println("y: " + x.getY(i));
 	   }
 
 	}

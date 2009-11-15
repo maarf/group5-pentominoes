@@ -51,6 +51,10 @@ public interface Ifig
 	 */
 	void rotateCounterClockwise();
 	/**
+	 * returns the int representing a certain pentomino
+	 */
+	int getName();
+	/**
 	 * returns a random pentomino from the array
 	 * @param a array of pentominoes
 	 * @return a random pentomino
