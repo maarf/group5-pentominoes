@@ -55,10 +55,10 @@ public interface Ifig
 	 */
 	int getName();
 	/**
-	 * returns a random pentomino from the array
+	 * returns a random pentomino
 	 * @param a array of pentominoes
 	 * @return a random pentomino
 	 */
-	Figure randomPicker(Figure[] a);
+	Figure randomPicker();
 	
 }
