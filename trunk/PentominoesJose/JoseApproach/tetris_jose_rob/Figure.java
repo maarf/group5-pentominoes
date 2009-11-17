@@ -34,7 +34,7 @@ public class Figure implements Ifig
 	
 	private int orientation;
 	
-	private int maxOrientation;
+	private final int maxOrientation = 4;
 	
 	private int x1;
 	
@@ -78,7 +78,7 @@ public class Figure implements Ifig
 		switch(type)
 		{
 		case P_FIGURE:
-			maxOrientation = 4;
+			//maxOrientation = 4;
 			name = 1;
 			
         	shapeX[0] = 0;
@@ -93,7 +93,7 @@ public class Figure implements Ifig
         	shapeY[4] = 2;
         	break;
 		case X_FIGURE:
-			maxOrientation = 1;
+			//maxOrientation = 1;
 			name = 2;
 			
         	shapeX[0] = 0;
@@ -109,7 +109,7 @@ public class Figure implements Ifig
 			break;
 			
 		case F_FIGURE:
-			maxOrientation = 4;
+			//maxOrientation = 4;
 			name = 3;
 			
         	shapeX[0] = 0;
@@ -125,7 +125,7 @@ public class Figure implements Ifig
         	break;
         	
 		case V_FIGURE:
-			maxOrientation = 4;
+			//maxOrientation = 4;
 			name = 4;
 			
         	shapeX[0] = 0;
@@ -140,7 +140,7 @@ public class Figure implements Ifig
         	shapeY[4] = 2;
         	break;
 		case W_FIGURE:
-			maxOrientation = 4;
+			//maxOrientation = 4;
 			name = 5;
 			
         	shapeX[0] = 0;
@@ -155,7 +155,7 @@ public class Figure implements Ifig
         	shapeY[4] = 2;
         	break;
 		case Y_FIGURE:
-			maxOrientation = 4;
+			//maxOrientation = 4;
 			name = 6;
 			
         	shapeX[0] = 0;
@@ -170,7 +170,7 @@ public class Figure implements Ifig
         	shapeY[4] = 2;
         	break;
 		case I_FIGURE:
-			maxOrientation = 2;
+			//maxOrientation = 2;
 			name = 7;
 			
         	shapeX[0] = 0;
@@ -185,7 +185,7 @@ public class Figure implements Ifig
         	shapeY[4] = 4;
         	break;
 		case T_FIGURE:
-			maxOrientation = 4;
+			//maxOrientation = 4;
 			name = 8;
 			
         	shapeX[0] = 0;
@@ -200,7 +200,7 @@ public class Figure implements Ifig
         	shapeY[4] = 2;
         	break;
 		case Z_FIGURE:
-			maxOrientation = 4;
+			//maxOrientation = 4;
 			name = 9;
 			
         	shapeX[0] = 0;
@@ -215,7 +215,7 @@ public class Figure implements Ifig
         	shapeY[4] = 2;
         	break;
 		case U_FIGURE:
-			maxOrientation = 4;
+			//maxOrientation = 4;
 			name = 10;
 			
         	shapeX[0] = 0;
@@ -230,7 +230,7 @@ public class Figure implements Ifig
         	shapeY[4] = 1;
         	break;
 		case N_FIGURE:
-			maxOrientation = 4;
+			//maxOrientation = 4;
 			name = 11;
 			
         	shapeX[0] = 0;
@@ -245,7 +245,7 @@ public class Figure implements Ifig
         	shapeY[4] = 1;
         	break;
 		case L_FIGURE:
-			maxOrientation = 4;
+			//maxOrientation = 4;
 			name = 12;
 			
         	shapeX[0] = 0;
@@ -317,13 +317,13 @@ public class Figure implements Ifig
 				shapeX[i] = x;
 				shapeY[i] = y;				
 			}
-			if(orientation > 1)
+			if(orientation == 1)
 			{
-				orientation--;
+				orientation = 4;
 			}
 			else
 			{
-				orientation = 1;
+				orientation--;
 			}
 		}
 		else
@@ -375,11 +375,14 @@ public class Figure implements Ifig
 		shapeY[4] = shapeY[0] + y5diff;
 	}
 	
-	public Figure randomPicker(Figure[] a)
+	public Figure randomPicker()
 	{
-		Random ram = new Random();
-		Figure b = a[ram.nextInt(a.length)];
-		return b;
+		int lower = 1;
+		int higher = 12;
+		Random ran = new Random();
+		int r = ran.nextInt(higher - lower + 1) + lower;
+		Figure a = new Figure (r);
+		return a;
 	}
 	
 	public void rotateClockwise()
