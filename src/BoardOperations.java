@@ -63,14 +63,88 @@ public class BoardOperations
         }
     }
 
+    public void moveDown(Figure b)
+    {
+        int[][] bArray = returnFigure(b);
+        for(int x = 0; x < bArray.length; x++)
+        {
+          board[bArray[x][0]][bArray[x][1]] = null;
+          board[bArray[x][0]][bArray[x][1] + 1] = b;
+        }
+    }
+
+    public void moveMaxDown(Figure b)
+    {
+        int[][] bArray = returnFigure(b);
+        int[] distances = new int[5];
+        for(int x = 0; x < bArray.length; x++)
+        {
+            
+        }
+    }
+
+
+
+    public int supremumX(int x)
+    {
+        int supremumX = 0;
+        for(int y = 0; y < board[x].length; y++)
+        {
+            if(board[x][y] != null)
+            {
+                supremumX = y; 
+            }
+        }
+        return supremumX;
+    }
+    public void moveLeft(Figure b)
+    {
+        int[][] bArray = returnFigure(b);
+        for(int x = 0; x < bArray.length; x++)
+        {
+          board[bArray[x][0]][bArray[x][1]] = null;
+          board[bArray[x][0] - 1][bArray[x][1]] = b;
+        }
+
+    }
+
+    public void moveRight(Figure b)
+    {
+        int[][] bArray = returnFigure(b);
+        for(int x = 0; x < bArray.length; x++)
+        {
+          board[bArray[x][0]][bArray[x][1]] = null;
+          board[bArray[x][0] + 1][bArray[x][1]] = b;
+        }
+
+    }
+
+    public int[][] returnFigure(Figure b)
+    {
+        int last = 0;
+        int[][] returnArray = new int[5][2];
+        for(int x = 0; x < board.length; x++)
+        {
+            for(int y = 0; y < board[x].length; y++)
+            {
+                if(board[x][y] == b)
+                {
+                    returnArray[last][0] = x;
+                    returnArray[last][1] = y;
+                }
+            }
+        }
+        return returnArray;
+    }
+
     /**
      * Returns the board
      * @return Returns the Pentomino[][].
      */
-    public Pentomino[][] returnBoard()
+    public Figure[][] returnBoard()
     {
         return board;
     }
 
-    private Pentomino[][] board;
+    private Figure[][] board;
 }
