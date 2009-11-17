@@ -9,7 +9,7 @@
  *
  * @author Leoni
  */
-import javax.swing.*;
+/** import javax.swing.*;
 
 public class KeyImputer
 {
@@ -53,4 +53,4 @@ public class KeyImputer
         }
     }
 
-}
+}*/
