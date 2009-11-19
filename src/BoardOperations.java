@@ -48,6 +48,7 @@ public class BoardOperations
         {
             board[i][line] = null;
         }
+        lineCounter++;
     }
 
     /** Moves a line to another place
@@ -146,5 +147,11 @@ public class BoardOperations
         return board;
     }
 
+    public int Counter()
+    {
+        return lineCounter;
+    }
+
     private Figure[][] board;
+    private int lineCounter;
 }
