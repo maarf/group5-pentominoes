@@ -1,4 +1,9 @@
 
+/**
+ * 
+ * @author Rob van den Oever and José Sue Smith
+ *
+ */
 
 
 public class Game extends BoardOperations implements IGame

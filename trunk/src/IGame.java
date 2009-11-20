@@ -1,4 +1,8 @@
-
+/**
+ * 
+ * @author Rob van den Oever and José Sue Smith
+ *
+ */
 
 public interface IGame 
 {
