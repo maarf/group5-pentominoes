@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.Timer;
 
-public class Mover
+public class Mover extends Game
 {
     /**
      * Method that makes every new pentomino move one line every step in time.
@@ -30,7 +30,7 @@ public class Mover
             }
         }
         MyListener listener = new MyListener();
-        final int DELAY = 1000;
+        final int DELAY = 1000 - (100 * (getLevel() - 1));
         Timer t = new Timer(DELAY, listener);
         t.start();
     }

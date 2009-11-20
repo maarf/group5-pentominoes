@@ -1,7 +1,9 @@
 
+
+
 /**
  * interface of class figure for pentomino and rotations
- *
+ * 
  * @author Jose Sue Smith, Rob van den Oever
  *
  */
@@ -14,7 +16,7 @@ public interface Ifig
 	/**
 	 * gets current orientation of pentomino could go from 0 to 3, used to avoid unnecessary
 	 * rotations
-	 *
+	 * 
 	 */
 	int getOrientation();
 	/**
@@ -31,7 +33,7 @@ public interface Ifig
 	void saveCurrentCor ();
 	/**
 	 * Calculates the position of the X and Y in relation to X1 and Y1 so we can use this information
-	 * to put the pentomino back to the original position
+	 * to put the pentomino back to the original position 
 	 */
 	void difference();
 	/**
@@ -55,10 +57,10 @@ public interface Ifig
 	 */
 	int getName();
 	/**
-	 * returns a random pentomino from the array
+	 * returns a random pentomino
 	 * @param a array of pentominoes
 	 * @return a random pentomino
 	 */
-	Figure randomPicker(Figure[] a);
-
+	Figure randomPicker(Figure [] a);
+	
 }
