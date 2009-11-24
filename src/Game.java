@@ -8,10 +8,11 @@
 
 public class Game extends BoardOperations implements IGame
 {
-	private int counter;
+	private int multiplier;
 	private int score;
 	private int level;
 	private int adjustScore;
+	private int addScore;
 	
 	public Game()
 	{
@@ -20,6 +21,7 @@ public class Game extends BoardOperations implements IGame
 		
 	}
 	
+		
 	public void adding()
 	{
 		adjustScore = (level - 1) *5;
@@ -32,7 +34,9 @@ public class Game extends BoardOperations implements IGame
 	
 	public void increaseScore()
 	{
-		score = Counter() * (10 + adjustScore);
+		multiplier = BoardOperations.numberofFullLines();
+		addScore = (Counter() - (level-1) * 10) * (10 + adjustScore)* multiplier;
+		score = score + addScore;
 	}
 	
 	public void increaseLevel()
