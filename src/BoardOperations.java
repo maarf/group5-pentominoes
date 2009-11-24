@@ -9,6 +9,89 @@
  */
 public class BoardOperations
 {
+    public BoardOperations()
+    {
+        
+    }
+
+    public void placePentomino(Figure b, int x, int y)
+    {
+        int[][] bArray = new int[5][2];
+        for(int i = 0; i < 5; i++)
+        {
+            bArray[i][0] = b.getX(i);
+            bArray[i][1] = b.getY(i);
+        }
+
+        for(int i = 0; i < 5; i++)
+        {
+            board[bArray[i][0] + x][bArray[i][1]] = b;
+        }
+
+    }
+
+    /**
+     * Checks whether a certain Figure fits on the board.
+     * @param b Figure
+     * @param x
+     * @param y
+     * @return Returns true if the board isn't full a x,y.
+     */
+    public boolean checkFull(Figure b, int x, int y)
+    {
+       int[][] bArray = new int[5][2];
+       for(int i = 0; i < 5; i++)
+       {
+           bArray[i][0] = b.getX(i);
+           bArray[i][1] = b.getY(i);
+       }
+
+       for(int i = 0; i < 5; i++)
+       {
+           if(board[bArray[i+x][0]][bArray[i+y][1]] != null)
+           {
+                return false;
+           }
+       }
+       return true;
+    }
+
+    /**
+     * Checks on which lines the board is full.
+     * @return Returns an boolean-array. F.e. if [1] = true; line 1 is filled.
+     */
+    public boolean[] checkBoard()
+    {
+
+        boolean[] lines = new boolean[board[0].length];
+        for(int i = 0; i < board[0].length; i++)
+        {
+            if(Checker(i) == true) lines[i] = true;
+            else lines[i] = false;
+
+        }
+        return lines;
+    }
+
+    /**
+     * Returns the number of full lines.
+     * @return An int.
+     */
+    public int numberofFullLines()
+    {
+        int numberoffulllines = 0;
+        for(int i = 0; i < checkBoard().length; i++)
+        {
+            if(checkBoard()[i] == true) numberoffulllines++;
+        }
+        return numberoffulllines;
+    }
+
+    /**
+     * Checks whether there is a line full.
+     * @param line
+     * @return
+     */
     public boolean Checker(int line)
     {
         boolean check = false;
@@ -56,7 +139,7 @@ public class BoardOperations
      * @param line Defines the line that has to be moved
      * @param newLocation The new location of the line
      */
-    public void MoveLine(int line, int newLocation)
+    public void moveLine(int line, int newLocation)
     {
         for (int i = 0; i < board.length; i++)
         {
@@ -78,9 +161,9 @@ public class BoardOperations
     {
         int[][] bArray = returnFigure(b);
         int[] distances = new int[5];
-        for(int x = 0; x < bArray.length; x++)
+        for(int i = 0; i < bArray.length; i++)
         {
-            
+            bArray[i][]
         }
     }
 
@@ -98,6 +181,7 @@ public class BoardOperations
         }
         return supremumX;
     }
+
     public void moveLeft(Figure b)
     {
         int[][] bArray = returnFigure(b);
