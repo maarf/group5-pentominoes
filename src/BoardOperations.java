@@ -9,25 +9,28 @@
  */
 public class BoardOperations
 {
-    public BoardOperations()
+    public BoardOperations(int x, int y)
     {
-        
+        board = new Figure[x][y];
     }
 
     public void placePentomino(Figure b, int x, int y)
     {
+        if (checkFull(b, x, y) == true)
+        {
         int[][] bArray = new int[5][2];
         for(int i = 0; i < 5; i++)
         {
             bArray[i][0] = b.getX(i);
             bArray[i][1] = b.getY(i);
         }
-
-        for(int i = 0; i < 5; i++)
-        {
-            board[bArray[i][0] + x][bArray[i][1]] = b;
+               
+       for(int i = 0; i < 5; i++)
+       {
+         board[bArray[i][0] + x][bArray[i][1] + y] = b;
         }
-
+        }
+        
     }
 
     /**
@@ -35,7 +38,7 @@ public class BoardOperations
      * @param b Figure
      * @param x
      * @param y
-     * @return Returns true if the board isn't full a x,y.
+     * @return Returns true if the board isn't full at x,y.
      */
     public boolean checkFull(Figure b, int x, int y)
     {
@@ -48,13 +51,17 @@ public class BoardOperations
 
        for(int i = 0; i < 5; i++)
        {
-           if(board[bArray[i+x][0]][bArray[i+y][1]] != null)
+           if(bArray[i][0] + x <= getWidth() && bArray[i][1] + y <= getHeight())
            {
-                return false;
+               if(board[bArray[i][0] + x ][bArray[i][1] + y] != null)
+               {
+                    return false;
+               }
            }
        }
        return true;
     }
+    
 
     /**
      * Checks on which lines the board is full.
@@ -77,7 +84,7 @@ public class BoardOperations
      * Returns the number of full lines.
      * @return An int.
      */
-    public int numberofFullLines()
+    public int numberOfFullLines()
     {
         int numberoffulllines = 0;
         for(int i = 0; i < checkBoard().length; i++)
@@ -246,6 +253,23 @@ public class BoardOperations
     {
         return lineCounter;
     }
+
+    public int getHeight()
+     {
+         return height;
+     }
+
+     /** Returns width
+      *
+      * @return int
+      */
+     public int getWidth()
+     {
+         return width;
+     }
+
+     private int width;
+     private int height;
 
     private Figure[][] board;
     private int lineCounter;
