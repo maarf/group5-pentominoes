@@ -163,11 +163,22 @@ public class BoardOperations
         int[] distances = new int[5];
         for(int i = 0; i < bArray.length; i++)
         {
-            bArray[i][]
+            distances[i] = supremumX(bArray[i][0]) - bArray[i][1];
+        }
+        int min = 0;
+
+        for(int i = 0; i < distances.length; i++)
+        {
+       
+            if(distances[i] < min) distances[i] = min;
+        }
+
+        for(int x = 0; x < bArray.length; x++)
+        {
+          board[bArray[x][0]][bArray[x][1]] = null;
+          board[bArray[x][0]][bArray[x][1] + min] = b;
         }
     }
-
-
 
     public int supremumX(int x)
     {
