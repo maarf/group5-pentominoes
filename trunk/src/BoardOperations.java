@@ -222,6 +222,11 @@ public class BoardOperations
 
     }
 
+    /**
+     * Returns the coordinates of a certain Figure on the board.
+     * @param b
+     * @return A 2D int array of coordinates. x = int[x][0] and y = int[x][1].
+     */
     public int[][] returnFigure(Figure b)
     {
         int last = 0;
@@ -249,6 +254,25 @@ public class BoardOperations
         return board;
     }
 
+    /** Returns the board as a String
+     *
+     * @return A string.
+     */
+    public String toString()
+    {
+        String output = "";
+        for(int x = 0; x < board.length; x++)
+        {
+            for(int y = 0; y < board[x].length; y++)
+            {
+                output += " | " + board[x][y];
+            }
+            output += " | \n";
+        }
+        return output;
+        
+    }
+
     public int Counter()
     {
         return lineCounter;
@@ -268,6 +292,7 @@ public class BoardOperations
          return width;
      }
 
+     
      private int width;
      private int height;
 
