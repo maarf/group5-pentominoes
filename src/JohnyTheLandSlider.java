@@ -4,10 +4,12 @@ import java.awt.event.KeyListener;
 
 public class JohnyTheLandSlider implements KeyListener {
 
-	private Board board;
+	private TheBoard board;
+	private BoardView boardView;
 	
-	public JohnyTheLandSlider(Board aBoard) {
+	public JohnyTheLandSlider(TheBoard aBoard, BoardView aView) {
 		board = aBoard;
+		boardView = aView;
 	}
 	
 	public void keyPressed(KeyEvent e) {
@@ -22,13 +24,17 @@ public class JohnyTheLandSlider implements KeyListener {
 		case KeyEvent.VK_DOWN:
 			board.moveDown();			
 			break;
-//		case KeyEvent.VK_SPACE:
-//			board.moveToTheBottom();
-//			break;
+		case KeyEvent.VK_UP:
+			board.rotateFigure();			
+			break;
+		case KeyEvent.VK_SPACE:
+			board.moveToBottom();
+			break;
 		default:
 			break;
 		}
-
+		
+		boardView.repaint();
 	}
 
 	public void keyReleased(KeyEvent e) {

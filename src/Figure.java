@@ -82,30 +82,30 @@ public class Figure implements Ifig
 			//maxOrientation = 4;
 			name = 1;
 			
-        	shapeX[0] = 0;
+        	shapeX[0] = 1;
         	shapeY[0] = 1;
-        	shapeX[1] = -1;
+        	shapeX[1] = 0;
         	shapeY[1] = 1;
-        	shapeX[2] = -1;
+        	shapeX[2] = 0;
         	shapeY[2] = 2;
-        	shapeX[3] = -1;
+        	shapeX[3] = 0;
         	shapeY[3] = 0;
-        	shapeX[4] = 0;
+        	shapeX[4] = 1;
         	shapeY[4] = 2;
         	break;
 		case X_FIGURE:
 			//maxOrientation = 1;
 			name = 2;
 			
-        	shapeX[0] = 0;
+        	shapeX[0] = 1;
         	shapeY[0] = 1;
-        	shapeX[1] = 0;
+        	shapeX[1] = 1;
         	shapeY[1] = 0;
-        	shapeX[2] = 0;
+        	shapeX[2] = 1;
         	shapeY[2] = 2;
-        	shapeX[3] = 1;
+        	shapeX[3] = 2;
         	shapeY[3] = 1;
-        	shapeX[4] = -1;
+        	shapeX[4] = 0;
         	shapeY[4] = 1;
 			break;
 			
@@ -113,15 +113,15 @@ public class Figure implements Ifig
 			//maxOrientation = 4;
 			name = 3;
 			
-        	shapeX[0] = 0;
+        	shapeX[0] = 1;
         	shapeY[0] = 1;
-        	shapeX[1] = 0;
+        	shapeX[1] = 1;
         	shapeY[1] = 0;
-        	shapeX[2] = 0;
+        	shapeX[2] = 1;
         	shapeY[2] = 2;
-        	shapeX[3] = -1;
+        	shapeX[3] = 0;
         	shapeY[3] = 1;
-        	shapeX[4] = 1;
+        	shapeX[4] = 2;
         	shapeY[4] = 2;
         	break;
         	
@@ -129,45 +129,45 @@ public class Figure implements Ifig
 			//maxOrientation = 4;
 			name = 4;
 			
-        	shapeX[0] = 0;
+        	shapeX[0] = 1;
         	shapeY[0] = 0;
-        	shapeX[1] = 1;
+        	shapeX[1] = 2;
         	shapeY[1] = 0;
-        	shapeX[2] = -1;
+        	shapeX[2] = 0;
         	shapeY[2] = 0;
-        	shapeX[3] = -1;
+        	shapeX[3] = 0;
         	shapeY[3] = 1;
-        	shapeX[4] = -1;
+        	shapeX[4] = 0;
         	shapeY[4] = 2;
         	break;
 		case W_FIGURE:
 			//maxOrientation = 4;
 			name = 5;
 			
-        	shapeX[0] = 0;
+        	shapeX[0] = 1;
         	shapeY[0] = 1;
-        	shapeX[1] = 0;
+        	shapeX[1] = 1;
         	shapeY[1] = 0;
-        	shapeX[2] = 1;
+        	shapeX[2] = 2;
         	shapeY[2] = 0;
-        	shapeX[3] = -1;
+        	shapeX[3] = 0;
         	shapeY[3] = 1;
-        	shapeX[4] = -1;
+        	shapeX[4] = 0;
         	shapeY[4] = 2;
         	break;
 		case Y_FIGURE:
 			//maxOrientation = 4;
 			name = 6;
 			
-        	shapeX[0] = 0;
+        	shapeX[0] = 1;
         	shapeY[0] = 1;
-        	shapeX[1] = 0;
+        	shapeX[1] = 1;
         	shapeY[1] = 0;
-        	shapeX[2] = 0;
+        	shapeX[2] = 1;
         	shapeY[2] = 2;
-        	shapeX[3] = 0;
+        	shapeX[3] = 1;
         	shapeY[3] = 3;
-        	shapeX[4] = -1;
+        	shapeX[4] = 0;
         	shapeY[4] = 2;
         	break;
 		case I_FIGURE:
@@ -189,75 +189,75 @@ public class Figure implements Ifig
 			//maxOrientation = 4;
 			name = 8;
 			
-        	shapeX[0] = 0;
+        	shapeX[0] = 1;
         	shapeY[0] = 1;
-        	shapeX[1] = 0;
+        	shapeX[1] = 1;
         	shapeY[1] = 0;
-        	shapeX[2] = 0;
+        	shapeX[2] = 1;
         	shapeY[2] = 2;
-        	shapeX[3] = -1;
+        	shapeX[3] = 0;
         	shapeY[3] = 2;
-        	shapeX[4] = 1;
+        	shapeX[4] = 2;
         	shapeY[4] = 2;
         	break;
 		case Z_FIGURE:
 			//maxOrientation = 4;
 			name = 9;
 			
-        	shapeX[0] = 0;
+        	shapeX[0] = 1;
         	shapeY[0] = 1;
-        	shapeX[1] = 0;
+        	shapeX[1] = 1;
         	shapeY[1] = 0;
-        	shapeX[2] = 1;
+        	shapeX[2] = 2;
         	shapeY[2] = 0;
-        	shapeX[3] = -1;
+        	shapeX[3] = 0;
         	shapeY[3] = 2;
-        	shapeX[4] = 0;
+        	shapeX[4] = 1;
         	shapeY[4] = 2;
         	break;
 		case U_FIGURE:
 			//maxOrientation = 4;
 			name = 10;
 			
-        	shapeX[0] = 0;
+        	shapeX[0] = 1;
         	shapeY[0] = 0;
-        	shapeX[1] = 1;
+        	shapeX[1] = 2;
         	shapeY[1] = 0;
-        	shapeX[2] = 1;
+        	shapeX[2] = 2;
         	shapeY[2] = 1;
-        	shapeX[3] = -1;
+        	shapeX[3] = 0;
         	shapeY[3] = 0;
-        	shapeX[4] = -1;
+        	shapeX[4] = 0;
         	shapeY[4] = 1;
         	break;
 		case N_FIGURE:
 			//maxOrientation = 4;
 			name = 11;
 			
-        	shapeX[0] = 0;
+        	shapeX[0] = 2;
         	shapeY[0] = 0;
-        	shapeX[1] = 1;
+        	shapeX[1] = 3;
         	shapeY[1] = 0;
-        	shapeX[2] = -1;
+        	shapeX[2] = 1;
         	shapeY[2] = 0;
-        	shapeX[3] = -1;
+        	shapeX[3] = 1;
         	shapeY[3] = 1;
-        	shapeX[4] = -2;
+        	shapeX[4] = 0;
         	shapeY[4] = 1;
         	break;
 		case L_FIGURE:
 			//maxOrientation = 4;
 			name = 12;
 			
-        	shapeX[0] = 0;
+        	shapeX[0] = 2;
         	shapeY[0] = 0;
-        	shapeX[1] = 1;
+        	shapeX[1] = 3;
         	shapeY[1] = 0;
-        	shapeX[2] = 1;
+        	shapeX[2] = 3;
         	shapeY[2] = 1;
-        	shapeX[3] = -1;
+        	shapeX[3] = 1;
         	shapeY[3] = 0;
-        	shapeX[4] = -2;
+        	shapeX[4] = 0;
         	shapeY[4] = 0;
         	break;
 
@@ -404,4 +404,33 @@ public class Figure implements Ifig
 	{
 		return name;
 	}
+	
+	public int getWidth() {
+		int minX = Integer.MAX_VALUE;
+		int maxX = Integer.MIN_VALUE;
+		for (int i = 0; i < 5; i++) {
+			if (shapeX[i] < minX) {
+				minX = shapeX[i];
+			}
+			if (shapeX[i] > maxX) {
+				maxX = shapeX[i];
+			}
+		}
+		return maxX - minX + 1;
+	}
+
+	public int getHeight() {
+		int minY = Integer.MAX_VALUE;
+		int maxY = Integer.MIN_VALUE;
+		for (int i = 0; i < 5; i++) {
+			if (shapeY[i] < minY) {
+				minY = shapeY[i];
+			}
+			if (shapeY[i] > maxY) {
+				maxY = shapeY[i];
+			}
+		}
+		return maxY - minY + 1;
+	}
+
 }

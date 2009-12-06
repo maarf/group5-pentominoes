@@ -1,3 +1,6 @@
+import java.awt.Color;
+import java.awt.Dimension;
+import javax.swing.JFrame;
 
 /**
  * The Main class of the project.
@@ -17,65 +20,46 @@ public class Main
 	 */
 	public static void main(String[] args)
 	{
-		SuperBruteSolver solver = new SuperBruteSolver(listPentominoes(), 6, 5);
-		int solutions = solver.solve();
-		System.out.println("Solution with mirror images: " + solutions);
-		System.out.println("Solution without mirror images: " + (solutions)/4);
+		
+		TheBoard board = new TheBoard(7, 20, listPentominoes());
+		board.addActiveFigure(listPentominoes()[0].randomPicker(listPentominoes()));
+		
+		BoardView boardView = new BoardView(board);
+		
+		JohnyTheLandSlider keyListener = new JohnyTheLandSlider(board, boardView);
+		Mover mover = new Mover(board, boardView);
+		mover.movePentomino();
+		
+		JFrame frame = new JFrame();
+		frame.setSize(new Dimension(board.getWidth() * 30 + 50, board.getHeight() * 30 + 50));
+		frame.setTitle("Pentris");
+		frame.setBackground(Color.black);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.addKeyListener(keyListener);
+		frame.add(boardView);
+		frame.setVisible(true);
 	}
 	
 	/**
 	 * Defines all the twelve pentomiones.
 	 * @return array of pentominoes
 	 */
-	public static Pentomino[] listPentominoes() {
-
+	public static Figure[] listPentominoes() {
 		// List all the pentominoes here
-		Pentomino[] pentominoes = {
-			new Pentomino("##\n" + 
-			              "##\n" +
-			              "#.", 1), // P
-
-			new Pentomino(".##\n" + 
-			              "##.\n" +
-			              ".#.", 2), // F
-			
-			new Pentomino("#..\n" + 
-			              "#..\n" +
-			              "###", 3), // L
-			
-			new Pentomino("#..\n" + 
-			              "##.\n" +
-			              ".##", 4), // W
-			
-			new Pentomino(".#\n" + 
-			              "##\n" +
-			              ".#\n" +
-			              ".#", 5), // Y
-			
-			new Pentomino("#####", 6), // I
-			
-			new Pentomino("###\n" + 
-			              ".#.\n" +
-			              ".#.", 7), // T
-			
-			new Pentomino("##.\n" + 
-			              ".#.\n" +
-			              ".##", 8), // Z
-			
-			new Pentomino(".#.\n" + 
-			              "###\n" +
-			              ".#.", 9), // X
-			
-			new Pentomino("#.#\n" + 
-			              "###", 10), // U
-			
-			new Pentomino("##..\n" + 
-			              ".###", 11), // N
-			
-			new Pentomino("#...\n" + 
-			              "####", 12) // X
+		Figure[] pentominoes = {
+				new Figure(1),
+				new Figure(2),
+				new Figure(3),
+				new Figure(4),
+				new Figure(5),
+				new Figure(6),
+				new Figure(7),
+				new Figure(8),
+				new Figure(9),
+				new Figure(10),
+				new Figure(11),
+				new Figure(12),
 		};
-		
 		return pentominoes;
 	}
 }
