@@ -30,7 +30,16 @@ public class JohnyTheLandSlider implements KeyListener {
 		case KeyEvent.VK_SPACE:
 			board.moveToBottom();
 			break;
-		default:
+                case KeyEvent.VK_P:
+                        board.Pause();
+                        break;
+                case KeyEvent.VK_X:
+                        board.Stop();
+                        break;
+                case KeyEvent.VK_S:
+                        board.Start();
+                        break;
+                default:
 			break;
 		}
 		
