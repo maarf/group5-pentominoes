@@ -15,6 +15,7 @@ public class TheBoard
 	private Figure[] figures;
 	private int activeFigurePositionX;
 	private int activeFigurePositionY;
+	private int linesRemoved = 0;
 	
     public TheBoard(int x, int y, Figure[] figuresList)
     {
@@ -93,6 +94,13 @@ public class TheBoard
     
     public void rotateFigure() {
     	activeFigure.rotateClockwise();
+    	for (int i = 0; i < 5; i++) {
+			if (board[activeFigure.getX(i) + activeFigurePositionX][activeFigure.getY(i) + activeFigurePositionY] != 0) {
+		    	activeFigure.rotateCounterClockwise();
+				break;
+			}
+		}
+
     }
 
     public void checkFullLines() {
@@ -108,6 +116,9 @@ public class TheBoard
 					board[j2][board[0].length - i - j - 1] = board[j2][board[0].length - i - j - 2];
 				}
 			}
+			if (i > 0)
+				i--;
+			linesRemoved++;
 		}
     }
     
@@ -136,12 +147,18 @@ public class TheBoard
         return board.length;
     }
     
+    public int getLinesRemoved() {
+    	return linesRemoved;
+    }
+    
     private void resetBoard() {
     	for (int i = 0; i < board.length; i++) {
 			for (int j = 0; j < board[i].length; j++) {
 				board[i][j] = 0;
 			}
 		}
+    	linesRemoved = 0;
     	addActiveFigure(activeFigure.randomPicker(figures));
+    	
     }
 }
