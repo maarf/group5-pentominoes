@@ -9,13 +9,14 @@
  */
 public class TheBoard
 {
-	
 	private int[][] board;
-	private Figure activeFigure;
+        private int[][] smallBoard;
+        private Figure activeFigure;
 	private Figure[] figures;
 	private int activeFigurePositionX;
 	private int activeFigurePositionY;
 	private int linesRemoved = 0;
+        private int highscore = 0;
 	
     public TheBoard(int x, int y, Figure[] figuresList)
     {
@@ -23,6 +24,11 @@ public class TheBoard
         figures = figuresList;
     }
 
+    public TheBoard()
+    {
+
+    }
+    
     public void placePentomino(Figure b, int x, int y)
     {
     	for (int i = 0; i < 5; i++) {
@@ -125,11 +131,13 @@ public class TheBoard
     public int[][] returnBoard()
     {
     	int[][] tempBoard = new int[getWidth()][getHeight()];
-    	for (int i = 0; i < tempBoard.length; i++) {
-			for (int j = 0; j < tempBoard[i].length; j++) {
-				tempBoard[i][j] = board[i][j];
-			}
-		}
+    	for (int i = 0; i < tempBoard.length; i++)
+        {
+            for (int j = 0; j < tempBoard[i].length; j++)
+            {
+                tempBoard[i][j] = board[i][j];
+            }
+        }
     	
     	for (int i = 0; i < 5; i++) {
 			tempBoard[activeFigure.getX(i) + activeFigurePositionX][activeFigure.getY(i) + activeFigurePositionY] = activeFigure.getName();
@@ -150,6 +158,12 @@ public class TheBoard
     public int getLinesRemoved() {
     	return linesRemoved;
     }
+
+    // José, you'll make the highscoremethod right? I just needed a getHighscore for the GUI!
+    public int getHighscore()
+    {
+        return highscore;
+    }
     
     private void resetBoard() {
     	for (int i = 0; i < board.length; i++) {
@@ -161,4 +175,19 @@ public class TheBoard
     	addActiveFigure(activeFigure.randomPicker(figures));
     	
     }
+
+        public void Start()
+        {
+
+        }
+
+        public void Stop()
+        {
+
+        }
+
+        public void Pause()
+        {
+
+        }
 }

@@ -19,12 +19,12 @@ public class Main
 	 * The main method, hold on yer horses!
 	 */
 	public static void main(String[] args)
-	{
-		
-		TheBoard board = new TheBoard(7, 20, listPentominoes());
+	{		
+		TheBoard board = new TheBoard(5, 15, listPentominoes());
 		board.addActiveFigure(listPentominoes()[0].randomPicker(listPentominoes()));
 		
 		BoardView boardView = new BoardView(board);
+                BoardButtons buttons = new BoardButtons();
 		
 		JohnyTheLandSlider keyListener = new JohnyTheLandSlider(board, boardView);
 		Mover mover = new Mover(board, boardView);
@@ -32,11 +32,13 @@ public class Main
 		
 		JFrame frame = new JFrame();
 		frame.setSize(new Dimension(board.getWidth() * 30 + 50, board.getHeight() * 30 + 50));
-		frame.setTitle("Pentris");
+		frame.setSize(new Dimension(500, 500));
+                frame.setTitle("Pentris");
 		frame.setBackground(Color.black);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.addKeyListener(keyListener);
 		frame.add(boardView);
+                frame.add(buttons);
 		frame.setVisible(true);
 	}
 	
