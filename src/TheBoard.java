@@ -16,7 +16,9 @@ public class TheBoard
 	private int activeFigurePositionX;
 	private int activeFigurePositionY;
 	private int linesRemoved = 0;
-        private int highscore = 0;
+	private int linesRemovedInLastTime = 0;
+    private int highscore = 0;
+
 	
     public TheBoard(int x, int y, Figure[] figuresList)
     {
@@ -41,6 +43,8 @@ public class TheBoard
     	activeFigure = aFigure;
     	activeFigurePositionX = 0;
     	activeFigurePositionY = 0;
+    	activeFigurePositionX = - getActiveFigureAbsoluteX() + ((board.length - activeFigure.getWidth()) / 2);
+    	activeFigurePositionY = - getActiveFigureAbsoluteY();
     	
     	// Lets check if the board is already full!
     	for (int i = 0; i < 5; i++) {
@@ -51,8 +55,32 @@ public class TheBoard
 
     }
 
+    public int[] getActiveFigureOffsets() {
+		int minX = Integer.MAX_VALUE;
+		int minY = Integer.MAX_VALUE;
+		for (int i = 0; i < 5; i++) {
+			if (activeFigure.getX(i) < minX) {
+				minX = activeFigure.getX(i);
+			}
+			if (activeFigure.getY(i) < minY) {
+				minY = activeFigure.getY(i);
+			}
+		}
+		int[] ret = {minX, minY}; 
+		return ret;
+
+    }
+    
+    public int getActiveFigureAbsoluteX() {
+    	return activeFigurePositionX + getActiveFigureOffsets()[0];
+    }
+
+    public int getActiveFigureAbsoluteY() {
+    	return activeFigurePositionY + getActiveFigureOffsets()[1];
+    }
+    
 	public void moveLeft() {
-    	if(activeFigurePositionX > 0) {
+    	if(getActiveFigureAbsoluteX() > 0) {
         	for (int i = 0; i < 5; i++) {
     			if (board[activeFigure.getX(i) + activeFigurePositionX - 1][activeFigure.getY(i) + activeFigurePositionY] != 0) {
     				return;
@@ -63,7 +91,7 @@ public class TheBoard
     }
    
     public void moveRight() {
-    	if(activeFigurePositionX < getWidth() - activeFigure.getWidth()) {
+    	if(getActiveFigureAbsoluteX() < getWidth() - activeFigure.getWidth()) {
         	for (int i = 0; i < 5; i++) {
     			if (board[activeFigure.getX(i) + activeFigurePositionX + 1][activeFigure.getY(i) + activeFigurePositionY] != 0) {
     				return;
@@ -74,7 +102,7 @@ public class TheBoard
     }
     
     public boolean moveDown() {
-    	if(activeFigurePositionY >= getHeight() - activeFigure.getHeight()) {
+    	if(getActiveFigureAbsoluteY() >= getHeight() - activeFigure.getHeight()) {
     		placePentomino(activeFigure, activeFigurePositionX, activeFigurePositionY);
     		addActiveFigure(activeFigure.randomPicker(figures));
     		return false;    		
@@ -101,7 +129,11 @@ public class TheBoard
     public void rotateFigure() {
     	activeFigure.rotateClockwise();
     	for (int i = 0; i < 5; i++) {
-			if (board[activeFigure.getX(i) + activeFigurePositionX][activeFigure.getY(i) + activeFigurePositionY] != 0) {
+			if (activeFigure.getX(i) + activeFigurePositionX < 0 ||
+					activeFigure.getX(i) + activeFigurePositionX >= board.length ||
+					activeFigure.getY(i) + activeFigurePositionY < 0 ||
+					activeFigure.getY(i) + activeFigurePositionY >= board[0].length ||
+					board[activeFigure.getX(i) + activeFigurePositionX][activeFigure.getY(i) + activeFigurePositionY] != 0) {
 		    	activeFigure.rotateCounterClockwise();
 				break;
 			}
@@ -117,6 +149,7 @@ public class TheBoard
 					continue lineCheck;
 				}
 			}
+			
 			for (int j = 0; j < board[0].length - i - 1; j++) {
 				for (int j2 = 0; j2 < board.length; j2++) {
 					board[j2][board[0].length - i - j - 1] = board[j2][board[0].length - i - j - 2];
