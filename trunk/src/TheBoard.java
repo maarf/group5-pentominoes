@@ -9,16 +9,15 @@
  */
 public class TheBoard
 {
-	private int[][] board;
-        private int[][] smallBoard;
-        private Figure activeFigure;
-	private Figure[] figures;
-	private int activeFigurePositionX;
-	private int activeFigurePositionY;
-	private int linesRemoved = 0;
-	private int linesRemovedInLastTime = 0;
+    private int[][] board;
+    private int[][] smallBoard;
+    private Figure activeFigure;
+    private Figure[] figures;
+    private int activeFigurePositionX;
+    private int activeFigurePositionY;
+    private int linesRemoved = 0;
+    private int linesRemovedInLastTime = 0;
     private int highscore = 0;
-
 	
     public TheBoard(int x, int y, Figure[] figuresList)
     {
@@ -209,18 +208,18 @@ public class TheBoard
     	
     }
 
-        public void Start()
-        {
+    public void Start()
+    {
+        moveDown();
+    }
 
-        }
+    public void Stop()
+    {
+        resetBoard();
+    }
 
-        public void Stop()
-        {
+    public void Pause()
+    {
 
-        }
-
-        public void Pause()
-        {
-
-        }
+    }
 }
