@@ -18,11 +18,13 @@ public class TheBoard
     private int linesRemoved = 0;
     private int linesRemovedInLastTime = 0;
     private int highscore = 0;
+    private Game game;
 	
-    public TheBoard(int x, int y, Figure[] figuresList)
+    public TheBoard(int x, int y, Figure[] figuresList, Game aGame)
     {
         board = new int[x][y];
         figures = figuresList;
+        game = aGame;
     }
 
     public TheBoard()
@@ -157,6 +159,7 @@ public class TheBoard
 			if (i > 0)
 				i--;
 			linesRemoved++;
+			game.initialize(getLinesRemoved());
 		}
     }
     
@@ -204,6 +207,7 @@ public class TheBoard
 			}
 		}
     	linesRemoved = 0;
+    	game.reset();
     	addActiveFigure(activeFigure.randomPicker(figures));
     	
     }
