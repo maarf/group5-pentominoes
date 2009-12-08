@@ -1,6 +1,8 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * The Main class of the project.
@@ -20,12 +22,11 @@ public class Main
 	 */
 	public static void main(String[] args)
 	{		
-		TheBoard board = new TheBoard(5, 15, listPentominoes());
+		TheBoard board = new TheBoard(10, 15, listPentominoes());
 		board.addActiveFigure(listPentominoes()[0].randomPicker(listPentominoes()));
 		
 		BoardView boardView = new BoardView(board);
-                BoardButtons buttons = new BoardButtons();
-		
+
 		JohnyTheLandSlider keyListener = new JohnyTheLandSlider(board, boardView);
 		Mover mover = new Mover(board, boardView);
 		mover.movePentomino();
@@ -38,8 +39,8 @@ public class Main
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.addKeyListener(keyListener);
 		frame.add(boardView);
-                frame.add(buttons);
-		frame.setVisible(true);
+                //BoardButtons buttons = new BoardButtons(frame);
+                frame.setVisible(true);
 	}
 	
 	/**
