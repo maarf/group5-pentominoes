@@ -1,10 +1,7 @@
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
 
 /*
  * To change this template, choose Tools | Templates
@@ -25,15 +22,18 @@ public class BoardButtons extends JComponent
     private JButton start;
     private JButton pause;
     private JButton stop;
-
-    public BoardButtons()
+    private JFrame frame;
+    //private JMenuBar bar;
+    
+    public BoardButtons(JFrame framepje)
     {
+        frame = framepje;
         topper = new TheBoard();
         highscore = new JLabel("Highscore: " + topper.getHighscore());
         numberOfLines = new JLabel("Number of lines deleted: " + topper.getLinesRemoved());
 
         createButton();
-        createPanel();
+        createPanel(frame);
 
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
     }
@@ -43,7 +43,7 @@ public class BoardButtons extends JComponent
         start = new JButton("Play");
         stop = new JButton("Stop");
         pause = new JButton("Pause");
-
+    
         class StopListener implements ActionListener
         {
             public void actionPerformed(ActionEvent event)
@@ -72,18 +72,21 @@ public class BoardButtons extends JComponent
     pause.addActionListener(listener2);
     ActionListener listener3 = new StopListener();
     stop.addActionListener(listener3);
+    
     }
 
-    private void createPanel()
+    private void createPanel(JFrame frame)
     {
-        JPanel panel = new JPanel();
-        panel.add(start);
-        panel.add(stop);
-        panel.add(pause);
+        JPanel controlPanel = new JPanel();
+        
+        controlPanel.add(start);
+        controlPanel.add(stop);
+        controlPanel.add(pause);
+        
+        controlPanel.add(highscore);
+        controlPanel.add(numberOfLines);
 
-        panel.add(highscore);
-
-        panel.add(numberOfLines);
-        add(panel);
+        frame.add(controlPanel, BorderLayout.EAST);
+        
     }
 }
