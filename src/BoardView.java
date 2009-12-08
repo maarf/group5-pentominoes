@@ -3,14 +3,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.Line2D;
-import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 
 public class BoardView extends JComponent
 {
@@ -23,8 +17,6 @@ public class BoardView extends JComponent
         board = aBoard;
     }
 
-    
-/*
     public void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g;
             draw(g2);
@@ -69,5 +61,5 @@ public class BoardView extends JComponent
                 columnNumber = 0;
                 rowNumber++;
             }
-        }*/
+        }
 }
