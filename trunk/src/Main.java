@@ -22,7 +22,8 @@ public class Main
 	 */
 	public static void main(String[] args)
 	{		
-		TheBoard board = new TheBoard(10, 15, listPentominoes());
+		Game game = new Game();
+		TheBoard board = new TheBoard(10, 15, listPentominoes(), game);
 		board.addActiveFigure(listPentominoes()[0].randomPicker(listPentominoes()));
 		
 		BoardView boardView = new BoardView(board);
