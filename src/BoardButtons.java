@@ -61,6 +61,7 @@ public class BoardButtons extends JComponent
         createButton();
         createPanel();
         
+        panel.setBackground(Color.black);
         panel.setPreferredSize(new Dimension(120, 400));
     }
 
