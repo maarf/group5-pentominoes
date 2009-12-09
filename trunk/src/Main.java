@@ -66,6 +66,7 @@ public class Main
 		frame.addKeyListener(keyListener);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.black);
 //		panel.setAlignmentX(-1);
 		panel.add(boardView);
 		panel.add(buttons.panel);
