@@ -37,6 +37,13 @@ public class BoardButtons extends JComponent
     public HighScoreKeeper highScores;
     private JTextPane highScoreLabel;
 
+    /**
+     * Constructor for BoardButtons
+     * @param aBoard add the board to the constructor
+     * @param aMoveTimer adds timer to constructor
+     * @param next add next board to constructor
+     * @param aFrame adds frame
+     */
     public BoardButtons(TheBoard aBoard, MoveTimer aMoveTimer, BoardView next, JFrame aFrame)
     {
         board = aBoard;
@@ -65,6 +72,9 @@ public class BoardButtons extends JComponent
         panel.setPreferredSize(new Dimension(120, 400));
     }
 
+    /**
+     * Creates buttons
+     */
     private void createButton()
     {
         start = new JButton("Play");
@@ -103,6 +113,9 @@ public class BoardButtons extends JComponent
 //	    pause.addActionListener(listener2);
     }
 
+    /**
+     * Creates the panel
+     */
     private void createPanel()
     {
     	panel.add(nextFiguereBoardView);
@@ -116,6 +129,9 @@ public class BoardButtons extends JComponent
         panel.add(highScoreLabel);
     }
     
+    /**
+     * Updates the score, lines and level
+     */
     public void update() {
     	scoreLabel.setText("Score: " + board.getScore());
     	linesLabel.setText("Lines: " + board.getLinesRemoved());
