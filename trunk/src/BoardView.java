@@ -8,18 +8,32 @@ import java.awt.geom.Line2D;
 
 import javax.swing.JComponent;
 
-
+/**
+ * This class represents a view for board.
+ * @author Martins Spilners
+ *
+ */
 public class BoardView extends JComponent {
 	
 	private static final long serialVersionUID = 1L;
+	
 	private TheBoard board;
 	public int figureSize = 30;
-	
+
+	/**
+	 * Constructs a board view
+	 * @param aBoard reference to the board
+	 */
 	public BoardView(TheBoard aBoard) {
 		board = aBoard;
 		setPreferredSize(new Dimension(board.getWidth() * figureSize + 5, board.getHeight() * figureSize + 5));
 	}
 
+	/**
+	 * Constructs a board with specified size for a block
+	 * @param aBoard reference to the board
+	 * @param size the size of a block
+	 */
 	public BoardView(TheBoard aBoard, int size) {
 		this(aBoard);
 		figureSize = size;
@@ -30,7 +44,11 @@ public class BoardView extends JComponent {
 		Graphics2D g2 = (Graphics2D) g;
 		draw(g2);
 	}
-	
+
+	/**
+	 * Draws the board
+	 * @param g2 graphics context
+	 */
 	public void draw(Graphics2D g2) {
 		// Lets draw some nice borders!!!!
 		g2.setColor(Color.white);
