@@ -10,8 +10,8 @@ import javax.swing.JOptionPane;
  */
 
 /**
- *
- * @author Leoni Haagmans & Ronald Gerits
+ * This class represents a game board
+ * @author Leoni Haagmans, Ronald Gerits, Martins Spilners
  */
 public class TheBoard
 {
@@ -25,6 +25,12 @@ public class TheBoard
     
 	private NextFigureBoard nextFigureBoard;
 	
+	/**
+	 * Constructs a certain sized board with reference to next figure generator 
+	 * @param x width
+	 * @param y height
+	 * @param next next figure generator
+	 */
     public TheBoard(int x, int y, NextFigureBoard next)
     {
         board = new int[x][y];
@@ -32,11 +38,22 @@ public class TheBoard
         nextFigureBoard = next;
     }
 
+    /**
+     * Constructs a certain sized board
+     * @param x width
+     * @param y height
+     */
     public TheBoard(int x, int y)
     {
         board = new int[x][y];
     }
     
+    /**
+     * Places a figure on the board
+     * @param b figure
+     * @param x x coordinate
+     * @param y y coordinate
+     */
     public void placePentomino(Figure b, int x, int y)
     {
     	for (int i = 0; i < 5; i++) {
@@ -47,7 +64,7 @@ public class TheBoard
     
     
     /**
-     * Adds a figure to the board.
+     * Adds an active figure to the board.
      * @param aFigure The figure to be added
      */
     public void addActiveFigure(Figure aFigure) {
@@ -66,6 +83,10 @@ public class TheBoard
 
     }
 
+    /**
+     * returns offsets of the active pentomino
+     * @return array of offsets
+     */
     public int[] getActiveFigureOffsets() {
 		int minX = Integer.MAX_VALUE;
 		int minY = Integer.MAX_VALUE;
@@ -82,14 +103,25 @@ public class TheBoard
 
     }
     
+    /**
+     * returns active figures x coordinate with offset
+     * @return x coordinate
+     */
     public int getActiveFigureAbsoluteX() {
     	return activeFigurePositionX + getActiveFigureOffsets()[0];
     }
 
+    /**
+     * returns active figures y coordinate with offset
+     * @return y coordinate
+     */
     public int getActiveFigureAbsoluteY() {
     	return activeFigurePositionY + getActiveFigureOffsets()[1];
     }
     
+    /**
+     * moves active figure to left
+     */
 	public void moveLeft() {
     	if(getActiveFigureAbsoluteX() > 0) {
         	for (int i = 0; i < 5; i++) {
@@ -101,6 +133,9 @@ public class TheBoard
     	}
     }
    
+	/**
+	 * moves active figure to the right
+	 */
     public void moveRight() {
     	if(getActiveFigureAbsoluteX() < getWidth() - activeFigure.getWidth()) {
         	for (int i = 0; i < 5; i++) {
@@ -112,6 +147,10 @@ public class TheBoard
     	}
     }
     
+    /**
+     * moves active figure to the bottom
+     * @return true if is coliding with other figures
+     */
     public boolean moveDown() {
     	if(getActiveFigureAbsoluteY() >= getHeight() - activeFigure.getHeight()) {
     		placePentomino(activeFigure, activeFigurePositionX, activeFigurePositionY);
@@ -131,12 +170,18 @@ public class TheBoard
 		return true;
     }
 
+    /**
+     * moves active pentomino down until it hits other figure 
+     */
     public void moveToBottom() {
     	while(moveDown()) {
     		// do nothiiiiing, just wait
     	}
     }
     
+    /**
+     * rotates active figure
+     */
     public void rotateFigure() {
     	activeFigure.rotateClockwise();
     	for (int i = 0; i < 5; i++) {
@@ -152,6 +197,9 @@ public class TheBoard
 
     }
 
+    /**
+     * checks for full lines and remove them
+     */
     public void checkFullLines() {
     	int justRemoved = 0;
     	lineCheck:
@@ -174,6 +222,10 @@ public class TheBoard
     	score.increaseScore(linesRemoved, justRemoved);
     }
     
+    /**
+     * returns board
+     * @return board
+     */
     public int[][] returnBoard()
     {
     	int[][] tempBoard = new int[getWidth()][getHeight()];
@@ -191,30 +243,54 @@ public class TheBoard
         return tempBoard;
     }
 
+    /**
+     * returns next figure picked randomly
+     * @return random figure
+     */
     public Figure getNextFigure() {
     	Figure ret = nextFigureBoard.getNext();
     	return ret;
     }
     
+    /**
+     * returns height of the board
+     * @return height
+     */
     public int getHeight()
     {
         return board[0].length;
     }
 
+    /**
+     * returns width of the board
+     * @return width
+     */
     public int getWidth()
     {
         return board.length;
     }
     
+    /**
+     * returns the count of lines that have been removed
+     * @return count of lines
+     */
     public int getLinesRemoved() {
     	return linesRemoved;
     }
 
+    /**
+     * returns total score
+     * @return score
+     */
     public int getScore()
     {
         return score.getScore();
     }
 
+    /**
+     * returns the number of level
+     * @return level
+     */
     public int getLevel()
     {
         return score.getLevel();
@@ -222,6 +298,9 @@ public class TheBoard
     
     public HighScoreKeeper highScores;
     
+    /**
+     * resets the board to nicely fresh one
+     */
     private void resetBoard() {
     	highScores.addScore(getScore(), (String)JOptionPane.showInputDialog(frame, "Your name, please..."));
 		try {
