@@ -1,16 +1,27 @@
 import java.io.Serializable;
 
-
+/**
+*
+* @author Martins Spilners and Leoni Haagmans
+*/
 public class HighScoreKeeper implements Serializable {
 
 	private int[] scores;
 	private String[] names; 
 	
+	/**
+	 * Constructor that holds the scores and names
+	 */
 	public HighScoreKeeper() {
 		scores = new int[6];
 		names = new String[6];
 	}
 	
+	/**
+	 * Method that constructs the highscore array
+	 * @param score the score that the player got
+	 * @param name the name the player puts into the game
+	 */
 	public void addScore(int score, String name) {
 		if (score > scores[4]) {
 			names[5] = name;
@@ -38,10 +49,18 @@ public class HighScoreKeeper implements Serializable {
 		
 	}
 	
+	/**
+	 * returns scores out of the score array
+	 * @return scores
+	 */
 	public int[] getScores() {
 		return scores;
 	}
 
+	/**
+	 * returns the names out of the score array
+	 * @return names
+	 */
 	public String[] getNames() {
 		return names;
 	}

@@ -1,17 +1,29 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
+/**
+ * 
+ * @author Leoni Haagmans and Martins Spilners
+ *
+ */
 
 public class MoveListener implements KeyListener {
 
 	private TheBoard board;
 	private BoardView boardView;
 	
+	/**
+	 * constructor of MoveListener
+	 * @param aBoard that adds the board
+	 * @param aView adds the boardview
+	 */
 	public MoveListener(TheBoard aBoard, BoardView aView) {
 		board = aBoard;
 		boardView = aView;
 	}
 	
+	/**
+	 * all keylisteners for the game Pentris
+	 */
 	public void keyPressed(KeyEvent e) {
 		// Slide Land!
 		switch (e.getKeyCode()) {
