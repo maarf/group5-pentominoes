@@ -10,14 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
- * @author Leoni
+ * @author Leoni Haagmans and Martins Spilners
  */
 public class BoardButtons extends JComponent
 {
