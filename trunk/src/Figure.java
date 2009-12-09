@@ -3,7 +3,7 @@
 import java.util.Random;
 
 
-public class Figure implements Ifig
+public class Figure
 {
 	public static final int P_FIGURE = 1;
 	

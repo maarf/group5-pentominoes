@@ -2,12 +2,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 
-public class JohnyTheLandSlider implements KeyListener {
+public class MoveListener implements KeyListener {
 
 	private TheBoard board;
 	private BoardView boardView;
 	
-	public JohnyTheLandSlider(TheBoard aBoard, BoardView aView) {
+	public MoveListener(TheBoard aBoard, BoardView aView) {
 		board = aBoard;
 		boardView = aView;
 	}
@@ -29,17 +29,6 @@ public class JohnyTheLandSlider implements KeyListener {
 			break;
 		case KeyEvent.VK_SPACE:
 			board.moveToBottom();
-			break;
-                case KeyEvent.VK_P:
-                        board.Pause();
-                        break;
-                case KeyEvent.VK_X:
-                        board.Stop();
-                        break;
-                case KeyEvent.VK_S:
-                        board.Start();
-                        break;
-                default:
 			break;
 		}
 		
