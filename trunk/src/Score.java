@@ -30,7 +30,7 @@ public class Score
 	
 	public int getLevel()
 	{
-		return 1 + (lastTime / 10);
+		return 1 + (lastTime / 2);
 	}
 	
 }
