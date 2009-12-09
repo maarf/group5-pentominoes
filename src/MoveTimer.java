@@ -23,6 +23,11 @@ public class MoveTimer
 	private Timer t;
 	private BoardButtons buttons;
 	
+	/**
+	 * Timer that moves a pentomino down once every step in time
+	 * @param aBoard
+	 * @param aView
+	 */
 	public MoveTimer(TheBoard aBoard, BoardView aView) {
 		board = aBoard;
 		boardView = aView;
@@ -40,20 +45,32 @@ public class MoveTimer
             update();
         }
     }
-	
+	/**
+	 * starts the game
+	 */
     public void start()
     {
         t.start();
     }
     
+    /**
+     * updates the delay to the level
+     */
     public void update() {
     	t.setDelay(1000 - (100 * (board.getLevel() - 1)));
     }
     
+    /**
+     * stops the timer
+     */
     public void stop() {
     	t.stop();
     }
     
+    /**
+     * 
+     * @param someButtons
+     */
     public void buttons(BoardButtons someButtons) {
     	buttons = someButtons;
     }
