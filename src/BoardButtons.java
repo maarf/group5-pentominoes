@@ -1,7 +1,14 @@
 
-import java.awt.*;
-import javax.swing.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
 
 /*
  * To change this template, choose Tools | Templates
@@ -14,79 +21,113 @@ import java.awt.event.*;
  */
 public class BoardButtons extends JComponent
 {
-    private TheBoard topper;
-    private static final int FRAME_WIDTH = 100;
-    private static final int FRAME_HEIGHT = 100;
-    private JLabel highscore;
-    private JLabel numberOfLines;
+	private static final long serialVersionUID = 2906078564924014395L;
+	
+	private JLabel scoreLabel;
+    private JLabel linesLabel;
+    private JLabel levelLabel;
     private JButton start;
-    private JButton pause;
+//    private JButton pause;
     private JButton stop;
+    private TheBoard board;
+    private MoveTimer moveTimer;
     private JFrame frame;
-    //private JMenuBar bar;
-    
-    public BoardButtons(JFrame framepje)
+    public JPanel panel = new JPanel();
+    private BoardView nextFiguereBoardView;
+    public HighScoreKeeper highScores;
+    private JTextPane highScoreLabel;
+
+    public BoardButtons(TheBoard aBoard, MoveTimer aMoveTimer, BoardView next, JFrame aFrame)
     {
-        frame = framepje;
-        topper = new TheBoard();
-        highscore = new JLabel("Highscore: " + topper.getHighscore());
-        numberOfLines = new JLabel("Number of lines deleted: " + topper.getLinesRemoved());
+        board = aBoard;
+        moveTimer = aMoveTimer;
+        nextFiguereBoardView = next;
+        frame = aFrame;
+        
+        scoreLabel = new JLabel();
+        scoreLabel.setForeground(Color.white);
+        scoreLabel.setPreferredSize(new Dimension(100, 20));
+        linesLabel = new JLabel();
+        linesLabel.setForeground(Color.white);
+        linesLabel.setPreferredSize(new Dimension(100, 20));
+        levelLabel = new JLabel();
+        levelLabel.setForeground(Color.white);
+        levelLabel.setPreferredSize(new Dimension(100, 20));
+        highScoreLabel = new JTextPane();
+        highScoreLabel.setForeground(Color.white);
+        highScoreLabel.setBackground(Color.black);
+        highScoreLabel.setPreferredSize(new Dimension(100, 150));
 
         createButton();
-        createPanel(frame);
-
-        setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        createPanel();
+        
+        panel.setPreferredSize(new Dimension(120, 400));
     }
 
     private void createButton()
     {
         start = new JButton("Play");
         stop = new JButton("Stop");
-        pause = new JButton("Pause");
-    
+//        pause = new JButton("Pause");
+
         class StopListener implements ActionListener
         {
             public void actionPerformed(ActionEvent event)
             {
-                topper.Stop();
+                moveTimer.stop();
+                frame.requestFocus();
             }
         }
         class StartListener implements ActionListener
         {
             public void actionPerformed(ActionEvent event)
             {
-                topper.Start();
+                moveTimer.start();
+                frame.requestFocus();
             }
         }
-        class PauseListener implements ActionListener
-        {
-            public void actionPerformed(ActionEvent event)
-            {
-                topper.Pause();
-            }
-        }
+//        class PauseListener implements ActionListener
+//        {
+//            public void actionPerformed(ActionEvent event)
+//            {
+//                moveTimer.stop();
+//            }
+//        }
 
-    ActionListener listener = new StartListener();
-    start.addActionListener(listener);
-    ActionListener listener2 = new PauseListener();
-    pause.addActionListener(listener2);
-    ActionListener listener3 = new StopListener();
-    stop.addActionListener(listener3);
-    
+	    ActionListener listener = new StartListener();
+	    start.addActionListener(listener);
+	    ActionListener listener3 = new StopListener();
+	    stop.addActionListener(listener3);
+//	    ActionListener listener2 = new PauseListener();
+//	    pause.addActionListener(listener2);
     }
 
-    private void createPanel(JFrame frame)
+    private void createPanel()
     {
-        JPanel controlPanel = new JPanel();
-        
-        controlPanel.add(start);
-        controlPanel.add(stop);
-        controlPanel.add(pause);
-        
-        controlPanel.add(highscore);
-        controlPanel.add(numberOfLines);
+    	panel.add(nextFiguereBoardView);
+        panel.add(start);
+        panel.add(stop);
+//        panel.add(pause);
 
-        frame.add(controlPanel, BorderLayout.EAST);
-        
+        panel.add(scoreLabel);
+        panel.add(linesLabel);
+        panel.add(levelLabel);
+        panel.add(highScoreLabel);
+    }
+    
+    public void update() {
+    	scoreLabel.setText("Score: " + board.getScore());
+    	linesLabel.setText("Lines: " + board.getLinesRemoved());
+    	levelLabel.setText("Level: " + board.getLevel());
+    	
+    	int[] scores = highScores.getScores();
+    	String[] names = highScores.getNames();
+    	String text = "Highscores:";
+    	for (int i = 0; i < scores.length - 1; i++) {
+			text = new String(text + "\n" + (i + 1) + ": " + (names[i] != null ? names[i] : "No name") + " " + scores[i]);
+		}
+    	highScoreLabel.setText(text);			
+    	
+    	nextFiguereBoardView.repaint();
     }
 }

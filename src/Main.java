@@ -1,6 +1,8 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -21,27 +23,56 @@ public class Main
 	 * The main method, hold on yer horses!
 	 */
 	public static void main(String[] args)
-	{		
-		Game game = new Game();
-		TheBoard board = new TheBoard(10, 15, listPentominoes(), game);
+	{	
+		
+		HighScoreKeeper highScores;
+		
+		try {
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream("highscores.dat"));
+			highScores = (HighScoreKeeper)in.readObject();
+		} catch (Exception e) {
+			highScores = new HighScoreKeeper();
+		}
+		
+		
+		NextFigureBoard nextFigureBoard = new NextFigureBoard(5, 5, listPentominoes());
+		BoardView nextFigureBoardView = new BoardView(nextFigureBoard, 10);
+		
+		TheBoard board = new TheBoard(5, 15, nextFigureBoard);
 		board.addActiveFigure(listPentominoes()[0].randomPicker(listPentominoes()));
+		board.highScores = highScores;
 		
 		BoardView boardView = new BoardView(board);
-
-		JohnyTheLandSlider keyListener = new JohnyTheLandSlider(board, boardView);
-		Mover mover = new Mover(board, boardView);
-		mover.movePentomino();
 		
+		MoveListener keyListener = new MoveListener(board, boardView);
+		MoveTimer mover = new MoveTimer(board, boardView);
+
 		JFrame frame = new JFrame();
-		frame.setSize(new Dimension(board.getWidth() * 30 + 50, board.getHeight() * 30 + 50));
-		frame.setSize(new Dimension(500, 500));
-                frame.setTitle("Pentris");
+		
+		board.frame = frame;
+		
+        BoardButtons buttons = new BoardButtons(board, mover, nextFigureBoardView, frame);
+        buttons.setBackground(Color.white);
+        buttons.highScores = highScores;
+        buttons.update();
+
+        mover.buttons(buttons);
+		mover.start();
+        
+		frame.setSize(new Dimension(board.getWidth() * 30 + 180, board.getHeight() * 30 + 50));
+		frame.setTitle("Pentris");
 		frame.setBackground(Color.black);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.addKeyListener(keyListener);
-		frame.add(boardView);
-                //BoardButtons buttons = new BoardButtons(frame);
-                frame.setVisible(true);
+		
+		JPanel panel = new JPanel();
+//		panel.setAlignmentX(-1);
+		panel.add(boardView);
+		panel.add(buttons.panel);
+		frame.add(panel);
+		
+		frame.setVisible(true);
+		frame.requestFocusInWindow();
 	}
 	
 	/**
