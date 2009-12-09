@@ -8,12 +8,11 @@ import javax.swing.JPanel;
 
 /**
  * The Main class of the project.
- * Here we initialize all the pentominoes and add them to an array.
- * We will run our solver here.
+ * Sets up the whole game
  * 
- * 15/09/2009
+ * 09/12/09
  * 
- * @author Martins Spilners, Roland Gerits, Leoni Haagmans
+ * @author Martins Spilners, Roland Gerits, Leoni Haagmans, José Sue Smith, Rob van den Oever, Seyit Ayas
  * @version 0.1
  */
 
