@@ -215,7 +215,7 @@ public class TheBoard
 					board[j2][board[0].length - i - j - 1] = board[j2][board[0].length - i - j - 2];
 				}
 			}
-			if (i > 0)
+			
 				i--;
 			linesRemoved++;
 		}
