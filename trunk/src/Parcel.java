@@ -1,5 +1,12 @@
 public class Parcel
 {
+	/**
+	 * Constructs a Parcel with a certain height, width, length and a certain value.
+	 * @param aHeight An integer which represents the height of the parcel.
+	 * @param aWidth An integer which represents the width of the parcel.
+	 * @param aLength An integer which represents the length of the parcel.
+	 * @param aValue An integer which represents the value of a parcel.
+	 */
 	public Parcel(int aHeight, int aWidth, int aLength, int aValue)
 	{
 		height = aHeight;
@@ -9,6 +16,9 @@ public class Parcel
 		initialize();
 	}
 	
+	/**
+	 * This method initializes the rotations of a certain parcel and stores the results in the rotations-array.
+	 */
 	public void initialize()
 	{
 		// Returns only one parcel dimension when the three variables are equal.
@@ -99,7 +109,10 @@ public class Parcel
 	}
 	
 
-	
+	/**
+	 * Returns the dimensions of the parcel and it's rotations. 
+	 * @return A 2-dimensional array with at least one and at most six values in the first dimension and always with three values in the second dimension.
+	 */
 	public int[][] returnRotations()
 	{
 		return rotations;
@@ -107,7 +120,7 @@ public class Parcel
 	
 	/**
 	 * Returns the value of the Parcel.
-	 * @return An integer.
+	 * @return An integer the represents the value of a Parcel.
 	 */
 	public int returnValue()
 	{
@@ -122,7 +135,8 @@ public class Parcel
 	{
 		return "Parcel[" + height + "][" + width + "][" + length + "]";
 	}
-	// We doubled the height, width and length of the parcels
+	
+	// We doubled the height, width and length of the parcels as to only use integers.
 	private int height;
 	private int width;
 	private int length;
