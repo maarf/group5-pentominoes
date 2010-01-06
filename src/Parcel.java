@@ -11,7 +11,66 @@ public class Parcel
 	
 	public void initialize()
 	{
-		/** rotations = new int[6][3];
+		// Returns only one parcel dimension when the three variables are equal.
+		if(height == width && height == length) 
+		{
+			System.out.println("3 the same");
+			rotations = new int[1][3]; 
+			rotations[0][0] = height;
+			rotations[0][1] = width;
+			rotations[0][2] = length;
+		}
+		
+		// Returns three parcel dimensions when there are two different numbers. 
+		else if(height == width || height == length || width == length)
+		{
+			System.out.println("2 the same");
+			rotations = new int[3][3];
+			int different;
+			int same;
+			if(height == width)
+			{
+				different = length;
+				same = height;
+			}
+			else if(height == length)
+			{
+				different = width;
+				same = height;
+			}
+			
+			else if(width == length)
+			{
+				different = height;
+				same = length;
+			}
+			
+			else
+			{
+				different = 911987;
+				same = 789119;
+			}
+
+			
+			rotations[0][0] = different;
+			rotations[0][1] = same;
+			rotations[0][2] = same;
+			
+			rotations[1][0] = same;
+			rotations[1][1] = different;
+			rotations[1][2] = same;
+			
+			rotations[2][0] = same;
+			rotations[2][1] = same;
+			rotations[2][2] = different;
+			
+		}
+		
+		// Returns the six different rotations in case of three different values.
+		else if(height != width && height != length && width != length)
+		{
+			System.out.println("0 the same");
+		rotations = new int[6][3];
 		rotations[0][0] = height;
 		rotations[0][1] = width;
 		rotations[0][2] = length;
@@ -35,18 +94,8 @@ public class Parcel
 		rotations[5][0] = length;
 		rotations[5][1] = width;
 		rotations[5][2] = height;		
-		
-		*/
-		
-		if(height == width && height == length) 
-		{
-			rotations = new int[1][3]; 
-			rotations[0][0] = height;
-			rotations[0][1] = width;
-			rotations[0][2] = length;
 		}
-		
-		if(height == width )
+
 	}
 	
 
