@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Parcel
 {
 	/**
@@ -105,6 +107,8 @@ public class Parcel
 		rotations[5][1] = width;
 		rotations[5][2] = height;		
 		}
+		
+		randParcel(returnRotations()); //selects randomly one rotation of the parcel
 
 	}
 	
@@ -135,6 +139,39 @@ public class Parcel
 	{
 		return "Parcel[" + height + "][" + width + "][" + length + "]";
 	}
+	/**
+	 * randomly selects a rotation from all possible rotations
+	 * @param listRotations list of all possible rotations
+	 */
+	public void randParcel(int [][] listRotations)
+	{
+        Random ram = new Random();
+        parcel = listRotations[ram.nextInt(listRotations.length)];
+	}
+	/**
+	 * returns the X from the parcel
+	 * @return length of parcel
+	 */
+	public int getParcelX()
+	{
+		return parcel[0];
+	}
+	/**
+	 * returns the Y from the parcel
+	 * @return height of parcel
+	 */
+	public int getParcelY()
+	{
+		return parcel[1];
+	}
+	/**
+	 * returns the Z from the parcel
+	 * @return width of parcel
+	 */
+	public int getParcelZ()
+	{
+		return parcel[2];
+	}
 	
 	// We doubled the height, width and length of the parcels as to only use integers.
 	private int height;
@@ -142,4 +179,5 @@ public class Parcel
 	private int length;
 	private int value;
 	private int[][] rotations;
+	private int [] parcel;
 }
