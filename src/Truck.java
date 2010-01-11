@@ -62,5 +62,49 @@ public class Truck
 		maxZ = maxZ + b.getParcelZ();
 	}
 	
+	public int getTrucklength()
+	{
+		return length;
+	}
+	
+	public int getTruckHeight()
+	{
+		return height;		
+	}
+	
+	public int getTruckWidth()
+	{
+		return width;
+	}
+	
+	public int getMaxX()
+	{
+		return maxX;
+	}
+	public int getMaxY()
+	{
+		return maxY;
+	}
+	
+	public int getMaxZ()
+	{
+		return maxZ;
+	}
+	public boolean fits(Parcel bParcel)
+	{
+		if(length<getMaxX())
+		{
+			return false;
+		}
+		if(height<getMaxY())
+		{
+			return false;
+		}
+		if(width<getMaxZ())
+		{
+			return false;
+		}
+		return true;
+	}
 
 }
