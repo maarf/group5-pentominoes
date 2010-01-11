@@ -11,18 +11,18 @@ public class Greedy
 	public void makeGreedy()
 	{
 		// here the program should sort the parcels into descending order (highest value first).
-		Parcel maxParcel = new Parcel(0,0,0,0);
+		int max = 0;
 		for(int i = 0; i < parcels.length; i++)
 		{
-			if(parcels[i].getValue() > maxParcel.getValue()) maxParcel = parcels[i];
+			if(parcels[i].getValue() > max) max = parcels[i].getValue();
 		}
-		greedyParcels = new Parcel[parcels.length];
-		greedyParcels[0] = maxParcel;
-		for(int i = 1; i < parcels.length - 1; i++)
+		Parcel[] temporaryParcels = new Parcel[max];
+		
+		for(int i = 0; i < temporaryParcels.length; i++)
 		{
-			for(int j = maxParcel.getValue(); j > 0; j--)
+			for(int j = 0; j < parcels.length;  j++)
 			{
-				
+				if(parcels[j].getValue() == i) temporaryParcels[i] = parcels[j];
 			}
 		}
 	}
