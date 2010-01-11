@@ -17,6 +17,10 @@ public class Truck
 		truck = new int[height][length][width];		
 	}	
 	
+	/**
+	 * 
+	 * @param a
+	 */
 	public void setParcel(Parcel a)
 	{
 		for (int i = 0; i<a.getParcelX();i++)
@@ -25,7 +29,7 @@ public class Truck
 			{
 				for(int k = 0; k<a.getParcelY(); k++)
 				{
-					truck[i+maxX][j+maxY][k+maxZ] = a.returnValue();
+					truck[i+maxX][j+maxY][k+maxZ] = a.getValue();
 				}
 			}
 		}
@@ -107,4 +111,19 @@ public class Truck
 		return true;
 	}
 
+	public boolean isFull()
+	{
+		
+		for(int i = 0; i < truck.length; i++)
+		{
+			for(int j = 0; j < truck[i].length; j++)
+			{
+				for(int k = 0; k < truck[i][j].length; k++)
+				{
+					if(truck[i][j][k] == 0) return false;
+				}
+			}
+		}
+		return true;
+	}
 }
