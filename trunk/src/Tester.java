@@ -5,7 +5,7 @@ public class Tester
 	{
 		RandParcelSelector selector = new RandParcelSelector();
 		Parcel aParcel = new Parcel(selector.getParcelX(),selector.getParcelY(),selector.getParcelZ(),selector.getParcelV());
-		System.out.println("Actual value: " + aParcel.returnValue());
+		System.out.println("Actual value: " + aParcel.getValue());
 		System.out.println("X: " + aParcel.getParcelX());
 		System.out.println("Y: " + aParcel.getParcelY());
 		System.out.println("Z: " + aParcel.getParcelZ());
