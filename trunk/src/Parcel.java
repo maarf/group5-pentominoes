@@ -126,7 +126,7 @@ public class Parcel
 	 * Returns the value of the Parcel.
 	 * @return An integer the represents the value of a Parcel.
 	 */
-	public int returnValue()
+	public int getValue()
 	{
 		return value;
 	}
