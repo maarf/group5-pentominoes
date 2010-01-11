@@ -14,7 +14,7 @@ public class Truck
 		maxX = 0;
 		maxY = 0;
 		maxZ = 0;
-		truck = new int[height][length][width];		
+		truck = new int[height][width][length];		
 	}	
 	
 	/**
@@ -30,11 +30,11 @@ public class Truck
 				for(int k = 0; k<a.getParcelY(); k++)
 				{
 					if(fitsX(a))
-						truck[i+maxX][j][k] = a.getValue();
+						{truck[i+maxX][j][k] = a.getValue();}
 					else if(fitsY(a))
-						truck[i][j+maxY][k] = a.getValue();
+						{truck[i][j+maxY][k] = a.getValue();}
 					else if(fitsZ(a))
-						truck[i][j][k+maxZ] = a.getValue();
+						{truck[i][j][k+maxZ] = a.getValue();}
 				}
 			}
 		}
@@ -59,17 +59,17 @@ public class Truck
 	
 	public void setMaxX(Parcel b)
 	{
-		maxX = maxX + b.getParcelX();		
+		maxX = maxX + b.getParcelX() - 1;		
 	}
 	
 	public void setMaxY(Parcel b)
 	{
-		maxY = maxY + b.getParcelY();	
+		maxY = maxY + b.getParcelY() - 1;	
 	}
 	
 	public void setMaxZ(Parcel b)
 	{
-		maxZ = maxZ + b.getParcelZ();
+		maxZ = maxZ + b.getParcelZ() - 1;
 	}
 	
 	public int getTrucklength()

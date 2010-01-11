@@ -1,5 +1,3 @@
-import java.util.Random;
-
 /**
  * Solver!!
  * @author Jose Sue Smith, Leoni Haagmans
@@ -10,7 +8,7 @@ public class BruteForce1
 	public BruteForce1(Truck atruck)
 	{
 		truck = atruck;
-		Solve();
+		//Solve();
 	}	
 
 	/**
@@ -18,17 +16,24 @@ public class BruteForce1
 	 */
 	public void Solve()
 	{
-		parcel = randomPicker();
+		RandParcelSelector selector = new RandParcelSelector();
+		Parcel aParcel = new Parcel(selector.getParcelX(),selector.getParcelY(),selector.getParcelZ(),selector.getParcelV());
 		
-		if(!fits(parcel))
+		if(truck.isFull())
 		{
-			break;
+			reset();
 		}
-		if(fits(parcel))
+		else
 		{
-			setParcel(parcel);
+			truck.setParcel(aParcel);
 			Solve();
 		}
+	}
+	
+	public void reset()
+	{
+		truck.getTruckValue();
+		//truck = new Truck(4,4,4);
 	}
 
 	
@@ -36,3 +41,4 @@ public class BruteForce1
 	private Truck truck;
 	
 }
+
