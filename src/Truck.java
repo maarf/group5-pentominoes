@@ -29,27 +29,49 @@ public class Truck
 		}
 		else
 		{
-		for (int i = 0; i<a.getParcelX();i++)
-		{
-			for(int j = 0; j<a.getParcelY(); j++)
+			if(fitsX(a))
 			{
-				for(int k = 0; k<a.getParcelZ(); k++)
+				for (int i = 0; i<a.getParcelX();i++)
 				{
-					if(fitsX(a))
-						{truck[j][k][i] = a.getValue();
-						System.out.println("fitsX");
+					for(int j = 0; j<a.getParcelY(); j++)
+					{
+						for(int k = 0; k<a.getParcelZ(); k++)
+						{
+							truck[j][k][i+maxX] = a.getValue();
+							System.out.println("fitsX");
 						}
-					else if(fitsY(a))
-						{truck[j][k][i] = a.getValue();
-						System.out.println("fitsY");
-						}
-					else if(fitsZ(a))
-						{truck[j][k][i] = a.getValue();
-						System.out.println("fitsZ");
-						}
+					}
 				}
 			}
-		}
+			else if(fitsY(a))
+			{
+				for (int i = 0; i<a.getParcelX();i++)
+				{
+					for(int j = 0; j<a.getParcelY(); j++)
+					{
+						for(int k = 0; k<a.getParcelZ(); k++)
+						{
+							truck[j+maxY][k][i] = a.getValue();
+							System.out.println("fitsY");
+						}
+					}
+				}
+			}
+			else if(fitsZ(a))
+			{
+				for (int i = 0; i<a.getParcelX();i++)
+				{
+					for(int j = 0; j<a.getParcelY(); j++)
+					{
+						for(int k = 0; k<a.getParcelZ(); k++)
+						{
+							truck[j][k+maxZ][i] = a.getValue();
+							System.out.println("fitsZ");
+						}
+					}
+				}
+			}						
+	
 		setMaxX(a);
 		setMaxY(a);
 		setMaxZ(a);
@@ -72,32 +94,17 @@ public class Truck
 	
 	public void setMaxX(Parcel b)
 	{
-		maxX = maxX + b.getParcelX()+1;		
+		maxX = maxX + b.getParcelX();		
 	}
 	
 	public void setMaxY(Parcel b)
 	{
-		maxY = maxY + b.getParcelY()+1;	
+		maxY = maxY + b.getParcelY();	
 	}
 	
 	public void setMaxZ(Parcel b)
 	{
-		maxZ = maxZ + b.getParcelZ()+1;
-	}
-	
-	public int getTrucklength()
-	{
-		return length;
-	}
-	
-	public int getTruckHeight()
-	{
-		return height;		
-	}
-	
-	public int getTruckWidth()
-	{
-		return width;
+		maxZ = maxZ + b.getParcelZ();
 	}
 	
 	public int getMaxX()
@@ -132,8 +139,9 @@ public class Truck
 	
 	public boolean fitsX(Parcel bParcel)
 	{
-		if(length<getMaxX()+bParcel.getParcelX())
+		if(width<getMaxX()+bParcel.getParcelX())
 		{
+			maxX = 0;
 			return false;
 		}
 		return true;
@@ -142,6 +150,7 @@ public class Truck
 	{
 		if(height<getMaxY()+bParcel.getParcelY())
 		{
+			maxY = 0;
 			return false;
 		}
 		return true;
@@ -149,8 +158,9 @@ public class Truck
 	
 	public boolean fitsZ(Parcel bParcel)
 	{
-		if(width<getMaxZ()+bParcel.getParcelZ())
+		if(length<getMaxZ()+bParcel.getParcelZ())
 		{
+			maxZ = 0;
 			return false;
 		}
 		return true;
