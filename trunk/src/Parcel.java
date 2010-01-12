@@ -137,7 +137,7 @@ public class Parcel
 	 */
 	public String toString()
 	{
-		return "Parcel[" + height + "][" + width + "][" + length + "]";
+		return "Parcel[" + height + "][" + width + "][" + length + "][" + value + "]";
 	}
 	/**
 	 * randomly selects a rotation from all possible rotations
