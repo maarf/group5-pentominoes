@@ -3,7 +3,9 @@ public class Truck
 {
 	private int height, length, width;
 	private int [][][] truck;
-	private int maxX, maxY, maxZ;
+	private int counter;
+	private int currX = 0, currY = 0, currZ = 0;
+	
 	
 	
 	public Truck(int aHeight, int aWidth, int aLength)	
@@ -11,73 +13,8 @@ public class Truck
 		height = aHeight;
 		length = aLength;
 		width = aWidth;
-		maxX = 0;
-		maxY = 0;
-		maxZ = 0;
 		truck = new int[height][length][width];		
 	}	
-	
-	/**
-	 * 
-	 * @param a
-	 */
-	public void setParcel(Parcel a)
-	{
-		if(isFull())
-		{
-			System.out.println("is full");
-		}
-		else
-		{
-			if(fitsX(a))
-			{
-				for (int i = 0; i<a.getParcelX();i++)
-				{
-					for(int j = 0; j<a.getParcelY(); j++)
-					{
-						for(int k = 0; k<a.getParcelZ(); k++)
-						{
-							truck[j][k][i+maxX] = a.getValue();
-							System.out.println("fitsX");
-						}
-					}
-				}
-			}
-			else if(fitsY(a))
-			{
-				for (int i = 0; i<a.getParcelX();i++)
-				{
-					for(int j = 0; j<a.getParcelY(); j++)
-					{
-						for(int k = 0; k<a.getParcelZ(); k++)
-						{
-							truck[j+maxY][k][i] = a.getValue();
-							System.out.println("fitsY");
-						}
-					}
-				}
-			}
-			else if(fitsZ(a))
-			{
-				for (int i = 0; i<a.getParcelX();i++)
-				{
-					for(int j = 0; j<a.getParcelY(); j++)
-					{
-						for(int k = 0; k<a.getParcelZ(); k++)
-						{
-							truck[j][k+maxZ][i] = a.getValue();
-							System.out.println("fitsZ");
-						}
-					}
-				}
-			}						
-	
-		setMaxX(a);
-		setMaxY(a);
-		setMaxZ(a);
-		}
-	}
-
 	
 	public void getTruckValue()
 	{
@@ -91,35 +28,6 @@ public class Truck
 		    }
 		    System.out.println();
 	}
-	
-	public void setMaxX(Parcel b)
-	{
-		maxX = maxX + b.getParcelX();		
-	}
-	
-	public void setMaxY(Parcel b)
-	{
-		maxY = maxY + b.getParcelY();	
-	}
-	
-	public void setMaxZ(Parcel b)
-	{
-		maxZ = maxZ + b.getParcelZ();
-	}
-	
-	public int getMaxX()
-	{
-		return maxX;
-	}
-	public int getMaxY()
-	{
-		return maxY;
-	}
-	
-	public int getMaxZ()
-	{
-		return maxZ;
-	}
 
 	public boolean isFull()
 	{
@@ -130,40 +38,96 @@ public class Truck
 			{
 				for(int k = 0; k < truck[i][j].length; k++)
 				{
-					if(truck[i][j][k] == 0) return false;
+					if(truck[i][j][k] == 0) 
+					{
+						counter++;				
+					}					
 				}
 			}
 		}
-		return true;
+		
+		if(counter<16)
+		{
+			return true;
+		}
+		
+		else if(counter>1)
+		{
+			return false;
+		}
+		
+		return false;
 	}
 	
-	public boolean fitsX(Parcel bParcel)
+	public boolean fits(Parcel bParcel)
 	{
-		if(width<getMaxX()+bParcel.getParcelX())
+		if(width-currX>bParcel.getParcelX() && height-currY>bParcel.getParcelY() && length-currZ>bParcel.getParcelZ())
 		{
-			maxX = 0;
-			return false;
+			return true;
 		}
-		return true;
-	}
-	public boolean fitsY(Parcel bParcel)
-	{
-		if(height<getMaxY()+bParcel.getParcelY())
-		{
-			maxY = 0;
-			return false;
-		}
-		return true;
+		return false;
 	}
 	
-	public boolean fitsZ(Parcel bParcel)
+	public void NextBlank()
 	{
-		if(length<getMaxZ()+bParcel.getParcelZ())
+		for(int i = 0; i < truck.length; i++)
 		{
-			maxZ = 0;
-			return false;
+			for(int j = 0; j < truck[i].length; j++)
+			{
+				for(int k = 0; k < truck[i][j].length; k++)
+				{
+					if(!isfilled(j,k,i)) 
+					{
+						currY = i;
+						currZ = j;
+						currX = k;
+						return;
+					}					
+				}		
+			}		
 		}
-		return true;
 	}
-
+	
+	public int getCurrX()
+	{
+		return currX;
+	}
+	
+	public int getCurrY()
+	{
+		return currY;
+	}
+	
+	public int getCurrZ()
+	{
+		return currZ;
+	}
+	
+	public void setParcel(Parcel a)
+	{
+		for (int i = 0; i<a.getParcelX();i++)
+		{
+			for(int j = 0; j<a.getParcelY(); j++)
+			{
+				for(int k = 0; k<a.getParcelZ(); k++)
+				{
+					truck[currY+j][currZ+k][currX+i] = a.getValue();
+				}
+			}
+		}
+	}
+	
+	public boolean isfilled(int x, int y, int z)
+	{
+        if (truck[y][z][x] == 0) 
+        {
+            return false;
+        }
+    return true;
+	}
+	
+	public void setEmpty()
+	{
+		truck[currY][currZ][currY] = 9;
+	}
 }
