@@ -4,27 +4,48 @@ public class Greedy
 	{
 		aTruck = truck;
 		this.parcels = parcels;
-		makeGreedy();
-		Solve();
+		//makeGreedy();
+		//Solve();
 	}
 	
-	public void makeGreedy()
+	public Parcel[] makeGreedy()
 	{
 		// here the program should sort the parcels into descending order (highest value first).
 		int max = 0;
+		int numberofParcels = 0;
 		for(int i = 0; i < parcels.length; i++)
 		{
 			if(parcels[i].getValue() > max) max = parcels[i].getValue();
 		}
-		Parcel[] temporaryParcels = new Parcel[max];
 		
-		for(int i = 0; i < temporaryParcels.length; i++)
+		
+		Parcel[] temporaryParcels = new Parcel[max + 1];
+		for(int i = 0; i < parcels.length; i++)
 		{
-			for(int j = 0; j < parcels.length;  j++)
+			for(int j = 1; j <= temporaryParcels.length; j++)
 			{
-				if(parcels[j].getValue() == i) temporaryParcels[i] = parcels[j];
+				if(parcels[i].getValue() == j) 
+					{
+						temporaryParcels[j] = parcels[i];
+						numberofParcels++;
+					}
 			}
 		}
+		
+		greedyParcels = new Parcel[numberofParcels];
+		int j = 0;
+		for(int i = 0; i < temporaryParcels.length; i++)
+		{
+			if(temporaryParcels[i] != null)
+				{
+					greedyParcels[j] = temporaryParcels[i];
+					j++;
+				}
+			
+		}
+		
+		return greedyParcels;
+		
 	}
 	
 	public boolean Solve()
