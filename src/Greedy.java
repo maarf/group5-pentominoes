@@ -48,23 +48,21 @@ public class Greedy
 		
 	}
 	
-	public boolean Solve()
+	public int Solve()
 	{
 		int solutions = 0;
-
+		
 		for(int i = 0; i < greedyParcels.length; i++)
 		{
-			while(truck.fits(greedyParcels[i]))
+			Parcel greedyParcel = new Parcel(greedyParcels[i].getParcelX(), greedyParcels[i].getParcelY(), greedyParcels[i].getParcelZ(), greedyParcels[i].getValue());
+			if(truck.fits(greedyParcel))
 			{
-				truck.setParcel(greedyParcels[i]);
+				truck.setParcel(greedyParcel);
+				truck.NextBlank();
 			}
 		}
-		if(truck.isFull() == true)
-		{
-			solutions++;
-			return true;
-		}
-		else return false;
+
+		return solutions;
 		
 	}
 	
