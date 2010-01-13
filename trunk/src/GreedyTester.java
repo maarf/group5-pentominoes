@@ -8,7 +8,7 @@ public class GreedyTester
 		
 		Parcel[] parcels = {parcelA, parcelB, parcelC};
 		
-		Truck truck = new Truck(8,5,33);
+		Truck truck = new Truck(8,7,10);
 		
 		Greedy greedy = new Greedy(truck, parcels);
 		
@@ -18,12 +18,8 @@ public class GreedyTester
 		{
 			System.out.println(greedyParcels[i].toString());
 		}
-
-		truck.setParcel(parcelA);
-		truck.setParcel(parcelB);
-		truck.setParcel(parcelC);
-		truck.getTruckValue();
-		//greedy.Solve();
+		
+		greedy.Solve();
 		
 	}
 }
