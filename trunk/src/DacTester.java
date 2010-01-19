@@ -18,7 +18,7 @@ public class DacTester
 		solver.solver();
 		//solver.getTruckValue();
 		
-
+		truck.setParcels(solver.getBigTruck());
 		System.out.println("Number of parcels: " + truck.getParcels().length);
 		for (Object o : truck.getParcels()) {
 			ParcelAtPlace p = (ParcelAtPlace)o;

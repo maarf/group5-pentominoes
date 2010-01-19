@@ -193,5 +193,13 @@ public class Truck
 	{
 		return truck;
 	}
+	
+	/**
+	 * Use very very carefully
+	 * @param a
+	 */
+	public void setParcels(ArrayList<ParcelAtPlace> a) {
+		parcels = a;
+	}
 
 }
