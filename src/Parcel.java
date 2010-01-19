@@ -16,7 +16,6 @@ public class Parcel
 		length = aLength;
 		value = aValue;
 		initialize();
-		//randParcel(returnRotations());
 	}
 	
 	/**
@@ -147,8 +146,7 @@ public class Parcel
 	public void randParcel(int [][] listRotations)
 	{
         Random ram = new Random();
-       // parcel = listRotations[ram.nextInt(listRotations.length)];
-        parcel = listRotations[0];
+        parcel = listRotations[ram.nextInt(listRotations.length)];
 	}
 	/**
 	 * returns the X from the parcel
