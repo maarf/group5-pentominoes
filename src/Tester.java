@@ -8,7 +8,7 @@ public class Tester
 	public static void main(String[]args) throws InterruptedException
 	{
 
-		Truck truck = new Truck(6,6,6);// 4 5 8
+		Truck truck = new Truck(8, 33, 5);// 4 5 8
 		//Parcel a = new Parcel(7,7,7,5);
 		//System.out.println(truck.fits(a));
 		//truck.setParcel(a);
@@ -42,13 +42,13 @@ public class Tester
 		
 		frame.setVisible(true);
 		
-		while (true) {
-			if (cargoView.autoRotate) {
-				cargoView.skew += 0.007;
-				cargoView.repaint();
-				Thread.sleep(1000/30);
-			}
-		}
+//		while (true) {
+//			if (cargoView.autoRotate) {
+//				cargoView.skew += 0.007;
+//				cargoView.repaint();
+//				Thread.sleep(1000/30);
+//			}
+//		}
 		
 		
 	}
