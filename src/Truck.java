@@ -87,11 +87,11 @@ public class Truck
 			{
 				for(int k = 0; k < truck[i][j].length; k++)
 				{
-					if(!isfilled(j,k,i)) 
+					if(!isfilled(i,j,k)) 
 					{
-						currY = i;
-						currZ = j;
-						currX = k;
+						currY = j;
+						currZ = k;
+						currX = i;
 						return;
 					}					
 				}		
