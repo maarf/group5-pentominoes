@@ -11,7 +11,7 @@ public class DacTester
 		
 		Dac solver = new Dac(truck,parcels);
 		solver.solver();
-		solver.getTruckValue();
+		//solver.getTruckValue();
 		
 
 	}
