@@ -8,7 +8,7 @@ public class GreedyTester
 		
 		Parcel[] parcels = {parcelC, parcelB, parcelA};
 		
-		Truck truck = new Truck(8,5,33);
+		Truck truck = new Truck(8,33,5);
 		
 		Greedy greedy = new Greedy(truck, parcels);		
 		
