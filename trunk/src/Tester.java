@@ -42,13 +42,13 @@ public class Tester
 		
 		frame.setVisible(true);
 		
-//		while (true) {
-//			if (cargoView.autoRotate) {
-//				cargoView.skew += 0.007;
-//				cargoView.repaint();
-//				Thread.sleep(1000/30);
-//			}
-//		}
+		while (true) {
+			if (cargoView.autoRotate) {
+				cargoView.skew += 0.007;
+				cargoView.repaint();
+			}
+			Thread.sleep(1000/30);
+		}
 		
 		
 	}

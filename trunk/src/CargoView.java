@@ -6,6 +6,7 @@ import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
@@ -14,7 +15,7 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.JComponent;
 
 
-public class CargoView extends JComponent {
+public class CargoView extends JComponent implements MouseMotionListener, MouseListener {
 
 	private static final long serialVersionUID = -8546231042854359675L;
 	public double skew;
@@ -22,6 +23,11 @@ public class CargoView extends JComponent {
 	public double zoom;
 	
 	public Truck truck;
+	
+	public CargoView() {
+		addMouseListener(this);
+		addMouseMotionListener(this);
+	}
 	
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
@@ -193,28 +199,36 @@ public class CargoView extends JComponent {
 		
 	}
 
-	private boolean mouseDown = false;
-	final private Point mouseLocation = new Point();
-	private class ViewMouseListener implements MouseListener {
-
-		public void mouseClicked(MouseEvent e) {
-		}
-
-		public void mouseEntered(MouseEvent e) {
-		}
-
-		public void mouseExited(MouseEvent e) {
-		}
-
-		public void mousePressed(MouseEvent e) {
-			mouseDown = true;
-			mouseLocation.setLocation(e.getXOnScreen(), e.getYOnScreen());
-		}
-
-		public void mouseReleased(MouseEvent e) {
-			mouseDown = false;
-		}
-		
+	private Point mouseLocation = new Point();
+	public void mouseDragged(MouseEvent e) {
+		skew = skew - (mouseLocation.getX() - e.getXOnScreen()) / 1000;
+		repaint();
+		mouseLocation.setLocation(e.getXOnScreen(), e.getYOnScreen());
 	}
+
+	public void mouseMoved(MouseEvent e) {
+	}
+
+	public void mouseClicked(MouseEvent e) {
+	}
+
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	public void mouseExited(MouseEvent e) {
+	}
+
+	private boolean wasAutoRotateOn;
+	public void mousePressed(MouseEvent e) {
+		wasAutoRotateOn = autoRotate;
+		autoRotate = false;
+		mouseLocation.setLocation(e.getXOnScreen(), e.getYOnScreen());
+	}
+
+	public void mouseReleased(MouseEvent e) {
+		autoRotate = wasAutoRotateOn;
+	}
+
+	
 	
 }
