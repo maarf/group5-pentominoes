@@ -7,18 +7,23 @@ public class Tester
 {
 	public static void main(String[]args) throws InterruptedException
 	{
-
+		
 		Truck truck = new Truck(8, 33, 5);// 4 5 8
+
 		//Parcel a = new Parcel(7,7,7,5);
 		//System.out.println(truck.fits(a));
 		//truck.setParcel(a);
 		BruteForce1 solver = new BruteForce1(truck);
 		//System.out.println(solver.getParcelV());
 		solver.Solve(parcels);
-		truck.getTruckValue();
+		//truck.getTruckValue();
 		
 		
 		System.out.println("Number of parcels: " + truck.getParcels().length);
+		System.out.println("Value: " + solver.getValue());
+		System.out.println("Parcels A: " + solver.getBoxA());
+		System.out.println("Parcels B: " + solver.getBoxB());
+		System.out.println("Parcels C: " + solver.getBoxC());
 		for (Object o : truck.getParcels()) {
 			ParcelAtPlace p = (ParcelAtPlace)o;
 			System.out.println("x: " + p.x + " y: " + p.y + " z: " + p.z + " w:" + p.parcel.getParcelX() + " h: " + p.parcel.getParcelY() + " d: " + p.parcel.getParcelZ());
@@ -42,6 +47,7 @@ public class Tester
 		
 		frame.setVisible(true);
 		
+
 		while (true) {
 			if (cargoView.autoRotate) {
 				cargoView.skew += 0.007;
@@ -53,6 +59,7 @@ public class Tester
 			}
 			Thread.sleep(1000/30);
 		}
+
 		
 		
 	}

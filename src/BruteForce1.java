@@ -10,7 +10,8 @@ public class BruteForce1
 	private Truck truck;
 	private Parcel aParcel;
 	private int [] parcel;
-	private int counter;
+	private int value;
+	private int boxA = 0, boxB = 0, boxC = 0;
 	
 	public BruteForce1(Truck atruck)
 	{
@@ -59,6 +60,7 @@ public class BruteForce1
 		
 		randomPicker(a);
 		
+		
 		System.out.println("parcel " + aParcel.getValue()); 
 		System.out.println("full " + truck.isFull());
 		System.out.println("still " + truck.stillFits());
@@ -77,8 +79,21 @@ public class BruteForce1
 			if(truck.fits(aParcel))
 			{
 				truck.setParcel(aParcel);
+				value = value + aParcel.getValue();
 				//counter = 0;
 				truck.NextBlank();
+				if(aParcel.getValue() == 3)
+				{
+					boxA++;
+				}
+				if(aParcel.getValue() == 4)
+				{
+					boxB++;
+				}
+				if(aParcel.getValue() == 5)
+				{
+					boxC++;
+				}
 				System.out.println("set");
 				Solve(a);
 			}
@@ -103,5 +118,22 @@ public class BruteForce1
 		truck.getTruckValue();//just prints
 		//truck = new Truck(4,4,4);
 	}	
+	
+	public int getValue()
+	{
+		return value;
+	}
+	public int getBoxA()
+	{
+		return boxA;
+	}
+	public int getBoxB()
+	{
+		return boxB;		
+	}
+	public int getBoxC()
+	{
+		return boxC;
+	}
 }
 
