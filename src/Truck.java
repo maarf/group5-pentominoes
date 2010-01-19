@@ -19,7 +19,7 @@ public class Truck
 	public void getTruckValue()
 	{
 		 for(int i=0; i<truck.length; i++)
-		        for(int j=0; j<truck[i].length; j++){
+		    for(int j=0; j<truck[i].length; j++){
 		        for (int k=0; k<truck[i][j].length; k++ )
 		        {
 		               System.out.print(truck[i][j][k]);   
@@ -48,6 +48,7 @@ public class Truck
 		
 		if(counter<16)
 		{
+			counter = 0;
 			return true;
 		}
 		
@@ -67,6 +68,16 @@ public class Truck
 		}
 		return false;
 	}
+	
+	public boolean fits(Figure a)
+	{
+		if(width-currX>a.getWidth() && height-currY>a.getHeight() && length-currZ>a.getDepth())
+		{
+			return true;
+		}
+		return false;
+	}
+	
 	
 	public void NextBlank()
 	{
@@ -117,6 +128,20 @@ public class Truck
 		}
 	}
 	
+	public void setParcel(Figure b)
+	{
+		for (int i = 0; i<b.getWidth();i++)
+		{
+			for(int j = 0; j<b.getHeight(); j++)
+			{
+				for(int k = 0; k<b.getDepth(); k++)
+				{
+					truck[currY+j][currZ+k][currX+i] = b.getName();
+				}
+			}
+		}
+	}
+	
 	public boolean isfilled(int x, int y, int z)
 	{
         if (truck[y][z][x] == 0) 
@@ -128,6 +153,21 @@ public class Truck
 	
 	public void setEmpty()
 	{
-		truck[currY][currZ][currY] = 9;
+		truck[currY][currZ][currX] = 9;
+	}
+	
+	public int getHeight()
+	{
+		return height;
+	}
+	
+	public int getLength()
+	{
+		return length;
+	}
+	
+	public int getWidth()
+	{
+		return width;
 	}
 }
