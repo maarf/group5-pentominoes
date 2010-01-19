@@ -1,7 +1,11 @@
+import java.awt.Color;
+
+import javax.swing.JFrame;
+
 
 public class Tester 
 {
-	public static void main(String[]args)
+	public static void main(String[]args) throws InterruptedException
 	{
 
 		Truck truck = new Truck(6,6,6);// 4 5 8
@@ -12,6 +16,40 @@ public class Tester
 		//System.out.println(solver.getParcelV());
 		solver.Solve(parcels);
 		truck.getTruckValue();
+		
+		
+		System.out.println("Number of parcels: " + truck.getParcels().length);
+		for (Object o : truck.getParcels()) {
+			ParcelAtPlace p = (ParcelAtPlace)o;
+			System.out.println("x: " + p.x + " y: " + p.y + " z: " + p.z + " w:" + p.parcel.getParcelX() + " h: " + p.parcel.getParcelY() + " d: " + p.parcel.getParcelZ());
+		}
+		
+		/* Cargo view */
+		CargoView cargoView = new CargoView();
+		cargoView.zoom = 25.0;
+		cargoView.setBackground(Color.white);
+		
+		cargoView.truck = truck;
+		
+		/* The frame */
+		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(1100, 700);
+		frame.setTitle("Cargo");
+		frame.setLocation(80, 50);
+
+		frame.add(cargoView);
+		
+		frame.setVisible(true);
+		
+		while (true) {
+			if (cargoView.autoRotate) {
+				cargoView.skew += 0.007;
+				cargoView.repaint();
+				Thread.sleep(1000/30);
+			}
+		}
+		
 		
 	}
 	private final static int aX = 2, aY = 2, aZ = 4, aV = 3;

@@ -30,23 +30,31 @@ public class CargoView extends JComponent {
 		// Lets draw the truck
 		drawCube(g2, 0.0, 0.0, 0.0, (double)truck.getHeight(), (double)truck.getLength(), (double)truck.getWidth(), Color.lightGray);
 		
+//		int limit = 0;
 		// Lets draw parcels
 		for (Object aP : truck.getParcels()) {
 			ParcelAtPlace p = (ParcelAtPlace)aP;
 			drawCube(
 					g2,
-					(-((double)truck.getLength())/2 + ((double)p.parcel.getParcelY())/2 + (double)p.y),
-					(-((double)truck.getWidth())/2 + ((double)p.parcel.getParcelX())/2 + (double)p.x),
+					(-((double)truck.getLength())/2 + ((double)p.parcel.getParcelX())/2 + (double)p.x),
+					(-((double)truck.getWidth())/2 + ((double)p.parcel.getParcelY())/2 + (double)p.y),
 					(-((double)truck.getHeight())/2 + ((double)p.parcel.getParcelZ())/2 + (double)p.z),
+					(double)p.parcel.getParcelZ() - 0.2,
 					(double)p.parcel.getParcelX() - 0.2,
 					(double)p.parcel.getParcelY() - 0.2,
-					(double)p.parcel.getParcelZ() - 0.2,
 					Color.orange.darker()
 					);
+//			limit++;
+//			if (limit > 1) {
+//				break;
+//			}
 		}
 
 		// zero point
-//		drawCube(g2, (-33.0/2 + 1.0/2), (-5.0/2 + 1.0/2), (-8.0/2 + 1.0/2), 1.0, 1.0, 1.0, Color.red.darker());
+		drawCube(g2, (-((double)truck.getLength())/2 + 0.2/2), (-((double)truck.getWidth())/2 + 0.2/2), (-((double)truck.getHeight())/2 + 0.2/2), 0.2, 0.2, 0.2, Color.black.darker());
+		drawCube(g2, (-((double)truck.getLength())/2 + 0.2/2 + 2.0), (-((double)truck.getWidth())/2 + 0.2/2), (-((double)truck.getHeight())/2 + 0.2/2), 0.2, 0.2, 0.2, Color.red.darker());
+		drawCube(g2, (-((double)truck.getLength())/2 + 0.2/2), (-((double)truck.getWidth())/2 + 0.2/2 + 2.0), (-((double)truck.getHeight())/2 + 0.2/2), 0.2, 0.2, 0.2, Color.green.darker());
+		drawCube(g2, (-((double)truck.getLength())/2 + 0.2/2), (-((double)truck.getWidth())/2 + 0.2/2), (-((double)truck.getHeight())/2 + 0.2/2 + 2.0), 0.2, 0.2, 0.2, Color.blue.darker());
 
 //		drawCube(g2, (-165.0/2 + 10.0/2), (-25.0/2 + 10.0/2), (-40.0/2 + 20.0/2), 20.0-1, 10.0-1, 10.0-1, Color.orange.darker());
 //		drawCube(g2, (-165.0/2 + 10.0/2), (-25.0/2 + 10.0/2) + 10, (-40.0/2 + 20.0/2), 20.0-1, 10.0-1, 10.0-1, Color.orange.darker());
