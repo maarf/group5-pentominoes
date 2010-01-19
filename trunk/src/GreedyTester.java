@@ -9,9 +9,9 @@ public class GreedyTester
 		Parcel[] parcels = {parcelC, parcelB, parcelA};
 		
 		Truck truck = new Truck(8,33,5);
+	
 		
 		Greedy greedy = new Greedy(truck, parcels);		
-		
 		Truck solvedtruck = greedy.Solve();
 		solvedtruck.toString();
 		
