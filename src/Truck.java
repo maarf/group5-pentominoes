@@ -62,7 +62,7 @@ public class Truck
 	
 	public boolean fits(Parcel bParcel)
 	{
-		if(width-1-currX>bParcel.getParcelX() && height-1-currY>bParcel.getParcelY() && length-1-currZ>bParcel.getParcelZ())
+		if(width-currX>=bParcel.getParcelX() && height-currY>=bParcel.getParcelY() && length-currZ>=bParcel.getParcelZ())
 		{
 			return true;
 		}
@@ -71,7 +71,7 @@ public class Truck
 	
 	public boolean fits(Figure a)
 	{
-		if(width-1-currX>a.getWidth() && height-1-currY>a.getHeight() && length-1-currZ>a.getDepth())
+		if(width-1-currX>=a.getWidth() && height-1-currY>=a.getHeight() && length-1-currZ>a.getDepth())
 		{
 			return true;
 		}
