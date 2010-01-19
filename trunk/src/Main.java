@@ -20,81 +20,58 @@ public class Main
 {
 	/**
 	 * The main method, hold on yer horses!
+	 * @throws InterruptedException 
 	 */
-	public static void main(String[] args)
+	public static void main(String[] args) throws InterruptedException
 	{	
+
+		Parcel parcelA = new Parcel(2, 2, 4, 3);
+		Truck truck = new Truck(8, 5, 33);
 		
-		HighScoreKeeper highScores;
-		
-		try {
-			ObjectInputStream in = new ObjectInputStream(new FileInputStream("highscores.dat"));
-			highScores = (HighScoreKeeper)in.readObject();
-		} catch (Exception e) {
-			highScores = new HighScoreKeeper();
+		// Lets put some parcels on truck
+		int parcelsOnTruck = 0;
+		while (parcelsOnTruck < 5) {
+			truck.NextBlank();
+			if (truck.fits(parcelA)) {
+				truck.setParcel(parcelA);
+				parcelsOnTruck++;
+			} else {
+				truck.setEmpty();
+			}
+			System.out.println(truck.getParcels().length);
+			System.out.println("1");
 		}
 		
+		for (Object aP : truck.getParcels()) {
+			ParcelAtPlace p = (ParcelAtPlace)aP;
+			System.out.println("x: " + p.z + " y: " + p.y + " z: " + p.x + " w:" + p.parcel.getParcelX() + " h: " + p.parcel.getParcelY() + " d: " + p.parcel.getParcelZ());
+		}
+				
+		/* Cargo view */
+		CargoView cargoView = new CargoView();
+		cargoView.zoom = 25.0;
+		cargoView.setBackground(Color.white);
 		
-		NextFigureBoard nextFigureBoard = new NextFigureBoard(5, 5, listPentominoes());
-		BoardView nextFigureBoardView = new BoardView(nextFigureBoard, 10);
+		cargoView.truck = truck;
 		
-		TheBoard board = new TheBoard(5, 15, nextFigureBoard);
-		board.addActiveFigure(listPentominoes()[0].randomPicker(listPentominoes()));
-		board.highScores = highScores;
-		
-		BoardView boardView = new BoardView(board);
-		
-		MoveListener keyListener = new MoveListener(board, boardView);
-		MoveTimer mover = new MoveTimer(board, boardView);
-
+		/* The frame */
 		JFrame frame = new JFrame();
-		
-		board.frame = frame;
-		
-        BoardButtons buttons = new BoardButtons(board, mover, nextFigureBoardView, frame);
-        buttons.setBackground(Color.white);
-        buttons.highScores = highScores;
-        buttons.update();
-
-        mover.buttons(buttons);
-		mover.start();
-        
-		frame.setSize(new Dimension(board.getWidth() * 30 + 180, board.getHeight() * 30 + 50));
-		frame.setTitle("Pentris");
-		frame.setBackground(Color.black);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.addKeyListener(keyListener);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.black);
-//		panel.setAlignmentX(-1);
-		panel.add(boardView);
-		panel.add(buttons.panel);
-		frame.add(panel);
+		frame.setSize(1100, 700);
+		frame.setTitle("Cargo");
+		frame.setLocation(80, 50);
+
+		frame.add(cargoView);
 		
 		frame.setVisible(true);
-		frame.requestFocusInWindow();
+		
+		while (true) {
+			if (cargoView.autoRotate) {
+				cargoView.skew += 0.007;
+				cargoView.repaint();
+				Thread.sleep(1000/30);
+			}
+		}
 	}
 	
-	/**
-	 * Defines all the twelve pentomiones.
-	 * @return array of pentominoes
-	 */
-	public static Figure[] listPentominoes() {
-		// List all the pentominoes here
-		Figure[] pentominoes = {
-				new Figure(1),
-				new Figure(2),
-				new Figure(3),
-				new Figure(4),
-				new Figure(5),
-				new Figure(6),
-				new Figure(7),
-				new Figure(8),
-				new Figure(9),
-				new Figure(10),
-				new Figure(11),
-				new Figure(12),
-		};
-		return pentominoes;
-	}
 }
