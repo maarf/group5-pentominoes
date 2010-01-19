@@ -8,7 +8,7 @@ public class Truck
 	
 	
 	
-	public Truck(int aHeight, int aWidth, int aLength)	
+	public Truck(int aHeight, int aLength, int aWidth)	
 	{
 		height = aHeight;
 		length = aLength;
@@ -62,7 +62,7 @@ public class Truck
 	
 	public boolean fits(Parcel bParcel)
 	{
-		if(width-currX>bParcel.getParcelX() && height-currY>bParcel.getParcelY() && length-currZ>bParcel.getParcelZ())
+		if(width-1-currX>bParcel.getParcelX() && height-1-currY>bParcel.getParcelY() && length-1-currZ>bParcel.getParcelZ())
 		{
 			return true;
 		}
@@ -71,7 +71,7 @@ public class Truck
 	
 	public boolean fits(Figure a)
 	{
-		if(width-currX>a.getWidth() && height-currY>a.getHeight() && length-currZ>a.getDepth())
+		if(width-1-currX>a.getWidth() && height-1-currY>a.getHeight() && length-1-currZ>a.getDepth())
 		{
 			return true;
 		}
@@ -81,17 +81,17 @@ public class Truck
 	
 	public void NextBlank()
 	{
-		for(int i = 0; i < truck.length; i++)
+		for(int i = 0; i < truck.length -1; i++)
 		{
-			for(int j = 0; j < truck[i].length; j++)
+			for(int j = 0; j < truck[i].length-1; j++)
 			{
-				for(int k = 0; k < truck[i][j].length; k++)
+				for(int k = 0; k < truck[i][j].length-1; k++)//msschn niet goed
 				{
 					if(!isfilled(i,j,k)) 
 					{
-						currY = j;
-						currZ = k;
-						currX = i;
+						currY = i;
+						currZ = j;
+						currX = k;
 						return;
 					}					
 				}		
@@ -116,13 +116,13 @@ public class Truck
 	
 	public void setParcel(Parcel a)
 	{
-		for (int i = 0; i<a.getParcelX();i++)
+		for (int i = 0; i<a.getParcelY();i++)
 		{
-			for(int j = 0; j<a.getParcelY(); j++)
+			for(int j = 0; j<a.getParcelZ(); j++)
 			{
-				for(int k = 0; k<a.getParcelZ(); k++)
+				for(int k = 0; k<a.getParcelX(); k++)
 				{
-					truck[currY+j][currZ+k][currX+i] = a.getValue();
+					truck[currY+i][currZ+j][currX+k] = a.getValue();
 				}
 			}
 		}
@@ -142,7 +142,7 @@ public class Truck
 		}
 	}
 	
-	public boolean isfilled(int x, int y, int z)
+	public boolean isfilled(int y, int z, int x)
 	{
         if (truck[y][z][x] == 0) 
         {
