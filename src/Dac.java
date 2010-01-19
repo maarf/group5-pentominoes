@@ -1,4 +1,5 @@
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /**
  * Divide and Conque Solver
@@ -14,6 +15,7 @@ public class Dac
 	private int [][][] smallTruck;
 	private int [][][] newTruck;
 	private int currX = 0, currY = 0, currZ = 0;
+	
 	
 	public Dac(Truck aTruck, int [][] a)
 	{
@@ -88,7 +90,20 @@ public class Dac
 		         System.out.println();
 		    }
 		    System.out.println();
+		}
+	
 	}
 	
+	public ArrayList<ParcelAtPlace> getBigTruck() {
+		ArrayList<ParcelAtPlace> parcelsAtPlace = new ArrayList<ParcelAtPlace>();
+
+		for (int i = 0; i < 11; i++) {
+			for (Object o : bTruck.getParcels()) {
+				ParcelAtPlace p = (ParcelAtPlace)o;
+				parcelsAtPlace.add(new ParcelAtPlace(p.parcel, p.x, p.y, p.z + (3 * i)));
+			}
+		}
+		
+		return parcelsAtPlace;
 	}
 }
