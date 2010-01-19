@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 
 public class Truck 
 {
@@ -5,7 +7,12 @@ public class Truck
 	private int [][][] truck;
 	private int counter = 0;
 	private int currX = 0, currY = 0, currZ = 0;
+
 	
+	/*
+	 * List of all parcels in the truck.
+	 */
+	private ArrayList<ParcelAtPlace> parcels = new ArrayList<ParcelAtPlace>();
 	
 	
 	public Truck(int aHeight, int aLength, int aWidth)	
@@ -121,6 +128,7 @@ public class Truck
 				}
 			}
 		}
+		parcels.add(new ParcelAtPlace(a, currX, currY, currZ));
 	}
 	
 	public void setParcel(Figure b)
@@ -143,7 +151,7 @@ public class Truck
         {
             return false;
         }
-    return true;
+        return true;
 	}
 	
 	public void setEmpty()
@@ -164,5 +172,9 @@ public class Truck
 	public int getWidth()
 	{
 		return width;
+	}
+	
+	public Object[] getParcels() {
+		return parcels.toArray();
 	}
 }

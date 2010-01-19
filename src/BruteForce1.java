@@ -44,11 +44,19 @@ public class BruteForce1
 	{
 		return parcel[3];
 	}
+	
+	private int someCounter = 0;
+	
 	/**
 	 * puts parcel in truck if fits
 	 */
 	public void Solve(int [][] a)
 	{
+		someCounter++;
+		if (someCounter > 100) {
+			return;
+		}
+		
 		randomPicker(a);
 		
 		System.out.println("parcel " + aParcel.getValue()); 
