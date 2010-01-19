@@ -50,21 +50,28 @@ public class Greedy
 	
 	public Truck Solve()
 	{
+		System.out.println("START");
 		int sets = 0;
-		for(int i = 0; i < greedyParcels.length; i++)
-		{
-			truck.NextBlank();
-			System.out.println(truck.fits(greedyParcels[i]));
-			while(truck.fits(greedyParcels[i]))
+		for(int i = greedyParcels.length - 1; i >= 0; i--)
+		
+	//		for(int i = 0; i < greedyParcels.length; i++)
 			{
-				truck.setParcel(greedyParcels[i]);
 				
-				sets++;
-				System.out.println(sets + " " + greedyParcels[i].getValue());
+				System.out.println("  Fits: " + greedyParcels[i].getValue() + " " + truck.fits(greedyParcels[i]));
+				while(truck.fits(greedyParcels[i])) 
+				{
+					
+					truck.setParcel(greedyParcels[i]);
+					truck.NextBlank();
+					sets++;
+					System.out.println("   Sets: " + greedyParcels[i].getValue() + " " + sets);
+									
+				}
 			}
-		}
 		System.out.println("END");
+		//truck.getTruckValue();
 		return truck;
+		
 	}
 	
 
