@@ -2,7 +2,7 @@ public class Greedy
 {
 	public Greedy(Truck aTruck, Parcel[] parcels)
 	{
-		aTruck = truck;
+		this.truck = aTruck;
 		this.parcels = parcels;
 		makeGreedy();
 		//Solve();
@@ -48,27 +48,29 @@ public class Greedy
 		
 	}
 	
-	public int Solve()
+	public Truck Solve()
 	{
-		int solutions = 0;
-		
+		int sets = 0;
 		for(int i = 0; i < greedyParcels.length; i++)
 		{
-			Parcel greedyParcel = new Parcel(greedyParcels[i].getParcelX(), greedyParcels[i].getParcelY(), greedyParcels[i].getParcelZ(), greedyParcels[i].getValue());
-			if(truck.fits(greedyParcel))
+			truck.NextBlank();
+			System.out.println(truck.fits(greedyParcels[i]));
+			while(truck.fits(greedyParcels[i]))
 			{
-				truck.setParcel(greedyParcel);
-				truck.NextBlank();
+				truck.setParcel(greedyParcels[i]);
+				
+				sets++;
+				System.out.println(sets + " " + greedyParcels[i].getValue());
 			}
 		}
-
-		return solutions;
-		
+		System.out.println("END");
+		return truck;
 	}
 	
+
 	private Truck truck;
 	private Parcel[] parcels;
 	private Parcel[] greedyParcels;
-	
+
 	
 }

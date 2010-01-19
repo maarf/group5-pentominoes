@@ -6,20 +6,11 @@ public class GreedyTester
 		Parcel parcelB = new Parcel(2,3,4,4);
 		Parcel parcelC = new Parcel(3,3,3,5);
 		
-		Parcel[] parcels = {parcelA, parcelB, parcelC};
+		Parcel[] parcels = {parcelC, parcelB, parcelA};
 		
-		Truck truck = new Truck(8,7,10);
+		Truck truck = new Truck(8,5,33);
 		
-		Greedy greedy = new Greedy(truck, parcels);
-		
-		Parcel[] greedyParcels = greedy.makeGreedy();
-		
-		for(int i = 0; i < greedyParcels.length; i++)
-		{
-			System.out.println(greedyParcels[i].toString());
-		}
-		
-		greedy.Solve();
+		Greedy greedy = new Greedy(truck, parcels);		
 		
 	}
 }
