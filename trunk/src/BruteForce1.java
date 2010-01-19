@@ -61,6 +61,7 @@ public class BruteForce1
 		
 		System.out.println("parcel " + aParcel.getValue()); 
 		System.out.println("full " + truck.isFull());
+		System.out.println("still " + truck.stillFits());
 		
 		if(truck.isFull())
 		{
@@ -76,7 +77,7 @@ public class BruteForce1
 			if(truck.fits(aParcel))
 			{
 				truck.setParcel(aParcel);
-				counter = 0;
+				//counter = 0;
 				truck.NextBlank();
 				System.out.println("set");
 				Solve(a);
@@ -91,6 +92,7 @@ public class BruteForce1
 					counter = 0;
 				}	*/
 				truck.setEmpty();
+				truck.NextBlank();
 				Solve(a);				
 			}
 		}		
