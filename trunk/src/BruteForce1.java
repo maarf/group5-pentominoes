@@ -52,7 +52,6 @@ public class BruteForce1
 		randomPicker(a);
 		
 		System.out.println("parcel " + aParcel.getValue()); 
-		System.out.println("fits " + truck.fits(aParcel));
 		System.out.println("full " + truck.isFull());
 		
 		if(truck.isFull())
@@ -62,7 +61,7 @@ public class BruteForce1
 		else
 		{
 			
-			System.out.println("fits 2 " + truck.fits(aParcel));
+			System.out.println("fits " + truck.fits(aParcel));
 			System.out.println("currX " + truck.getCurrX());
 			System.out.println("currY " + truck.getCurrY());
 			System.out.println("currZ " + truck.getCurrZ());
@@ -76,14 +75,15 @@ public class BruteForce1
 			}
 			else
 			{
-				counter++;
+				/*counter++;
 				System.out.println("counter " + counter);
 				if(counter == 10)
 				{
 					truck.setEmpty();
 					counter = 0;
-				}	
-				//Solve(a);				
+				}	*/
+				truck.setEmpty();
+				Solve(a);				
 			}
 		}		
 	}

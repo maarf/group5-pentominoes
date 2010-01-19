@@ -3,7 +3,7 @@ public class Truck
 {
 	private int height, length, width;
 	private int [][][] truck;
-	private int counter;
+	private int counter = 0;
 	private int currX = 0, currY = 0, currZ = 0;
 	
 	
@@ -46,15 +46,10 @@ public class Truck
 			}
 		}
 		
-		if(counter<16)
+		if(counter == 0)
 		{
 			counter = 0;
 			return true;
-		}
-		
-		else if(counter>1)
-		{
-			return false;
 		}
 		
 		return false;
