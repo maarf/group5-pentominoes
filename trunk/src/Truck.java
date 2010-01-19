@@ -62,6 +62,16 @@ public class Truck
 		return false;
 	}
 	
+	public boolean stillFits()
+	{
+		Parcel a = new Parcel(2,2,4,3);
+		if(fits(a))
+		{
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean fits(Parcel bParcel)
 	{
 		if(width-currX>=bParcel.getParcelX() && height-currY>=bParcel.getParcelY() && length-currZ>=bParcel.getParcelZ())
@@ -157,6 +167,7 @@ public class Truck
 	public void setEmpty()
 	{
 		truck[currY][currZ][currX] = 9;
+		System.out.println("empty used");
 	}
 	
 	public int getHeight()
@@ -176,5 +187,10 @@ public class Truck
 	
 	public Object[] getParcels() {
 		return parcels.toArray();
+	}
+	
+	public int[][][] getTruck()
+	{
+		return truck;
 	}
 }
