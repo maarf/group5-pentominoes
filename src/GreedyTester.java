@@ -12,5 +12,9 @@ public class GreedyTester
 		
 		Greedy greedy = new Greedy(truck, parcels);		
 		
+		Truck solvedtruck = greedy.Solve();
+		solvedtruck.toString();
+		
+	
 	}
 }
