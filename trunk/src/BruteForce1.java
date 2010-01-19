@@ -20,8 +20,9 @@ public class BruteForce1
     public void randomPicker(int [][] a)
     {
             Random ram = new Random();
-            parcel = a[ram.nextInt(a.length)];
-            aParcel = new Parcel(getParcelX(),getParcelY(),getParcelZ(),getParcelV());
+           // parcel = a[ram.nextInt(a.length)];
+    	parcel = a[2];
+    	aParcel = new Parcel(getParcelX(),getParcelY(),getParcelZ(),getParcelV());
     }
     
 	public int getParcelX()
@@ -68,8 +69,8 @@ public class BruteForce1
 				if(counter>10)
 				{
 					truck.setEmpty();
-					Solve(a);
-				}
+					counter = 0;
+				}	
 				Solve(a);				
 			}
 		}		

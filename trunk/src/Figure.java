@@ -10,31 +10,15 @@ public class Figure
 {
         public static final int P_FIGURE = 1;
        
-        public static final int X_FIGURE = 2;
+        public static final int T_FIGURE = 2;
        
-        public static final int F_FIGURE = 3;
-       
-        public static final int V_FIGURE = 4;
-       
-        public static final int W_FIGURE = 5;
-       
-        public static final int Y_FIGURE = 6;
-       
-        public static final int I_FIGURE = 7;
-       
-        public static final int T_FIGURE = 8;
-       
-        public static final int Z_FIGURE = 9;
-       
-        public static final int U_FIGURE = 10;
-       
-        public static final int N_FIGURE = 11;
-       
-        public static final int L_FIGURE = 12;
+        public static final int L_FIGURE = 3;
        
         private int [] shapeX = new int[5];
        
         private int [] shapeY = new int[5];
+        
+        private int [] shapeZ = new int[5];
        
         private int orientation;
        
@@ -43,6 +27,8 @@ public class Figure
         private int x1;
        
         private int y1;
+        
+        private int z1;
        
         private int x2diff;
        
@@ -80,190 +66,69 @@ public class Figure
                 orientation = 1;
                 x1 = 0;
                 y1 = 0;
+                z1 = 0;
                
                 switch(type)
                 {
                 case P_FIGURE:
                         //maxOrientation = 4;
-                        name = 1;
-                       
-                shapeX[0] = 1;
-                shapeY[0] = 1;
-                shapeX[1] = 0;
-                shapeY[1] = 1;
-                shapeX[2] = 0;
-                shapeY[2] = 2;
-                shapeX[3] = 0;
-                shapeY[3] = 0;
-                shapeX[4] = 1;
-                shapeY[4] = 2;
-                break;
-                case X_FIGURE:
-                        //maxOrientation = 1;
-                        name = 2;
-                       
-                shapeX[0] = 1;
-                shapeY[0] = 1;
-                shapeX[1] = 1;
-                shapeY[1] = 0;
-                shapeX[2] = 1;
-                shapeY[2] = 2;
-                shapeX[3] = 2;
-                shapeY[3] = 1;
-                shapeX[4] = 0;
-                shapeY[4] = 1;
-                        break;
-                       
-                case F_FIGURE:
-                        //maxOrientation = 4;
-                        name = 3;
-                       
-                shapeX[0] = 1;
-                shapeY[0] = 1;
-                shapeX[1] = 1;
-                shapeY[1] = 0;
-                shapeX[2] = 1;
-                shapeY[2] = 2;
-                shapeX[3] = 0;
-                shapeY[3] = 1;
-                shapeX[4] = 2;
-                shapeY[4] = 2;
-                break;
-               
-                case V_FIGURE:
-                        //maxOrientation = 4;
                         name = 4;
                        
                 shapeX[0] = 1;
-                shapeY[0] = 0;
-                shapeX[1] = 2;
-                shapeY[1] = 0;
+                shapeY[0] = 1;
+                shapeZ[0] = 1;
+                shapeX[1] = 0;
+                shapeY[1] = 1;
+                shapeZ[1] = 1;
                 shapeX[2] = 0;
-                shapeY[2] = 0;
+                shapeY[2] = 2;
+                shapeZ[2] = 1;
                 shapeX[3] = 0;
-                shapeY[3] = 1;
-                shapeX[4] = 0;
+                shapeY[3] = 0;
+                shapeZ[3] = 1;
+                shapeX[4] = 1;
                 shapeY[4] = 2;
+                shapeZ[4] = 1;
                 break;
-                case W_FIGURE:
+                case T_FIGURE:
                         //maxOrientation = 4;
                         name = 5;
                        
                 shapeX[0] = 1;
                 shapeY[0] = 1;
+                shapeZ[0] = 1;
                 shapeX[1] = 1;
                 shapeY[1] = 0;
-                shapeX[2] = 2;
-                shapeY[2] = 0;
-                shapeX[3] = 0;
-                shapeY[3] = 1;
-                shapeX[4] = 0;
-                shapeY[4] = 2;
-                break;
-                case Y_FIGURE:
-                        //maxOrientation = 4;
-                        name = 6;
-                       
-                shapeX[0] = 1;
-                shapeY[0] = 1;
-                shapeX[1] = 1;
-                shapeY[1] = 0;
+                shapeZ[1] = 1;
                 shapeX[2] = 1;
                 shapeY[2] = 2;
-                shapeX[3] = 1;
-                shapeY[3] = 3;
-                shapeX[4] = 0;
-                shapeY[4] = 2;
-                break;
-                case I_FIGURE:
-                        //maxOrientation = 2;
-                        name = 7;
-                       
-                shapeX[0] = 0;
-                shapeY[0] = 2;
-                shapeX[1] = 0;
-                shapeY[1] = 0;
-                shapeX[2] = 0;
-                shapeY[2] = 1;
-                shapeX[3] = 0;
-                shapeY[3] = 3;
-                shapeX[4] = 0;
-                shapeY[4] = 4;
-                break;
-                case T_FIGURE:
-                        //maxOrientation = 4;
-                        name = 8;
-                       
-                shapeX[0] = 1;
-                shapeY[0] = 1;
-                shapeX[1] = 1;
-                shapeY[1] = 0;
-                shapeX[2] = 1;
-                shapeY[2] = 2;
+                shapeZ[2] = 1;
                 shapeX[3] = 0;
                 shapeY[3] = 2;
+                shapeZ[3] = 1;
                 shapeX[4] = 2;
                 shapeY[4] = 2;
-                break;
-                case Z_FIGURE:
-                        //maxOrientation = 4;
-                        name = 9;
-                       
-                shapeX[0] = 1;
-                shapeY[0] = 1;
-                shapeX[1] = 1;
-                shapeY[1] = 0;
-                shapeX[2] = 2;
-                shapeY[2] = 0;
-                shapeX[3] = 0;
-                shapeY[3] = 2;
-                shapeX[4] = 1;
-                shapeY[4] = 2;
-                break;
-                case U_FIGURE:
-                        //maxOrientation = 4;
-                        name = 10;
-                       
-                shapeX[0] = 1;
-                shapeY[0] = 0;
-                shapeX[1] = 2;
-                shapeY[1] = 0;
-                shapeX[2] = 2;
-                shapeY[2] = 1;
-                shapeX[3] = 0;
-                shapeY[3] = 0;
-                shapeX[4] = 0;
-                shapeY[4] = 1;
-                break;
-                case N_FIGURE:
-                        //maxOrientation = 4;
-                        name = 11;
-                       
-                shapeX[0] = 2;
-                shapeY[0] = 0;
-                shapeX[1] = 3;
-                shapeY[1] = 0;
-                shapeX[2] = 1;
-                shapeY[2] = 0;
-                shapeX[3] = 1;
-                shapeY[3] = 1;
-                shapeX[4] = 0;
-                shapeY[4] = 1;
+                shapeZ[4] = 1;
                 break;
                 case L_FIGURE:
                         //maxOrientation = 4;
-                        name = 12;
+                        name = 3;
                        
                 shapeX[0] = 2;
                 shapeY[0] = 0;
+                shapeZ[0] = 1;
                 shapeX[1] = 3;
                 shapeY[1] = 0;
+                shapeZ[1] = 1;
                 shapeX[2] = 3;
                 shapeY[2] = 1;
+                shapeZ[2] = 1;
                 shapeX[3] = 1;
                 shapeY[3] = 0;
+                shapeZ[3] = 1;
                 shapeX[4] = 0;
                 shapeY[4] = 0;
+                shapeZ[4] = 1;
                 break;
 
 
@@ -293,6 +158,7 @@ public class Figure
                         {
                                 int x = shapeX[i];
                                 int y = shapeY[i];
+                               
                        
                                 int f = y;
                                 y = -1 * x;
@@ -341,7 +207,26 @@ public class Figure
                                 orientation--;
                         }
         }
-               
+        
+        public void verticalRotation()
+        {
+
+                        for(int i = 0; i<5; i++)
+                        {
+                                int y = shapeY[i];
+                                int z = shapeZ[i];
+                               
+                       
+                                int f = z;
+                                z = y;
+                                y = f;
+                               
+                                shapeZ[i] = z;
+                                shapeY[i] = y; 
+                        }
+
+                
+        }
        
        /**
         * saves the current coordinates of the pentominoe!
@@ -350,6 +235,7 @@ public class Figure
         {
                 x1 = shapeX[0];
                 y1 = shapeY[0];
+                z1 = shapeZ[0];
         }
        
         /**
@@ -450,6 +336,11 @@ public class Figure
                 return shapeY[b];
         }
         
+        public int getZ(int b)
+        {
+        	return shapeZ[b];
+        }
+        
         /**
          * returns the name
          */
@@ -492,6 +383,21 @@ public class Figure
                         }
                 }
                 return maxY - minY + 1;
+        }
+        
+        public int getDepth(){
+            int minZ = Integer.MAX_VALUE;
+            int maxZ = Integer.MIN_VALUE;
+            for (int i = 0; i < 5; i++) {
+                    if (shapeZ[i] < minZ) {
+                            minZ = shapeZ[i];
+                    }
+                    if (shapeZ[i] > maxZ) {
+                            maxZ = shapeZ[i];
+                    }
+            }
+            return maxZ - minZ + 1;
+        	
         }
 
 }
