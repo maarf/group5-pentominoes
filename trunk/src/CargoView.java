@@ -2,7 +2,10 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
@@ -30,39 +33,51 @@ public class CargoView extends JComponent {
 		// Lets draw the truck
 		drawCube(g2, 0.0, 0.0, 0.0, (double)truck.getHeight(), (double)truck.getLength(), (double)truck.getWidth(), Color.lightGray);
 		
-//		int limit = 0;
+		int limit = 0;
 		// Lets draw parcels
 		for (Object aP : truck.getParcels()) {
 			ParcelAtPlace p = (ParcelAtPlace)aP;
 			drawCube(
 					g2,
-					(-((double)truck.getLength())/2 + ((double)p.parcel.getParcelX())/2 + (double)p.x),
-					(-((double)truck.getWidth())/2 + ((double)p.parcel.getParcelY())/2 + (double)p.y),
-					(-((double)truck.getHeight())/2 + ((double)p.parcel.getParcelZ())/2 + (double)p.z),
+					(-((double)truck.getLength())/2 + ((double)p.parcel.getParcelZ())/2 + (double)p.z),
+					(-((double)truck.getWidth())/2 + ((double)p.parcel.getParcelX())/2 + (double)p.x),
+					(-((double)truck.getHeight())/2 + ((double)p.parcel.getParcelY())/2 + (double)p.y),
+					(double)p.parcel.getParcelY() - 0.2,
 					(double)p.parcel.getParcelZ() - 0.2,
 					(double)p.parcel.getParcelX() - 0.2,
-					(double)p.parcel.getParcelY() - 0.2,
-					Color.orange.darker()
+					(p.parcel.getValue() == 3 ? Color.orange.darker() : (p.parcel.getValue() == 4 ? Color.orange.darker().darker() : Color.orange.darker().darker().darker()) )
 					);
-//			limit++;
-//			if (limit > 1) {
-//				break;
-//			}
+			limit++;
+			if (limit > 100) {
+				break;
+			}
 		}
 
+		// Backup
+		// Lets draw parcels
+//		for (Object aP : truck.getParcels()) {
+//			ParcelAtPlace p = (ParcelAtPlace)aP;
+//			drawCube(
+//					g2,
+//					(-((double)truck.getLength())/2 + ((double)p.parcel.getParcelX())/2 + (double)p.x),
+//					(-((double)truck.getWidth())/2 + ((double)p.parcel.getParcelY())/2 + (double)p.y),
+//					(-((double)truck.getHeight())/2 + ((double)p.parcel.getParcelZ())/2 + (double)p.z),
+//					(double)p.parcel.getParcelZ() - 0.2,
+//					(double)p.parcel.getParcelX() - 0.2,
+//					(double)p.parcel.getParcelY() - 0.2,
+//					(p.parcel.getValue() == 3 ? Color.orange.darker() : (p.parcel.getValue() == 4 ? Color.orange.darker().darker() : Color.orange.darker().darker().darker()) )
+//					);
+//		}
+
+		
 		// zero point
 		drawCube(g2, (-((double)truck.getLength())/2 + 0.2/2), (-((double)truck.getWidth())/2 + 0.2/2), (-((double)truck.getHeight())/2 + 0.2/2), 0.2, 0.2, 0.2, Color.black.darker());
+		// x-axis
 		drawCube(g2, (-((double)truck.getLength())/2 + 0.2/2 + 2.0), (-((double)truck.getWidth())/2 + 0.2/2), (-((double)truck.getHeight())/2 + 0.2/2), 0.2, 0.2, 0.2, Color.red.darker());
+		// y-axis
 		drawCube(g2, (-((double)truck.getLength())/2 + 0.2/2), (-((double)truck.getWidth())/2 + 0.2/2 + 2.0), (-((double)truck.getHeight())/2 + 0.2/2), 0.2, 0.2, 0.2, Color.green.darker());
+		// z-axis
 		drawCube(g2, (-((double)truck.getLength())/2 + 0.2/2), (-((double)truck.getWidth())/2 + 0.2/2), (-((double)truck.getHeight())/2 + 0.2/2 + 2.0), 0.2, 0.2, 0.2, Color.blue.darker());
-
-//		drawCube(g2, (-165.0/2 + 10.0/2), (-25.0/2 + 10.0/2), (-40.0/2 + 20.0/2), 20.0-1, 10.0-1, 10.0-1, Color.orange.darker());
-//		drawCube(g2, (-165.0/2 + 10.0/2), (-25.0/2 + 10.0/2) + 10, (-40.0/2 + 20.0/2), 20.0-1, 10.0-1, 10.0-1, Color.orange.darker());
-//		
-//		drawCube(g2, (-165.0/2 + 15.0/2) + 10, (-25.0/2 + 10.0/2), (-40.0/2 + 20.0/2), 20.0-1, 15.0-1, 10.0-1, Color.orange.darker().darker());
-//
-//		drawCube(g2, (-165.0/2 + 15.0/2) + 10, (-25.0/2 + 15.0/2) + 10, (-40.0/2 + 15.0/2), 15.0-1, 15.0-1, 15.0-1, Color.orange.darker().darker().darker());
-
 	}
 	
 	private void drawCube(Graphics2D g2, double startX, double startY, double startZ, double height, double width, double depth, Color color) {
@@ -177,6 +192,29 @@ public class CargoView extends JComponent {
 		g2.draw(new Line2D.Double(bottom3.getX(), bottom3.getY(), top3.getX(), top3.getY()));
 		
 	}
-	
+
+	private boolean mouseDown = false;
+	final private Point mouseLocation = new Point();
+	private class ViewMouseListener implements MouseListener {
+
+		public void mouseClicked(MouseEvent e) {
+		}
+
+		public void mouseEntered(MouseEvent e) {
+		}
+
+		public void mouseExited(MouseEvent e) {
+		}
+
+		public void mousePressed(MouseEvent e) {
+			mouseDown = true;
+			mouseLocation.setLocation(e.getXOnScreen(), e.getYOnScreen());
+		}
+
+		public void mouseReleased(MouseEvent e) {
+			mouseDown = false;
+		}
+		
+	}
 	
 }
