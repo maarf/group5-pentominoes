@@ -45,6 +45,10 @@ public class Tester
 		while (true) {
 			if (cargoView.autoRotate) {
 				cargoView.skew += 0.007;
+				if (cargoView.angle > Math.PI / 3 + 0.01) {
+					cargoView.angle -= (cargoView.angle - Math.PI / 3) / 10;
+					System.out.println("angling");
+				}
 				cargoView.repaint();
 			}
 			Thread.sleep(1000/30);
