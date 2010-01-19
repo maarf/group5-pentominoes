@@ -21,6 +21,8 @@ public class CargoView extends JComponent implements MouseMotionListener, MouseL
 	public double skew;
 	public boolean autoRotate = true;
 	public double zoom;
+	public double angle = Math.PI / 3;
+
 	
 	public Truck truck;
 	
@@ -88,7 +90,6 @@ public class CargoView extends JComponent implements MouseMotionListener, MouseL
 	
 	private void drawCube(Graphics2D g2, double startX, double startY, double startZ, double height, double width, double depth, Color color) {
 		
-		double angle = Math.PI / 3;
 		
 		double centerX = (double)getWidth() / 2;
 		double centerY = (double)getHeight() / 2;
@@ -201,7 +202,14 @@ public class CargoView extends JComponent implements MouseMotionListener, MouseL
 
 	private Point mouseLocation = new Point();
 	public void mouseDragged(MouseEvent e) {
-		skew = skew - (mouseLocation.getX() - e.getXOnScreen()) / 1000;
+		skew = skew - (mouseLocation.getX() - e.getXOnScreen()) / 300;
+		if ((angle - (e.getYOnScreen() - mouseLocation.getY()) / 300) < Math.PI / 3) {
+			angle = Math.PI / 3;
+		} else if (angle - (e.getYOnScreen() - mouseLocation.getY()) / 300 > Math.PI / 2) {
+			angle = Math.PI / 2;
+		} else {
+			angle = angle - (e.getYOnScreen() - mouseLocation.getY()) / 300;			
+		}
 		repaint();
 		mouseLocation.setLocation(e.getXOnScreen(), e.getYOnScreen());
 	}
