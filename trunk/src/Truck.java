@@ -201,5 +201,15 @@ public class Truck
 	public void setParcels(ArrayList<ParcelAtPlace> a) {
 		parcels = a;
 	}
+	
+	public void reset() {
+		truck = new int[height][length][width];
+		counter = 0;
+		currX = 0;
+		currY = 0;
+		currZ = 0;
+		
+		parcels = new ArrayList<ParcelAtPlace>();
+	}
 
 }
