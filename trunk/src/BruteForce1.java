@@ -20,11 +20,11 @@ public class BruteForce1
     public void randomPicker(int [][] a)
     {
             Random ram = new Random();
-           // parcel = a[ram.nextInt(a.length)];
-    	parcel = a[2];
-    	aParcel = new Parcel(getParcelX(),getParcelY(),getParcelZ(),getParcelV());
+            parcel = a[ram.nextInt(a.length)];
+    	aParcel = new Parcel(parcel[0],parcel[1],parcel[2],parcel[3]);
+    	
     }
-    
+ 
 	public int getParcelX()
 	{
 		return parcel[0];
@@ -51,27 +51,39 @@ public class BruteForce1
 	{
 		randomPicker(a);
 		
+		System.out.println("parcel " + aParcel.getValue()); 
+		System.out.println("fits " + truck.fits(aParcel));
+		System.out.println("full " + truck.isFull());
+		
 		if(truck.isFull())
 		{
 			reset();//just prints for the moment
 		}
 		else
 		{
-			truck.NextBlank();
+			
+			System.out.println("fits 2 " + truck.fits(aParcel));
+			System.out.println("currX " + truck.getCurrX());
+			System.out.println("currY " + truck.getCurrY());
+			System.out.println("currZ " + truck.getCurrZ());
 			if(truck.fits(aParcel))
 			{
 				truck.setParcel(aParcel);
+				counter = 0;
+				truck.NextBlank();
+				System.out.println("set");
 				Solve(a);
 			}
 			else
 			{
 				counter++;
-				if(counter>10)
+				System.out.println("counter " + counter);
+				if(counter == 10)
 				{
 					truck.setEmpty();
 					counter = 0;
 				}	
-				Solve(a);				
+				//Solve(a);				
 			}
 		}		
 	}
