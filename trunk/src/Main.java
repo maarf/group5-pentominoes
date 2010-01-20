@@ -144,7 +144,6 @@ public class Main
 		algo1Radio.addActionListener(bigListener);
 		JRadioButton algo2Radio = new JRadioButton("Greedy algorithm");
 		algo2Radio.addActionListener(bigListener);
-		algo2Radio.setEnabled(false);
 		JRadioButton algo3Radio = new JRadioButton("Divide and conquer algorithm");
 		algo3Radio.addActionListener(bigListener);
 		
@@ -275,6 +274,16 @@ class BigListener implements ActionListener {
 					BruteForce1 solver = new BruteForce1(testTruck);
 					solver.Solve(parcels);
 					
+				} else if (algo == 1) {
+					Parcel parcelA = new Parcel(parcels[0][0],parcels[0][1],parcels[0][2],parcels[0][3],parcels[0][4]);
+					Parcel parcelB = new Parcel(parcels[1][0],parcels[1][1],parcels[1][2],parcels[1][3],parcels[1][4]);
+					Parcel parcelC = new Parcel(parcels[2][0],parcels[2][1],parcels[2][2],parcels[2][3],parcels[2][4]);
+					Parcel[] theParcels = {parcelC, parcelB, parcelA};
+					
+					Greedy greedy = new Greedy(testTruck, theParcels);		
+					Truck solvedtruck = greedy.Solve();
+					testTruck.setParcels(solvedtruck.getRawParcels());
+					
 				} else if (algo == 2) {
 					// Divide and conquer goes here.
 					Dac solver = new Dac(testTruck, parcels);
@@ -303,6 +312,7 @@ class BigListener implements ActionListener {
 			statsLabel[5].setText("Parcel C count: " + maxTruck.getCBoxes());
 			
 			truck.setParcels(maxTruck.getRawParcels());
+			view.repaint();
 			
 		} else if (e.getActionCommand().equals("Bruteforce algorithm")) {
 			// Bruteforce radio button was selected.
