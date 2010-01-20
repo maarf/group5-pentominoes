@@ -23,7 +23,7 @@ public class Greedy
 		
 		System.out.println("START");
 		int sets = 0;
-		int nodes = 0;
+	
 			for(int i = greedyParcels.length - 1; i >= 0; i--)
 			//for(int i = 0; i < greedyParcels.length; i++)
 				{
@@ -35,7 +35,7 @@ public class Greedy
 						sets++;
 						System.out.println("   Sets: " + greedyParcels[i].getValue() + " " + sets);
 	
-						nodes++;				
+					
 					}
 				}
 		
