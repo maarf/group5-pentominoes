@@ -52,7 +52,6 @@ public class RandomSolver
 		
 		System.out.println("parcel " + aParcel.getValue()); 
 		System.out.println("full " + truck.isFull());
-		System.out.println("still " + truck.stillFits());
 		
 		if(truck.isFull())
 		{

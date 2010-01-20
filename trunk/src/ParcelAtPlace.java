@@ -1,6 +1,11 @@
 
-/*
+/**
  * Represents one parcel at defined point in the truck.
+ * 
+ * 20/01/2010
+ * 
+ * @author Martins Spilners
+ * 
  */
 public class ParcelAtPlace {
 	public Parcel parcel;
