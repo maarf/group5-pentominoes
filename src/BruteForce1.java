@@ -23,7 +23,7 @@ public class BruteForce1
     {
             Random ram = new Random();
             parcel = a[ram.nextInt(a.length)];
-    	aParcel = new Parcel(parcel[0],parcel[1],parcel[2],parcel[3]);
+    	aParcel = new Parcel(parcel[0],parcel[1],parcel[2],parcel[3],parcel[4]);
     	
     }
 	

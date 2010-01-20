@@ -53,30 +53,13 @@ public class CargoView extends JComponent implements MouseMotionListener, MouseL
 					(double)p.parcel.getParcelY() - 0.2,
 					(double)p.parcel.getParcelZ() - 0.2,
 					(double)p.parcel.getParcelX() - 0.2,
-					(p.parcel.getValue() == 3 ? Color.orange.darker() : (p.parcel.getValue() == 4 ? Color.orange.darker().darker() : Color.orange.darker().darker().darker()) )
+					(p.parcel.getId() == 0 ? Color.orange.darker() : (p.parcel.getId() == 1 ? Color.orange.darker().darker() : Color.orange.darker().darker().darker()) )
 					);
 			limit++;
 			if (limit > 100) {
 				break;
 			}
 		}
-
-		// Backup
-		// Lets draw parcels
-//		for (Object aP : truck.getParcels()) {
-//			ParcelAtPlace p = (ParcelAtPlace)aP;
-//			drawCube(
-//					g2,
-//					(-((double)truck.getLength())/2 + ((double)p.parcel.getParcelX())/2 + (double)p.x),
-//					(-((double)truck.getWidth())/2 + ((double)p.parcel.getParcelY())/2 + (double)p.y),
-//					(-((double)truck.getHeight())/2 + ((double)p.parcel.getParcelZ())/2 + (double)p.z),
-//					(double)p.parcel.getParcelZ() - 0.2,
-//					(double)p.parcel.getParcelX() - 0.2,
-//					(double)p.parcel.getParcelY() - 0.2,
-//					(p.parcel.getValue() == 3 ? Color.orange.darker() : (p.parcel.getValue() == 4 ? Color.orange.darker().darker() : Color.orange.darker().darker().darker()) )
-//					);
-//		}
-
 		
 		// zero point
 		drawCube(g2, (-((double)truck.getLength())/2 + 0.2/2), (-((double)truck.getWidth())/2 + 0.2/2), (-((double)truck.getHeight())/2 + 0.2/2), 0.2, 0.2, 0.2, Color.black.darker());
