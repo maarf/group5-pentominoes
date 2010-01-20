@@ -80,6 +80,8 @@ public class Main
 	}
 	
 	static private JPanel createLeftPanel(Truck truck, CargoView cargoView) {
+		BigListener bigListener = new BigListener(truck, cargoView, parcels);
+		
 		/* All the options */
 		JPanel optionsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
@@ -135,10 +137,13 @@ public class Main
 		JPanel algoRadiosPanel = new JPanel();
 		algoRadiosPanel.setLayout(new BoxLayout(algoRadiosPanel, BoxLayout.Y_AXIS));
 		
-		JRadioButton algo1Radio = new JRadioButton("Random algorithm", true);
+		JRadioButton algo1Radio = new JRadioButton("Bruteforce algorithm", true);
+		algo1Radio.addActionListener(bigListener);
 		JRadioButton algo2Radio = new JRadioButton("Greedy algorithm");
+		algo2Radio.addActionListener(bigListener);
 		algo2Radio.setEnabled(false);
-		JRadioButton algo3Radio = new JRadioButton("Divide and conquere algorithm");
+		JRadioButton algo3Radio = new JRadioButton("Divide and conquer algorithm");
+		algo3Radio.addActionListener(bigListener);
 		
 		ButtonGroup algoRadios = new ButtonGroup();
 		algoRadios.add(algo1Radio);
@@ -156,7 +161,7 @@ public class Main
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
 		JButton theButton = new JButton("Draw!");
-		theButton.addActionListener(new BigListener(truck, cargoView, parcels));
+		theButton.addActionListener(bigListener);
 		buttonPanel.add(theButton);
 		optionsPanel.add(buttonPanel);
 				
@@ -167,6 +172,7 @@ public class Main
 		
 		JPanel autoRotatePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 10));
 		JCheckBox autoRotateCheckbox = new JCheckBox("Rotate automatically", true);
+		autoRotateCheckbox.addActionListener(bigListener);
 		autoRotatePanel.add(autoRotateCheckbox);
 		otherPanel.add(autoRotatePanel);
 		optionsPanel.add(otherPanel);
@@ -192,6 +198,7 @@ class BigListener implements ActionListener {
 	private Truck truck;
 	private CargoView view;
 	private int[][] parcels;
+	private int algo = 0;
 	
 	public BigListener(Truck aTruck, CargoView aView, int[][] someParcels) {
 		truck = aTruck;
@@ -200,12 +207,26 @@ class BigListener implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		truck.reset();
-		Dac solver = new Dac(truck,parcels);
-		solver.solver();
-		//solver.getTruckValue();
-		
-		truck.setParcels(solver.getBigTruck());
+		if (e.getActionCommand().equals("Draw!")) {
+			truck.reset();
+			if (algo == 0) {
+				BruteForce1 solver = new BruteForce1(truck);
+				solver.Solve(parcels);
+			} else if (algo == 2) {
+				Dac solver = new Dac(truck,parcels);
+				solver.solver();
+				
+				truck.setParcels(solver.getBigTruck());
+			}
+		} else if (e.getActionCommand().equals("Bruteforce algorithm")) {
+			algo = 0;
+		} else if (e.getActionCommand().equals("Greedy algorithm")) {
+			algo = 1;
+		} else if (e.getActionCommand().equals("Divide and conquer algorithm")) {
+			algo = 2;
+		} else if (e.getActionCommand().equals("Rotate automatically")) {
+			view.autoRotate = !view.autoRotate;
+		}
+			
 	}
-	
 }
