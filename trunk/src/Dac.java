@@ -15,6 +15,7 @@ public class Dac
 	private int [][][] smallTruck;
 	private int [][][] newTruck;
 	private int currX = 0, currY = 0, currZ = 0;
+	private int value, a, b, c;
 	
 	
 	public Dac(Truck aTruck, int [][] a)
@@ -29,6 +30,10 @@ public class Dac
 		bTruck = new Truck(truck.getHeight(),newLength, truck.getWidth());
 		BruteForce1 solver = new BruteForce1(bTruck);
 		solver.Solve(parcels);
+		value = solver.getValue();
+		a = solver.getBoxA();
+		b = solver.getBoxB();
+		c = solver.getBoxC();
 		smallTruck = bTruck.getTruck();
 		newTruck = new int[truck.getHeight()][truck.getLength()][truck.getWidth()];
 		for(int s = 0; s<11; s++)
@@ -38,7 +43,7 @@ public class Dac
 			{
 				for(int j = 0; j < newTruck[i].length; j++)
 				{
-					for(int k = 0; k < newTruck[i][j].length; k++)//msschn niet goed
+					for(int k = 0; k < newTruck[i][j].length; k++)
 					{
 						if(!isfilled(i,j,k)) 
 						{
@@ -56,11 +61,11 @@ public class Dac
 	
 	public void concatenate()
 	{
-		for(int i = 0; i < smallTruck.length-1; i++)
+		for(int i = 0; i < smallTruck.length; i++)
 		{
-			for(int j = 0; j < smallTruck[i].length-1; j++)
+			for(int j = 0; j < smallTruck[i].length; j++)
 			{
-				for(int k = 0; k < smallTruck[i][j].length-1; k++)
+				for(int k = 0; k < smallTruck[i][j].length; k++)
 				{
 					newTruck[currY+i][currZ+j][currX+k] = smallTruck [i][j][k];				
 				}
@@ -105,5 +110,25 @@ public class Dac
 		}
 		
 		return parcelsAtPlace;
+	}
+	
+	public int getA()
+	{
+		return a * 11;
+	}
+	
+	public int getB()
+	{
+		return b * 11;
+	}
+	
+	public int getC()
+	{
+		return c * 11;
+	}
+	
+	public int getV()
+	{
+		return value * 11;
 	}
 }
