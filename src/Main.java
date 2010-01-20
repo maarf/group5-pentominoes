@@ -4,11 +4,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
 import java.util.Date;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -22,12 +19,12 @@ import javax.swing.JTextField;
 
 /**
  * The Main class of the project.
- * Sets up the whole game
+ * Sets up the frame, panels, truck and cargo view
  * 
- * 09/12/09
+ * 20/01/2010
  * 
- * @author Martins Spilners, Roland Gerits, Leoni Haagmans, José Sue Smith, Rob van den Oever, Seyit Ayas
- * @version 0.1
+ * @author Martins Spilners, Roland Gerits, Leoni Haagmans, José Sue Smith, Rob van den Oever
+ * @version 0.2
  */
 
 public class Main
@@ -80,6 +77,12 @@ public class Main
 		}
 	}
 	
+	/**
+	 * Returns panel that holds all the left side interface elements
+	 * @param truck reference to Truck object
+	 * @param cargoView reference to CargoView object
+	 * @return JPanel that holds all other panels and components
+	 */
 	static private JPanel createLeftPanel(Truck truck, CargoView cargoView) {
 		BigListener bigListener = new BigListener(truck, cargoView, parcels);
 		
@@ -140,7 +143,7 @@ public class Main
 		JPanel algoRadiosPanel = new JPanel();
 		algoRadiosPanel.setLayout(new BoxLayout(algoRadiosPanel, BoxLayout.Y_AXIS));
 		
-		JRadioButton algo1Radio = new JRadioButton("Bruteforce algorithm", true);
+		JRadioButton algo1Radio = new JRadioButton("Random algorithm", true);
 		algo1Radio.addActionListener(bigListener);
 		JRadioButton algo2Radio = new JRadioButton("Greedy algorithm");
 		algo2Radio.addActionListener(bigListener);
@@ -210,18 +213,33 @@ public class Main
 		return optionsPanel;
 	}
 
-
-	
+	/**
+	 * Parcel A default state
+	 */
 	private final static int aX = 2, aY = 2, aZ = 4, aV = 3, aI = 0;
+	
+	/**
+	 * Parcel B default state
+	 */
 	private final static int bX = 2, bY = 3, bZ = 4, bV = 4, bI = 1;
+	
+	/**
+	 * Parcel C default state
+	 */
 	private final static int cX = 3, cY = 3, cZ = 3, cV = 5, cI = 2;
 	
+	/**
+	 * All parcels in one array
+	 */
 	private static int[][] parcels = {	{aX,aY,aZ,aV,aI},
 										{bX,bY,bZ,bV,bI},
 										{cX,cY,cZ,cV,cI} };
 	
 }
 
+/**
+ * ActionListener that listens to all actions from left side interface elements  
+ */
 class BigListener implements ActionListener {
 	
 	private Truck truck;
@@ -232,12 +250,21 @@ class BigListener implements ActionListener {
 	public JTextField textFields[];
 	public JLabel statsLabel[];
 	
+	/**
+	 * Constructor for the listener
+	 * @param aTruck reference to the Truck object
+	 * @param aView reference to the CargoView object
+	 * @param someParcels parcels used by the algorithms
+	 */
 	public BigListener(Truck aTruck, CargoView aView, int[][] someParcels) {
 		truck = aTruck;
 		view = aView;
 		parcels = someParcels;
 	}
 	
+	/**
+	 * Redirects action calls to needed action
+	 */
 	public void actionPerformed(ActionEvent e) {
 		
 		if (e.getActionCommand().equals("Draw!")) {
@@ -263,6 +290,7 @@ class BigListener implements ActionListener {
 			
 			starttime = new Date();
 			
+			// how many times will the algorithm be called?
 			int iterations = 10;
 			
 			for (int i = 0; i < iterations; i++) {
@@ -279,11 +307,11 @@ class BigListener implements ActionListener {
 					Parcel parcelB = new Parcel(parcels[1][0],parcels[1][1],parcels[1][2],parcels[1][3],parcels[1][4]);
 					Parcel parcelC = new Parcel(parcels[2][0],parcels[2][1],parcels[2][2],parcels[2][3],parcels[2][4]);
 					Parcel[] theParcels = {parcelC, parcelB, parcelA};
-					
+
 					Greedy greedy = new Greedy(testTruck, theParcels);		
 					Truck solvedtruck = greedy.Solve();
 					testTruck.setParcels(solvedtruck.getRawParcels());
-					
+										
 				} else if (algo == 2) {
 					// Divide and conquer goes here.
 					Dac solver = new Dac(testTruck, parcels);
@@ -293,17 +321,20 @@ class BigListener implements ActionListener {
 				
 				newScore = testTruck.getValue();
 
+				// check if the new solution is more valuable
 				if(newScore > highest || highest == -1) {
 					highest = newScore;
 					maxTruck = testTruck;
 				}
 				
+				// calculates the average value of the solver
 				average = ((average * i) + testTruck.getValue()) / (i + 1);
 			}
 					
 			endtime = new Date();	
 			long timespan = endtime.getTime() - starttime.getTime();
 			
+			// put stats on labels
 			statsLabel[0].setText("Runs: " + iterations);
 			statsLabel[1].setText("Time it took: " + timespan + "ms");
 			statsLabel[2].setText("Value of truck: " + maxTruck.getValue());
@@ -311,10 +342,11 @@ class BigListener implements ActionListener {
 			statsLabel[4].setText("Parcel B count: " + maxTruck.getBBoxes());
 			statsLabel[5].setText("Parcel C count: " + maxTruck.getCBoxes());
 			
+			// draw the truck
 			truck.setParcels(maxTruck.getRawParcels());
 			view.repaint();
 			
-		} else if (e.getActionCommand().equals("Bruteforce algorithm")) {
+		} else if (e.getActionCommand().equals("Random algorithm")) {
 			// Bruteforce radio button was selected.
 			algo = 0;
 			

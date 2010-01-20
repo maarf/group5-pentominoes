@@ -14,27 +14,59 @@ import java.awt.geom.Rectangle2D;
 
 import javax.swing.JComponent;
 
-
+/**
+ * Draws isometric truck with parcels in it
+ * 
+ * 20/01/2010
+ * 
+ * @author Martins Spilners
+ * @version 0.1
+ */
 public class CargoView extends JComponent implements MouseMotionListener, MouseListener {
 
 	private static final long serialVersionUID = -8546231042854359675L;
+	
+	/**
+	 * The angle of the rotaion in radians
+	 */
 	public double skew;
+	
+	/**
+	 * Should it rotate automatically
+	 */
 	public boolean autoRotate = true;
+	
+	/**
+	 * Zoom coefficient of the truck and parcels
+	 */
 	public double zoom;
+	
+	/**
+	 * Angle in which to translate points to isometric perspective 
+	 */
 	public double angle = Math.PI / 3;
 
-	
+	/**
+	 * Reference to truck
+	 */
 	public Truck truck;
 	
+	/**
+	 * Constructs cargo view
+	 */
 	public CargoView() {
 		addMouseListener(this);
 		addMouseMotionListener(this);
 	}
 	
+	/**
+	 * Paints truck and parcels in isometric perspective
+	 */
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);		
 		
+		// Lets paint background
 		g2.setColor(getBackground());
 		g2.fill(new Rectangle2D.Double(0, 0, getWidth(), getHeight()));
 		
@@ -71,13 +103,25 @@ public class CargoView extends JComponent implements MouseMotionListener, MouseL
 		drawCube(g2, (-((double)truck.getLength())/2 + 0.2/2), (-((double)truck.getWidth())/2 + 0.2/2), (-((double)truck.getHeight())/2 + 0.2/2 + 2.0), 0.2, 0.2, 0.2, Color.blue.darker());
 	}
 	
+	/**
+	 * Draws a box in 3d isometric space
+	 * @param g2 reference to graphics context
+	 * @param startX boxe's X coordinate
+	 * @param startY boxe's Y coordiante
+	 * @param startZ boxe's Z coordiante
+	 * @param height height of the box
+	 * @param width width of the box
+	 * @param depth depth of the box
+	 * @param color color of the box
+	 */
 	private void drawCube(Graphics2D g2, double startX, double startY, double startZ, double height, double width, double depth, Color color) {
 		
-		
+		// calculate center of the view
 		double centerX = (double)getWidth() / 2;
 		double centerY = (double)getHeight() / 2;
 		Point2D center = new Point2D.Double(centerX, centerY);
 		
+		// untranslated points in 2d space
 		Point2D points[] = {
 				new Point2D.Double(centerX + (startX - (width / 2)) * zoom, centerY + (startY - (depth / 2)) * zoom),
 				new Point2D.Double(centerX + (startX - (width / 2)) * zoom, centerY + (startY + (depth / 2)) * zoom),
@@ -85,6 +129,7 @@ public class CargoView extends JComponent implements MouseMotionListener, MouseL
 				new Point2D.Double(centerX + (startX + (width / 2)) * zoom, centerY + (startY - (depth / 2)) * zoom)
 		};
 
+		// translate points to isometric cordinates
 		Point2D translatedPoints[] = new Point2D[4];
 		for (int i = 0; i < points.length; i++) {
 			double diffX = points[i].getX() - center.getX();
@@ -96,6 +141,7 @@ public class CargoView extends JComponent implements MouseMotionListener, MouseL
 			translatedPoints[i] = new Point2D.Double(newX, newY);
 		}
 		
+		// create the bottom and top points of the box
 		Point2D bottom0 = new Point2D.Double(translatedPoints[0].getX(), translatedPoints[0].getY() - startZ * zoom + (height * 0.5 * zoom));
 		Point2D bottom1 = new Point2D.Double(translatedPoints[1].getX(), translatedPoints[1].getY() - startZ * zoom + (height * 0.5 * zoom));
 		Point2D bottom2 = new Point2D.Double(translatedPoints[2].getX(), translatedPoints[2].getY() - startZ * zoom + (height * 0.5 * zoom));
@@ -105,12 +151,11 @@ public class CargoView extends JComponent implements MouseMotionListener, MouseL
 		Point2D top2 = new Point2D.Double(bottom2.getX(), bottom2.getY() - height * zoom);
 		Point2D top3 = new Point2D.Double(bottom3.getX(), bottom3.getY() - height * zoom);
 
-		
-
-		
+		// DRAW THE SHAPES
 		
 		g2.setColor(color);
 
+		// bottom side
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
 		
 		GeneralPath shape1 = new GeneralPath();
@@ -121,6 +166,7 @@ public class CargoView extends JComponent implements MouseMotionListener, MouseL
 		shape1.lineTo(bottom0.getX(), bottom0.getY());
 		g2.fill(shape1);
 
+		// side sides
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.2f));
 		
 		GeneralPath shape3 = new GeneralPath();
@@ -155,6 +201,7 @@ public class CargoView extends JComponent implements MouseMotionListener, MouseL
 		shape6.lineTo(bottom3.getX(), bottom3.getY());
 		g2.fill(shape6);
 		
+		// top side
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.1f));
 		
 		GeneralPath shape2 = new GeneralPath();
@@ -165,7 +212,8 @@ public class CargoView extends JComponent implements MouseMotionListener, MouseL
 		shape2.lineTo(top0.getX(), top0.getY());
 		g2.fill(shape2);
 		
-
+		// DRAW THE LINES
+		
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
 		
 		g2.draw(new Line2D.Double(bottom0.getX(), bottom0.getY(), bottom1.getX(), bottom1.getY()));
@@ -182,8 +230,15 @@ public class CargoView extends JComponent implements MouseMotionListener, MouseL
 		g2.draw(new Line2D.Double(bottom3.getX(), bottom3.getY(), top3.getX(), top3.getY()));
 		
 	}
-
+	
+	/**
+	 * location of mouse once clicked or dragged
+	 */
 	private Point mouseLocation = new Point();
+	
+	/**
+	 * Listens to mouseDragged actions and rotats the view
+	 */
 	public void mouseDragged(MouseEvent e) {
 		skew = skew - (mouseLocation.getX() - e.getXOnScreen()) / 300;
 		if ((angle - (e.getYOnScreen() - mouseLocation.getY()) / 300) < Math.PI / 3) {
@@ -209,13 +264,23 @@ public class CargoView extends JComponent implements MouseMotionListener, MouseL
 	public void mouseExited(MouseEvent e) {
 	}
 
+	/**
+	 * Keeps note whether rotation was on when started to drag
+	 */
 	private boolean wasAutoRotateOn;
+	
+	/**
+	 * Disables autoRotate and sets initial location of mouse
+	 */
 	public void mousePressed(MouseEvent e) {
 		wasAutoRotateOn = autoRotate;
 		autoRotate = false;
 		mouseLocation.setLocation(e.getXOnScreen(), e.getYOnScreen());
 	}
 
+	/**
+	 * Enables autoRotate if needed
+	 */
 	public void mouseReleased(MouseEvent e) {
 		autoRotate = wasAutoRotateOn;
 	}
