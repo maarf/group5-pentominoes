@@ -5,7 +5,7 @@ public class Truck
 {
 	private int height, length, width;
 	private int [][][] truck;
-	private int counter = 0;
+	private int counter = 0, count = 0;
 	private int currX = 0, currY = 0, currZ = 0;
 
 	
@@ -74,7 +74,7 @@ public class Truck
 	
 	public boolean fits(Parcel bParcel)
 	{
-		if(width-currX>=bParcel.getParcelX() && height-currY>=bParcel.getParcelY() && length-currZ>=bParcel.getParcelZ())
+		if(width-currX-1>=bParcel.getParcelX() && height-currY-1>=bParcel.getParcelY() && length-currZ-1>=bParcel.getParcelZ() && !isEmpty(bParcel))
 		{
 			return true;
 		}
@@ -83,21 +83,42 @@ public class Truck
 	
 	public boolean fits(Figure a)
 	{
-		if(width-1-currX>=a.getWidth() && height-1-currY>=a.getHeight() && length-1-currZ>a.getDepth())
+		if(width-1-currX>=a.getWidth() && height-1-currY>=a.getHeight() && length-1-currZ>a.getDepth() )
 		{
 			return true;
 		}
 		return false;
 	}
 	
+	public boolean isEmpty(Parcel a)
+	{
+		for (int i = 0; i<a.getParcelY();i++)
+		{
+			for(int j = 0; j<a.getParcelZ(); j++)
+			{
+				for(int k = 0; k<a.getParcelX(); k++)
+				{
+					if(	truck[currY+i][currZ+j][currX+k] == 0)
+					{
+						count++;
+					}
+				}
+			}
+		}
+		if(count>1)
+		{
+			return false;
+		}
+		return true;
+	}
 	
 	public void NextBlank()
 	{
-		for(int i = 0; i < truck.length -1; i++)
+		for(int i = 0; i < truck.length-1; i++)
 		{
 			for(int j = 0; j < truck[i].length-1; j++)
 			{
-				for(int k = 0; k < truck[i][j].length-1; k++)//msschn niet goed
+				for(int k = 0; k < truck[i][j].length-1; k++)
 				{
 					if(!isfilled(i,j,k)) 
 					{

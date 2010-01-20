@@ -12,6 +12,7 @@ public class BruteForce1
 	private int [] parcel;
 	private int value;
 	private int boxA = 0, boxB = 0, boxC = 0;
+	private int counter;
 	
 	public BruteForce1(Truck atruck)
 	{
@@ -25,26 +26,6 @@ public class BruteForce1
     	aParcel = new Parcel(parcel[0],parcel[1],parcel[2],parcel[3]);
     	
     }
- 
-	public int getParcelX()
-	{
-		return parcel[0];
-	}
-	
-	public int getParcelY()
-	{
-		return parcel[1];
-	}
-	
-	public int getParcelZ()
-	{
-		return parcel[2];
-	}
-	
-	public int getParcelV()
-	{
-		return parcel[3];
-	}
 	
 	private int someCounter = 0;
 	
@@ -67,7 +48,7 @@ public class BruteForce1
 		
 		if(truck.isFull())
 		{
-			reset();//just prints for the moment
+			return;
 		}
 		else
 		{
@@ -99,15 +80,11 @@ public class BruteForce1
 			}
 			else
 			{
-				/*counter++;
-				System.out.println("counter " + counter);
-				if(counter == 10)
-				{
-					truck.setEmpty();
-					counter = 0;
-				}	*/
+
+			
 				truck.setEmpty();
 				truck.NextBlank();
+			
 				Solve(a);				
 			}
 		}		
@@ -134,6 +111,11 @@ public class BruteForce1
 	public int getBoxC()
 	{
 		return boxC;
+	}
+	
+	public int Nodes()
+	{
+		return someCounter;
 	}
 }
 

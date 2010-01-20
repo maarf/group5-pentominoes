@@ -8,7 +8,7 @@ public class Tester
 	public static void main(String[]args) throws InterruptedException
 	{
 		
-		Truck truck = new Truck(8, 33, 5);// 4 5 8
+		Truck truck = new Truck(8, 3, 5);// 4 5 8
 
 		//Parcel a = new Parcel(7,7,7,5);
 		//System.out.println(truck.fits(a));
@@ -24,6 +24,7 @@ public class Tester
 		System.out.println("Parcels A: " + solver.getBoxA());
 		System.out.println("Parcels B: " + solver.getBoxB());
 		System.out.println("Parcels C: " + solver.getBoxC());
+		System.out.println("Nodes: " + solver.Nodes());
 		for (Object o : truck.getParcels()) {
 			ParcelAtPlace p = (ParcelAtPlace)o;
 			System.out.println("x: " + p.x + " y: " + p.y + " z: " + p.z + " w:" + p.parcel.getParcelX() + " h: " + p.parcel.getParcelY() + " d: " + p.parcel.getParcelZ());
