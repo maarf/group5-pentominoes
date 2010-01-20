@@ -205,10 +205,18 @@ public class Truck {
         return width;
     }
 
+    /**
+     * Returns array of ParcelAtPlace
+     * @return array of ParcelAtPlace
+     */
     public Object[] getParcels() {
         return parcels.toArray();
     }
 
+    /**
+     * Returns ArrayList of ParcelAtPlace
+     * @return ArrayList of ParcelAtPlace
+     */
     public ArrayList<ParcelAtPlace> getRawParcels() {
         return parcels;
     }
@@ -228,7 +236,10 @@ public class Truck {
     public void setParcels(ArrayList<ParcelAtPlace> a) {
         parcels = a;
     }
-
+    
+    /**
+     * Rmove all the parcels from the truck so it can be reused
+     */
     public void reset() {
         truck = new int[height][length][width];
         counter = 0;
@@ -239,7 +250,10 @@ public class Truck {
         parcels = new ArrayList<ParcelAtPlace>();
     }
 
-
+    /**
+     * Calculates the value of the truck's parcels
+     * @return the value of the parcels
+     */
     public int getValue() {
         int value = 0;
         for (ParcelAtPlace p : parcels) {
@@ -248,6 +262,11 @@ public class Truck {
         return value;
     }
 
+    /**
+     * Returns count of specified parcel
+     * @param anId the ID of the parcel
+     * @return the count of the parcel in the truck
+     */
     public int getBoxesById(int anId) {
         int count = 0;
         for (ParcelAtPlace p : parcels) {
@@ -258,14 +277,26 @@ public class Truck {
         return count;
     }
 
+    /**
+     * Returns count of parcel A
+     * @return count of parcel A
+     */
     public int getABoxes() {
         return getBoxesById(0);
     }
 
+    /**
+     * Returns count of parcel B
+     * @return count of parcel B
+     */
     public int getBBoxes() {
         return getBoxesById(1);
     }
 
+    /**
+     * Returns count of parcel C
+     * @return count of parcel C
+     */
     public int getCBoxes() {
         return getBoxesById(2);
     }
