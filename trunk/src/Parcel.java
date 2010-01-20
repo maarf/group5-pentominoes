@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Parcel
+public class Parcel implements Comparable
 {
 	/**
 	 * Constructs a Parcel with a certain height, width, length and a certain value.
@@ -186,4 +186,23 @@ public class Parcel
 	private int[][] rotations;
 	private int [] parcel;
 	private int id;
+	
+	public double getRelativeValue(){
+		return ((double)this.getValue()) / (this.height*this.width*this.length);
+	}
+
+	@Override
+	public int compareTo(Object arg0) {
+		if(arg0 instanceof Parcel){
+			Parcel p = (Parcel)arg0;
+			if(p.getRelativeValue() == this.getRelativeValue()){
+				return 0;
+			} else if (p.getRelativeValue() > this.getRelativeValue()){
+				return -1;
+			} else {
+				return 1;
+			}
+		}
+		return 0;
+	}
 }
