@@ -57,8 +57,6 @@ public class Greedy
 		return truck;
 		
 	}
-	
-
 	private Truck truck;
 	private Parcel[] parcels;
 	private Parcel[] greedyParcels;

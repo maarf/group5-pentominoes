@@ -1,5 +1,9 @@
 public class GreedyTester
 {
+	/**
+	 * Tests the greedy algorithm with the parcels and the normal truck. 
+	 * @param args
+	 */
 	public static void main(String[] args)
 	{
 		Parcel parcelA = new Parcel(2,2,4,3,0);
