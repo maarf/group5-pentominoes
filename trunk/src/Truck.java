@@ -64,7 +64,7 @@ public class Truck
 	
 	public boolean stillFits()
 	{
-		Parcel a = new Parcel(2,2,4,3);
+		Parcel a = new Parcel(2,2,4,3,0);
 		if(fits(a))
 		{
 			return true;
@@ -231,6 +231,36 @@ public class Truck
 		currZ = 0;
 		
 		parcels = new ArrayList<ParcelAtPlace>();
+	}
+	
+	public int getValue() {
+		int value = 0;
+		for (ParcelAtPlace p : parcels) {
+			value += p.parcel.getValue();
+		}
+		return value;
+	}
+	
+	public int getBoxesById(int anId) {
+		int count = 0;
+		for (ParcelAtPlace p : parcels) {
+			if (p.parcel.getId() == anId) {
+				count++;				
+			}
+		}
+		return count;
+	}
+
+	public int getABoxes() {
+		return getBoxesById(0);
+	}
+	
+	public int getBBoxes() {
+		return getBoxesById(1);
+	}
+
+	public int getCBoxes() {
+		return getBoxesById(2);
 	}
 
 }

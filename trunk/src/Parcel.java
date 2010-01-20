@@ -9,12 +9,13 @@ public class Parcel
 	 * @param aLength An integer which represents the length of the parcel.
 	 * @param aValue An integer which represents the value of a parcel.
 	 */
-	public Parcel(int aHeight, int aWidth, int aLength, int aValue)
+	public Parcel(int aHeight, int aWidth, int aLength, int aValue, int anId)
 	{
 		height = aHeight;
 		width = aWidth;
 		length = aLength;
 		value = aValue;
+		id = anId;
 		initialize();
 	}
 	
@@ -173,6 +174,10 @@ public class Parcel
 		return parcel[2];
 	}
 	
+	public int getId() {
+		return id;
+	}
+	
 	// We doubled the height, width and length of the parcels as to only use integers.
 	private int height;
 	private int width;
@@ -180,4 +185,5 @@ public class Parcel
 	private int value;
 	private int[][] rotations;
 	private int [] parcel;
+	private int id;
 }

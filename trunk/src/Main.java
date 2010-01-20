@@ -124,6 +124,8 @@ public class Main
 		valuesPanel.add(parcelCValuePanel);
 		
 		optionsPanel.add(valuesPanel);
+		JTextField textFields[] = {parcelAValueField, parcelBValueField, parcelCValueField};
+		bigListener.textFields = textFields;
 		
 		// Algorithms
 		
@@ -183,13 +185,13 @@ public class Main
 
 
 	
-	private final static int aX = 2, aY = 2, aZ = 4, aV = 3;
-	private final static int bX = 2, bY = 3, bZ = 4, bV = 4;
-	private final static int cX = 3, cY = 3, cZ = 3, cV = 5;
+	private final static int aX = 2, aY = 2, aZ = 4, aV = 3, aI = 0;
+	private final static int bX = 2, bY = 3, bZ = 4, bV = 4, bI = 1;
+	private final static int cX = 3, cY = 3, cZ = 3, cV = 5, cI = 2;
 	
-	private static int[][] parcels = {	{aX,aY,aZ,aV},
-										{bX,bY,bZ,bV},
-										{cX,cY,cZ,cV} };
+	private static int[][] parcels = {	{aX,aY,aZ,aV,aI},
+										{bX,bY,bZ,bV,bI},
+										{cX,cY,cZ,cV,cI} };
 	
 }
 
@@ -200,6 +202,8 @@ class BigListener implements ActionListener {
 	private int[][] parcels;
 	private int algo = 0;
 	
+	public JTextField textFields[];
+	
 	public BigListener(Truck aTruck, CargoView aView, int[][] someParcels) {
 		truck = aTruck;
 		view = aView;
@@ -207,24 +211,44 @@ class BigListener implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		
 		if (e.getActionCommand().equals("Draw!")) {
+			// The big button was pressed.
+			
+			// Set the values of boxes from text inputs.
+			parcels[0][3] = Integer.parseInt(textFields[0].getText());
+			parcels[1][3] = Integer.parseInt(textFields[1].getText());
+			parcels[2][3] = Integer.parseInt(textFields[2].getText());
+			
+			// Reset the truck before filling it again. 
 			truck.reset();
+			
+			// Fire up the proper algorithm.
 			if (algo == 0) {
+				// Bruteforce goes here.
 				BruteForce1 solver = new BruteForce1(truck);
 				solver.Solve(parcels);
 			} else if (algo == 2) {
+				// Divide and conquer goes here.
 				Dac solver = new Dac(truck,parcels);
 				solver.solver();
-				
 				truck.setParcels(solver.getBigTruck());
 			}
+			
 		} else if (e.getActionCommand().equals("Bruteforce algorithm")) {
+			// Bruteforce radio button was selected.
 			algo = 0;
+			
 		} else if (e.getActionCommand().equals("Greedy algorithm")) {
+			// Greedy radio button was selected.
 			algo = 1;
+			
 		} else if (e.getActionCommand().equals("Divide and conquer algorithm")) {
+			// DaC radio button was seletced.
 			algo = 2;
+			
 		} else if (e.getActionCommand().equals("Rotate automatically")) {
+			// Auto-rotate checkbox was toggled.
 			view.autoRotate = !view.autoRotate;
 		}
 			

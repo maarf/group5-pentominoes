@@ -2,9 +2,9 @@ public class GreedyTester
 {
 	public static void main(String[] args)
 	{
-		Parcel parcelA = new Parcel(2,2,4,3);
-		Parcel parcelB = new Parcel(2,3,4,4);
-		Parcel parcelC = new Parcel(3,3,3,5);
+		Parcel parcelA = new Parcel(2,2,4,3,0);
+		Parcel parcelB = new Parcel(2,3,4,4,1);
+		Parcel parcelC = new Parcel(3,3,3,5,2);
 		
 		Parcel[] parcels = {parcelC, parcelB, parcelA};
 		
