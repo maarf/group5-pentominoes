@@ -2,8 +2,9 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
- * Divide and Conque Solver
- * @author Jose Sue Smith, Ronald Gerits
+ * Solver using the principle of Divide and Conquer
+ * it creates a smaller truck and then multiplies it to create a new normal truck
+ * @author Jose Sue Smith, Martins Spilners
  *
  */
 
@@ -17,18 +18,25 @@ public class Dac
 	private int currX = 0, currY = 0, currZ = 0;
 	private int value, a, b, c;
 	
-	
+/**
+ * Constructs the solver for a specific truck, with a list of specific parcels
+ * @param aTruck truck used to take the dimensions
+ * @param a array containing the parcels
+ */
 	public Dac(Truck aTruck, int [][] a)
 	{
 		truck = aTruck;
 		parcels = a;
 	}
-	
+	/**
+	 * creates a smaller truck and solves it. later it multiplies itself until a
+	 * new normal truck is created.
+	 */
 	public void solver()
 	{
 		int newLength = 4;
 		bTruck = new Truck(truck.getHeight(),newLength, truck.getWidth());
-		BruteForce1 solver = new BruteForce1(bTruck);
+		RandomSolver solver = new RandomSolver(bTruck);
 		solver.Solve(parcels);
 		value = solver.getValue();
 		a = solver.getBoxA();
@@ -58,7 +66,10 @@ public class Dac
 		}
 		
 	}
-	
+	/**
+	 * it multiplies the smaller truck by copying its elements into the new truck
+	 * taking advantage of the current position to place
+	 */
 	public void concatenate()
 	{
 		for(int i = 0; i < smallTruck.length; i++)
@@ -72,7 +83,13 @@ public class Dac
 			}
 		}
 	}
-
+	/**
+	 * controls if a specific space is filled
+	 * @param y y to be checked
+	 * @param z z to be checked
+	 * @param x x to be checked
+	 * @return true if its not empty
+	 */
 	public boolean isfilled(int y, int z, int x)
 	{
         if (newTruck[y][z][x] == 0) 
@@ -81,7 +98,9 @@ public class Dac
         }
         return true;
 	}
-	
+	/**
+	 * prints out in console the values in new truck
+	 */
 	public void getTruckValue()
 	{
 		for(int i = 0; i < newTruck.length; i++)
@@ -98,7 +117,10 @@ public class Dac
 		}
 	
 	}
-	
+	/**
+	 * takes the small truck and multiplies by 8
+	 * @return a truck with all parcels thats in the size of original truck
+	 */
 	public ArrayList<ParcelAtPlace> getBigTruck() {
 		ArrayList<ParcelAtPlace> parcelsAtPlace = new ArrayList<ParcelAtPlace>();
 
@@ -111,24 +133,36 @@ public class Dac
 		
 		return parcelsAtPlace;
 	}
-	
+	/**
+	 * provides the amount of parcels A used and multiplies by amount of copies
+	 * @return amount of parcels A
+	 */
 	public int getA()
 	{
-		return a * 11;
+		return a * 8;
 	}
-	
+	/**
+	 * provides the amount of parcels B used and multiplies by amount of copies
+	 * @return amount of parcels B
+	 */
 	public int getB()
 	{
-		return b * 11;
+		return b * 8;
 	}
-	
+	/**
+	 * provides the amount of parcels C used and multiplies by amount of copies
+	 * @return amount of parcels C
+	 */
 	public int getC()
 	{
-		return c * 11;
+		return c * 8;
 	}
-	
+	/**
+	 * provides the total value and multiplies by amount of copies
+	 * @return total value
+	 */
 	public int getV()
 	{
-		return value * 11;
+		return value * 8;
 	}
 }

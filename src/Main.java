@@ -271,7 +271,7 @@ class BigListener implements ActionListener {
 				// Fire up the proper algorithm.
 				if (algo == 0) {
 					// Bruteforce goes here.
-					BruteForce1 solver = new BruteForce1(testTruck);
+					RandomSolver solver = new RandomSolver(testTruck);
 					solver.Solve(parcels);
 					
 				} else if (algo == 1) {
