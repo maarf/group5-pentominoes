@@ -189,13 +189,24 @@ public class Main
 		statsLabel.setFont(f.deriveFont(f.getStyle() ^ Font.BOLD));
 		statsPanel.add(statsLabel);
 
-		JLabel bigStatsLabel = new JLabel("");
-		bigListener.statsLabel = bigStatsLabel;
-		statsPanel.add(bigStatsLabel);
+		JLabel bigStatsLabel1 = new JLabel("Runs: 0");
+		statsPanel.add(bigStatsLabel1);
+		JLabel bigStatsLabel2 = new JLabel("Time it took: 0ms");
+		statsPanel.add(bigStatsLabel2);
+		JLabel bigStatsLabel3 = new JLabel("Value of truck: 0");
+		statsPanel.add(bigStatsLabel3);
+		JLabel bigStatsLabel4 = new JLabel("Parcel A count: 0");
+		statsPanel.add(bigStatsLabel4);
+		JLabel bigStatsLabel5 = new JLabel("Parcel B count: 0");
+		statsPanel.add(bigStatsLabel5);
+		JLabel bigStatsLabel6 = new JLabel("Parcel C count: 0");
+		statsPanel.add(bigStatsLabel6);
 		
-		
-		optionsPanel.add(statsPanel);
+		JLabel allTheStatLabels[] = {bigStatsLabel1, bigStatsLabel2, bigStatsLabel3, bigStatsLabel4,
+				bigStatsLabel5, bigStatsLabel6}; 
+		bigListener.statsLabel = allTheStatLabels;
 
+		optionsPanel.add(statsPanel);
 		
 		return optionsPanel;
 	}
@@ -220,7 +231,7 @@ class BigListener implements ActionListener {
 	private int algo = 0;
 	
 	public JTextField textFields[];
-	public JLabel statsLabel;
+	public JLabel statsLabel[];
 	
 	public BigListener(Truck aTruck, CargoView aView, int[][] someParcels) {
 		truck = aTruck;
@@ -253,7 +264,9 @@ class BigListener implements ActionListener {
 			
 			starttime = new Date();
 			
-			for (int i = 0; i < 10; i++) {
+			int iterations = 10;
+			
+			for (int i = 0; i < iterations; i++) {
 				testTruck = new Truck(truck.getHeight(), truck.getLength(), truck.getWidth());
 				
 				// Fire up the proper algorithm.
@@ -282,11 +295,12 @@ class BigListener implements ActionListener {
 			endtime = new Date();	
 			long timespan = endtime.getTime() - starttime.getTime();
 			
-			statsLabel.setText("Time it took: " + timespan + "\n" +
-					"Highest value: " + maxTruck.getValue() + "\n" +
-					"Count of A parcels: " + maxTruck.getABoxes() + "\n" +
-					"Count of B parcels: " + maxTruck.getBBoxes() + "\n" +
-					"Count of C parcels: " + maxTruck.getCBoxes());
+			statsLabel[0].setText("Runs: " + iterations);
+			statsLabel[1].setText("Time it took: " + timespan + "ms");
+			statsLabel[2].setText("Value of truck: " + maxTruck.getValue());
+			statsLabel[3].setText("Parcel A count: " + maxTruck.getABoxes());
+			statsLabel[4].setText("Parcel B count: " + maxTruck.getBBoxes());
+			statsLabel[5].setText("Parcel C count: " + maxTruck.getCBoxes());
 			
 			truck.setParcels(maxTruck.getRawParcels());
 			
