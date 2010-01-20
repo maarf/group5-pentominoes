@@ -8,12 +8,26 @@ public class GreedyTester
 		
 		Parcel[] parcels = {parcelC, parcelB, parcelA};
 		
-		Truck truck = new Truck(8,33,5);
+		Truck truck = new Truck(5,8,33);
 	
+		/**
+		System.out.println(truck.fits(parcelC));
+		truck.setParcel(parcelC);
+		//truck.NextBlank();
+		System.out.println(truck.fits(parcelC));
+		truck.setParcel(parcelC);
+		System.out.println(truck.fits(parcelC));
+		**/
+		
+		
 		
 		Greedy greedy = new Greedy(truck, parcels);		
 		Truck solvedtruck = greedy.Solve();
-		solvedtruck.toString();
+		System.out.println("Number of A boxes: " + solvedtruck.getABoxes());
+		System.out.println("Number of B boxes: " + solvedtruck.getBBoxes());
+		System.out.println("Number of C boxes: " + solvedtruck.getCBoxes());
+		System.out.println("Total value of the truck: " + solvedtruck.getValue());
+		
 		
 	
 	}
