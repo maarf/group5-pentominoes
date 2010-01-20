@@ -11,6 +11,12 @@ public class Truck {
      */
     private ArrayList<ParcelAtPlace> parcels = new ArrayList<ParcelAtPlace>();
 
+    /**
+     * This constructor constructs a Truck with a certain height, length and width.
+     * @param aHeight The height of the truck.
+     * @param aLength The length of the truck.
+     * @param aWidth The width of the truck.
+     */
     public Truck(int aHeight, int aLength, int aWidth) {
         height = aHeight;
         length = aLength;
@@ -18,6 +24,9 @@ public class Truck {
         truck = new int[height][length][width];
     }
 
+    /**
+     * Prints out the the Truck-array as 2-dimensional.
+     */
     public void getTruckValue() {
         for (int i = 0; i < truck.length; i++) {
             for (int j = 0; j < truck[i].length; j++) {
@@ -30,6 +39,10 @@ public class Truck {
         System.out.println();
     }
 
+    /**
+     * Checks whether the truck is full.
+     * @return Returns true when the truck is full, returns false when there is an empty space.
+     */
     public boolean isFull() {
 
         for (int i = 0; i < truck.length; i++) {
@@ -50,14 +63,11 @@ public class Truck {
         return false;
     }
 
-    public boolean stillFits() {
-        Parcel a = new Parcel(2, 2, 4, 3, 0);
-        if (fits(a)) {
-            return true;
-        }
-        return false;
-    }
-
+    /**
+     * Checks whether a certain parcel fits in the truck on the next empty space.
+     * @param bParcel Needs a certain parcel.
+     * @return If the parcel fits on the next blank spot, true is returned. Otherwise returns false.
+     */
     public boolean fits(Parcel bParcel) {
         if (width - currX >= bParcel.getParcelX() && height - currY >= bParcel.getParcelY() && length - currZ >= bParcel.getParcelZ() && isCurrentSpaceEmpty(bParcel)) {
             return true;
@@ -78,6 +88,9 @@ public class Truck {
         return true;
     }
 
+    /**
+     * Sets the next blank spot in the truck. Needs to be called when an objects is placed.
+     */
     public void NextBlank() {
         for (int i = 0; i < truck.length - 1; i++) {
             for (int j = 0; j < truck[i].length - 1; j++) {
@@ -93,18 +106,34 @@ public class Truck {
         }
     }
 
+    /**
+     * Returns the current X.
+     * @return Returns an int.
+     */
     public int getCurrX() {
         return currX;
     }
 
+    /**
+     * Returns the current Y.
+     * @return Returns an int.
+     */
     public int getCurrY() {
         return currY;
     }
 
+    /**
+     * Returns the current Z.
+     * @return Returns an int.
+     */
     public int getCurrZ() {
         return currZ;
     }
 
+    /**
+     * This method sets a Parcel object in the truck on the next blank spot.
+     * @param a Requires a Parcel object.
+     */
     public void setParcel(Parcel a) {
         for (int i = 0; i < a.getParcelY(); i++) {
             for (int j = 0; j < a.getParcelZ(); j++) {
@@ -116,6 +145,10 @@ public class Truck {
         parcels.add(new ParcelAtPlace(a, currX, currY, currZ));
     }
 
+    /**
+     * This method sets a Figure object in the Truck on the next blank spot.
+     * @param b Requires a Figure object.
+     */
     public void setParcel(Figure b) {
         for (int i = 0; i < b.getWidth(); i++) {
             for (int j = 0; j < b.getHeight(); j++) {
@@ -126,6 +159,13 @@ public class Truck {
         }
     }
 
+    /**
+     * Checks whether a certain location is filled.
+     * @param y The y coordinate (int)
+     * @param z The z coordinate (int)
+     * @param x The x coordinate (int)
+     * @return Returns true when the space on x,y,z is filled, returns false if it isn't filled.
+     */
     public boolean isfilled(int y, int z, int x) {
         if (truck[y][z][x] == 0) {
             return false;
@@ -133,19 +173,34 @@ public class Truck {
         return true;
     }
 
+    /**
+     * Sets the next blank spot as unusable.
+     */
     public void setEmpty() {
         truck[currY][currZ][currX] = 9;
         System.out.println("empty used");
     }
 
+    /**
+     * Returns the height of the Truck.
+     * @return Returns an int.
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * Returns the length of the Truck.
+     * @return Returns an int.
+     */
     public int getLength() {
         return length;
     }
 
+    /**
+     * Returns the width of the Truck.
+     * @return Returns an int.
+     */
     public int getWidth() {
         return width;
     }
@@ -158,6 +213,10 @@ public class Truck {
         return parcels;
     }
 
+    /**
+     * Returns the truck array.
+     * @return Returns a 3-dimensional array.
+     */
     public int[][][] getTruck() {
         return truck;
     }
@@ -179,6 +238,7 @@ public class Truck {
 
         parcels = new ArrayList<ParcelAtPlace>();
     }
+
 
     public int getValue() {
         int value = 0;
