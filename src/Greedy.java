@@ -2,6 +2,11 @@ import java.util.Arrays;
 
 public class Greedy
 {
+	/**
+	 * Constructs a Greedy algorithm.
+	 * @param aTruck Requires a Truck object.
+	 * @param parcels Requires an Parcel[] containing parcel objects.
+	 */
 	public Greedy(Truck aTruck, Parcel[] parcels)
 	{
 		this.truck = aTruck;
@@ -10,6 +15,10 @@ public class Greedy
 		Solve();
 	}
 	
+	/**
+	 * Sorts the parcel[] in descending order.
+	 * @return Returns the sorted Parcel[].
+	 */
 	public Parcel[] makeGreedy()
 	{
 		Arrays.sort(parcels);
@@ -18,6 +27,10 @@ public class Greedy
 		return greedyParcels;		
 	}
 	
+	/**
+	 * Starts the algorithm.
+	 * @return Returns the solved truck.
+	 */
 	public Truck Solve()
 	{
 		
