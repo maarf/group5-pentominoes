@@ -92,8 +92,8 @@ public class LeoniTester2 {
 	private final static int bX = 2, bY = 3, bZ = 4, bV = 4;
 	private final static int cX = 3, cY = 3, cZ = 3, cV = 5;
 	
-	private static int[][] parcels = {	{aX,aY,aZ,aV},
-										{bX,bY,bZ,bV},
-										{cX,cY,cZ,cV} };
+	private static int[][] parcels = {	{aX,aY,aZ,aV, 0},
+										{bX,bY,bZ,bV, 1},
+										{cX,cY,cZ,cV, 2} };
 
 }

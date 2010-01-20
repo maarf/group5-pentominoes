@@ -209,6 +209,11 @@ public class Truck
 	public Object[] getParcels() {
 		return parcels.toArray();
 	}
+
+	public ArrayList<ParcelAtPlace> getRawParcels() {
+		return parcels;
+	}
+
 	
 	public int[][][] getTruck()
 	{
