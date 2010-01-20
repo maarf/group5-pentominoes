@@ -1,24 +1,30 @@
 import java.util.Random;
 
 /**
- * Solver!!
- * @author Jose Sue Smith, Leoni Haagmans
+ * Solves selecting random parcels and random rotations
+ * @author Jose Sue Smith, Martins Spilners
  *
  */
-public class BruteForce1 
+public class RandomSolver 
 {
 	private Truck truck;
 	private Parcel aParcel;
 	private int [] parcel;
 	private int value;
 	private int boxA = 0, boxB = 0, boxC = 0;
-	private int counter;
 	
-	public BruteForce1(Truck atruck)
+	/**
+	 * constructor for a specific truck
+	 * @param atruck
+	 */
+	public RandomSolver(Truck atruck)
 	{
 		truck = atruck;
 	}	
-	
+	/**
+	 * picks randomly a parcel from a list of parcels
+	 * @param a list of parcels
+	 */
     public void randomPicker(int [][] a)
     {
             Random ram = new Random();
@@ -28,9 +34,11 @@ public class BruteForce1
     }
 	
 	private int someCounter = 0;
-	
+
 	/**
-	 * puts parcel in truck if fits
+	 * picks a random parcel from a list, check if it fits and sets it, if not
+	 * sets an empty space and solve again
+	 * @param a array containing the possible parcels
 	 */
 	public void Solve(int [][] a)
 	{
@@ -90,32 +98,40 @@ public class BruteForce1
 		}		
 	}
 	
-	public void reset()
-	{
-		truck.getTruckValue();//just prints
-		//truck = new Truck(4,4,4);
-	}	
-	
+	/**
+	 * gets the total value
+	 * @return total value
+	 */	
 	public int getValue()
 	{
 		return value;
 	}
+	
+	/**
+	 * gets the amount of parcels A used
+	 * @return amount of parcels A
+	 */
 	public int getBoxA()
 	{
 		return boxA;
 	}
+	
+	/**
+	 * gets the amount of parcels B used
+	 * @return amount of parcels B
+	 */
 	public int getBoxB()
 	{
 		return boxB;		
 	}
+	
+	/**
+	 * gets the amount of parcels C used
+	 * @return amount of parcels C
+	 */
 	public int getBoxC()
 	{
 		return boxC;
-	}
-	
-	public int Nodes()
-	{
-		return someCounter;
 	}
 }
 
