@@ -174,6 +174,10 @@ public class Parcel implements Comparable
 		return parcel[2];
 	}
 	
+	/**
+	 * Returns the ID of the Parcel.
+	 * @return Returns the ID (int)
+	 */
 	public int getId() {
 		return id;
 	}
@@ -192,6 +196,7 @@ public class Parcel implements Comparable
 	}
 
 	@Override
+	
 	public int compareTo(Object arg0) {
 		if(arg0 instanceof Parcel){
 			Parcel p = (Parcel)arg0;
