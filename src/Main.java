@@ -180,6 +180,12 @@ public class Main
 		autoRotateCheckbox.addActionListener(bigListener);
 		autoRotatePanel.add(autoRotateCheckbox);
 		otherPanel.add(autoRotatePanel);
+		JLabel tipLabel = new JLabel("Tip: click and drag the cargo view.");
+		Font f2 = tipLabel.getFont();
+		tipLabel.setFont(f2.deriveFont(f.getStyle() ^ Font.ITALIC));
+		JPanel tipPanel = new JPanel();
+		tipPanel.add(tipLabel);
+		otherPanel.add(tipPanel);
 		optionsPanel.add(otherPanel);
 
 		// Stats stuff

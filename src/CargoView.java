@@ -93,14 +93,15 @@ public class CargoView extends JComponent implements MouseMotionListener, MouseL
 			}
 		}
 		
-		// zero point
-		drawCube(g2, (-((double)truck.getLength())/2 + 0.2/2), (-((double)truck.getWidth())/2 + 0.2/2), (-((double)truck.getHeight())/2 + 0.2/2), 0.2, 0.2, 0.2, Color.black.darker());
-		// x-axis
-		drawCube(g2, (-((double)truck.getLength())/2 + 0.2/2 + 2.0), (-((double)truck.getWidth())/2 + 0.2/2), (-((double)truck.getHeight())/2 + 0.2/2), 0.2, 0.2, 0.2, Color.red.darker());
-		// y-axis
-		drawCube(g2, (-((double)truck.getLength())/2 + 0.2/2), (-((double)truck.getWidth())/2 + 0.2/2 + 2.0), (-((double)truck.getHeight())/2 + 0.2/2), 0.2, 0.2, 0.2, Color.green.darker());
-		// z-axis
-		drawCube(g2, (-((double)truck.getLength())/2 + 0.2/2), (-((double)truck.getWidth())/2 + 0.2/2), (-((double)truck.getHeight())/2 + 0.2/2 + 2.0), 0.2, 0.2, 0.2, Color.blue.darker());
+		// Draws points for axes (for debug purposes)
+//		// zero point
+//		drawCube(g2, (-((double)truck.getLength())/2 + 0.2/2), (-((double)truck.getWidth())/2 + 0.2/2), (-((double)truck.getHeight())/2 + 0.2/2), 0.2, 0.2, 0.2, Color.black.darker());
+//		// x-axis
+//		drawCube(g2, (-((double)truck.getLength())/2 + 0.2/2 + 2.0), (-((double)truck.getWidth())/2 + 0.2/2), (-((double)truck.getHeight())/2 + 0.2/2), 0.2, 0.2, 0.2, Color.red.darker());
+//		// y-axis
+//		drawCube(g2, (-((double)truck.getLength())/2 + 0.2/2), (-((double)truck.getWidth())/2 + 0.2/2 + 2.0), (-((double)truck.getHeight())/2 + 0.2/2), 0.2, 0.2, 0.2, Color.green.darker());
+//		// z-axis
+//		drawCube(g2, (-((double)truck.getLength())/2 + 0.2/2), (-((double)truck.getWidth())/2 + 0.2/2), (-((double)truck.getHeight())/2 + 0.2/2 + 2.0), 0.2, 0.2, 0.2, Color.blue.darker());
 	}
 	
 	/**
