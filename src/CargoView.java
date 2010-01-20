@@ -56,7 +56,7 @@ public class CargoView extends JComponent implements MouseMotionListener, MouseL
 					(p.parcel.getId() == 0 ? Color.orange.darker() : (p.parcel.getId() == 1 ? Color.orange.darker().darker() : Color.orange.darker().darker().darker()) )
 					);
 			limit++;
-			if (limit > 100) {
+			if (limit > 200) {
 				break;
 			}
 		}

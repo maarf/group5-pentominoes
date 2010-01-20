@@ -26,7 +26,7 @@ public class Dac
 	
 	public void solver()
 	{
-		int newLength = truck.getLength()/11;
+		int newLength = 4;
 		bTruck = new Truck(truck.getHeight(),newLength, truck.getWidth());
 		BruteForce1 solver = new BruteForce1(bTruck);
 		solver.Solve(parcels);
@@ -36,7 +36,7 @@ public class Dac
 		c = solver.getBoxC();
 		smallTruck = bTruck.getTruck();
 		newTruck = new int[truck.getHeight()][truck.getLength()][truck.getWidth()];
-		for(int s = 0; s<11; s++)
+		for(int s = 0; s<8; s++)
 		{
 			concatenate();
 			for(int i = 0; i < newTruck.length; i++)
@@ -102,10 +102,10 @@ public class Dac
 	public ArrayList<ParcelAtPlace> getBigTruck() {
 		ArrayList<ParcelAtPlace> parcelsAtPlace = new ArrayList<ParcelAtPlace>();
 
-		for (int i = 0; i < 11; i++) {
+		for (int i = 0; i < 8; i++) {
 			for (Object o : bTruck.getParcels()) {
 				ParcelAtPlace p = (ParcelAtPlace)o;
-				parcelsAtPlace.add(new ParcelAtPlace(p.parcel, p.x, p.y, p.z + (3 * i)));
+				parcelsAtPlace.add(new ParcelAtPlace(p.parcel, p.x, p.y, p.z + (4 * i)));
 			}
 		}
 		
