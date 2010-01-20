@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
+import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -178,7 +179,23 @@ public class Main
 		autoRotatePanel.add(autoRotateCheckbox);
 		otherPanel.add(autoRotatePanel);
 		optionsPanel.add(otherPanel);
+
+		// Stats stuff
 		
+		JPanel statsPanel = new JPanel();
+		statsPanel.setLayout(new BoxLayout(statsPanel, BoxLayout.Y_AXIS));
+
+		JLabel statsLabel = new JLabel("Statistics");
+		statsLabel.setFont(f.deriveFont(f.getStyle() ^ Font.BOLD));
+		statsPanel.add(statsLabel);
+
+		JLabel bigStatsLabel = new JLabel("");
+		bigListener.statsLabel = bigStatsLabel;
+		statsPanel.add(bigStatsLabel);
+		
+		
+		optionsPanel.add(statsPanel);
+
 		
 		return optionsPanel;
 	}
@@ -203,6 +220,7 @@ class BigListener implements ActionListener {
 	private int algo = 0;
 	
 	public JTextField textFields[];
+	public JLabel statsLabel;
 	
 	public BigListener(Truck aTruck, CargoView aView, int[][] someParcels) {
 		truck = aTruck;
@@ -223,17 +241,54 @@ class BigListener implements ActionListener {
 			// Reset the truck before filling it again. 
 			truck.reset();
 			
-			// Fire up the proper algorithm.
-			if (algo == 0) {
-				// Bruteforce goes here.
-				BruteForce1 solver = new BruteForce1(truck);
-				solver.Solve(parcels);
-			} else if (algo == 2) {
-				// Divide and conquer goes here.
-				Dac solver = new Dac(truck,parcels);
-				solver.solver();
-				truck.setParcels(solver.getBigTruck());
+			// Stat variables
+			int average = 0;
+			int newScore = 0;
+			int highest = -1;
+			Truck maxTruck = null;
+			Truck testTruck = null;
+			
+			Date starttime;
+			Date endtime;
+			
+			starttime = new Date();
+			
+			for (int i = 0; i < 10; i++) {
+				testTruck = new Truck(truck.getHeight(), truck.getLength(), truck.getWidth());
+				
+				// Fire up the proper algorithm.
+				if (algo == 0) {
+					// Bruteforce goes here.
+					BruteForce1 solver = new BruteForce1(testTruck);
+					solver.Solve(parcels);
+					
+				} else if (algo == 2) {
+					// Divide and conquer goes here.
+					Dac solver = new Dac(testTruck, parcels);
+					solver.solver();
+					testTruck.setParcels(solver.getBigTruck());
+				}
+				
+				newScore = testTruck.getValue();
+
+				if(newScore > highest || highest == -1) {
+					highest = newScore;
+					maxTruck = testTruck;
+				}
+				
+				average = ((average * i) + testTruck.getValue()) / (i + 1);
 			}
+					
+			endtime = new Date();	
+			long timespan = endtime.getTime() - starttime.getTime();
+			
+			statsLabel.setText("Time it took: " + timespan + "\n" +
+					"Highest value: " + maxTruck.getValue() + "\n" +
+					"Count of A parcels: " + maxTruck.getABoxes() + "\n" +
+					"Count of B parcels: " + maxTruck.getBBoxes() + "\n" +
+					"Count of C parcels: " + maxTruck.getCBoxes());
+			
+			truck.setParcels(maxTruck.getRawParcels());
 			
 		} else if (e.getActionCommand().equals("Bruteforce algorithm")) {
 			// Bruteforce radio button was selected.
